@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/survivors/coach/moksuit"
+	"$nocull" 1
+}
