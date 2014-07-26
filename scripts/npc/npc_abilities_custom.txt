@@ -476,14 +476,27 @@
 				"Delay"   "0"
 				"Action"
 				{
-					"ApplyModifier"
+					"RunScript"
 					{
-						"Target"    "CASTER"
-						"ModifierName"    "modifier_dota2x_reimu02_think_interval"
+						"ScriptFile"        "scripts/vscripts/abilityReimu.lua"
+						"Function"          "OnLightVar"
+						"Caster"            "CASTER"	
+					}
+					"DelayedAction"
+					{
+						"Delay"   "0"
+						"Action"
+						{
+							"ApplyModifier"
+							{
+								"Target"    "CASTER"
+								"ModifierName"    "modifier_dota2x_reimu02_think_interval"
+							}
+						}
 					}
 				}
-			}
-		}	
+			}	
+		}
 		
 		"Modifiers"
 		{

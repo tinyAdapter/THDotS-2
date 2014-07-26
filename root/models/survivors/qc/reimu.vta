@@ -1,0 +1,9 @@
+version 1
+nodes
+0 "root" -1
+end
+skeleton
+time 0
+time 1 # a (reimu)
+time 2 # i (reimu)
+time 3 # u (reimu)
