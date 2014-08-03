@@ -407,7 +407,7 @@
       "RunScript"
       {
         "ScriptFile"        "scripts/vscripts/abilityReimu.lua"
-        "Function"          "OnSpellStart"
+        "Function"          "OnReimu01SpellStart"
         "Target"            "POINT"
       }
       "DelayedAction"
@@ -430,14 +430,14 @@
       {
         "RemoveOnDeath"     "0"
         "IsHidden"          "0"
-        "Duration"          "3.38"
+        "Duration"          "2.60"
         "ThinkInterval"     "0.01"
         "OnIntervalThink"
         {
           "RunScript"
           {
             "ScriptFile"        "scripts/vscripts/abilityReimu.lua"
-            "Function"          "OnReleaseBall"
+            "Function"          "OnReimu01ReleaseBall"
             "Caster"            "CASTER"
             "Target"            "POINT"
           }
@@ -468,9 +468,10 @@
 			"RunScript"
 			{
 				"ScriptFile"        "scripts/vscripts/abilityReimu.lua"
-				"Function"          "OnReimu02Start"
+				"Function"          "OnReimu02SpellStart"
 				"Caster"            "CASTER"	
 			}
+
 			"DelayedAction"
 			{
 				"Delay"   "0"
@@ -483,7 +484,7 @@
 					}
 				}
 			}
-		}	
+		}
 		
 		"Modifiers"
 		{
@@ -491,14 +492,14 @@
 			{
 				"RemoveOnDeath"     "0"
 				"IsHidden"          "0"
-				"Duration"          "3.38"
+				"Duration"          "5.00"
 				"ThinkInterval"     "0.01"
 				"OnIntervalThink"
 				{
 					"RunScript"
 					{
 						"ScriptFile"        "scripts/vscripts/abilityReimu.lua"
-						"Function"          "OnLight"
+						"Function"          "OnReimu02OnLightStart"
 						"Caster"            "CASTER"			
 					}
 				}

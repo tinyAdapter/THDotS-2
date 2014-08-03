@@ -157,7 +157,7 @@ function DOTA2XGameMode:InitGameMode()
   -- 这个命令就是通过载入我们在  npc_units_custom 里面所定义的 npc_precache_everything 这个单位，
   -- 来载入我们所有在lua里面所必须要用到的粒子特效/声音等
   PrecacheUnitByName('npc_precache_everything')
-  initBallData()
+
 end
 
 -- 这个函数是在有玩家连接到游戏之后，调用的，请查看 DOTA2XGameMode:AutoAssignPlayer里面调用这个函数的部分
