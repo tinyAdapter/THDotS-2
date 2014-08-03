@@ -104,7 +104,10 @@ end
 -- Reimu01End
 
 -- Reimu02
-function initLightData(keys)
+
+function OnReimu02Start(keys)
+	PrintTable(keys)
+	
 	local level = keys.ability:GetLevel()
 	
 	tReimu02Light = tReimu02Light or {}
@@ -115,12 +118,9 @@ function initLightData(keys)
 		}
 	end
 	print("init Light data success")
-end
-
-function OnReimu02Start(keys)
+	
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local unit = unit or {}
-	local vec0 = caster:GetOrigin()
 	
 	for i = 0,level+4 do
 		unit[i] = CreateUnitByName(
@@ -135,43 +135,23 @@ function OnReimu02Start(keys)
 		if unit[i] then
 			print("create unit["..i.."] suceess")
 			tReimu02Light[i].Head.unit = unit[i]
-			local vec3 = {vec0.x,vec0.y,100}
+			local vec3 = caster:GetOrigin()
 			unit[i]:SetOrigin(vec3)
 			print("end spell start")
 		end
 	end
 end
 
-function OnLightVar (keys)
-	uHead = uHead or {}
-	vec = vec or {}
-	zincrease = -0.01
+function OnLight (keys)
+	--local level = keys.ability:GetLevel()
+	--local uHead = tReimu02Light[i].Head.unit
+	--for i = 0,level+4 do
+		--uHead:Remove()
+	--end
 end
 
-function OnLight (keys)
-	local i = 0;
-	local level = keys.ability:GetLevel()
-	--上下跳动
-	for i = 0,level+4 do
-		uHead[i] = tReimu02Light[i].Head.unit --此句有错误，提示attempt to index global 'tReimu02Light' (a nil value)，但上方已有定义，目前尚不清楚原因
-		vec[i] = uHead[i]:GetOrigin()
-		
-		if vec[i].z>=200 then
-			zincrease = -0.01
-		end
-		
-		if vec[i].z<=0 then
-			zincrease = 0.01
-		end
-		
-		vec[i].z = vec[i].z + zincrease
-	end
-	----
-end
 
 -- Reimu02End
-
-
 function UnitDamageTarget(caster,target,skill,level)
 	local dummy = CreateUnitByName("npc_dummy_unit", 
 		target:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
