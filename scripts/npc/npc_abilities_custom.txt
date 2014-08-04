@@ -463,6 +463,12 @@
 		"AbilityCooldown"       "4"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
 		
+		"precache"
+		{
+			"particlefile"		"particles/units/heroes/hero_clinkz.pcf"
+		}
+		
+		
 		"OnSpellStart"
 		{
 			"RunScript"
