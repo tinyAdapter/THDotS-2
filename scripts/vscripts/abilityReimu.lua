@@ -160,15 +160,13 @@ function AbilityReimu:OnReimu02Start(keys)
 	local vec0 = caster:GetOrigin()
 	local ability = keys.ability
 	local abilitylevel = ability:GetLevel()
-	vecz = vecz or {}
-	Reimu02ztemp = Reimu02ztemp or {}
 	
 	PrintTable(keys)
 	
 	AbilityReimu:initLightData(abilitylevel)
 
 	for i = 0,abilitylevel+4 do
-		local veccre = Vector(vec0.x + math.cos(0.628 * i) * 60 ,vec0.y + math.sin(0.628 * i) * 60 ,-100)
+		local veccre = Vector(vec0.x + math.cos(0.628 * i) * 60 ,vec0.y + math.sin(0.628 * i) * 60 ,300)
 		self.tReimu02Light[i].Head.unit = CreateUnitByName(
 			"npc_dota2x_unit_reimu02_light"
 			,vec0
@@ -178,7 +176,6 @@ function AbilityReimu:OnReimu02Start(keys)
 			,caster:GetTeam()
 		)
 		
-		Reimu02ztemp[i] = RandomInt(10,90)
 		
 		if self.tReimu02Light[i].Head.unit then
 			print("create unit["..i.."] suceess")
@@ -205,21 +202,9 @@ function AbilityReimu:OnReimu02OnLight (keys)
 		return
 	end
 	--ÉÏÏÂÌø¶¯
-	for i = 0,level+4 do		
+	for i = 0,level+4 do
 		if (self.tReimu02Light[i].Head.unit ~= nil) then
 		
-			vecz[i] = self.tReimu02Light[i].Head.unit:GetOrigin()
-		
-			if Reimu02ztemp[i] > 100 then
-				Reimu02ztemp[i] = 0
-			end
-			
-			vecz[i].z = (-0.08 * Reimu02ztemp[i] * Reimu02ztemp[i]) + (8 * Reimu02ztemp[i])
-			self.tReimu02Light[i].Head.unit:SetOrigin(vecz[i])
-		
-			Reimu02ztemp[i] = Reimu02ztemp[i] + 1
-			
-			
 		    local vec = self.tReimu02Light[i].Head.unit:GetOrigin()
 		    local DamageTargets = FindUnitsInRadius(
 		       caster:GetTeam(),		--caster team
