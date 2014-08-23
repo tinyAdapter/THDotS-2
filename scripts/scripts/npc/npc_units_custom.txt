@@ -43,7 +43,7 @@
 
     "npc_dota2x_unit_reimu01_ball"
   	{
-  		"model"					"models/particle/snowball.vmdl"
+  		"model"					"models/thd2/yyy.vmdl"
   		"BaseClass"				"npc_dota_creep_neutral"
 		"Ability1"				"ability_dummy_unit"
   		"AttackCapabilities"	"DOTA_UNIT_CAP_NO_ATTACK"
