@@ -343,20 +343,20 @@
 	
 	"ability_stunsystem_stun"
 	{
-      "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-      "BaseClass"         "ability_datadriven"
-      "AbilityCooldown"   "0"
-      "OnSpellStart"
-      {
+		"AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"BaseClass"         "ability_datadriven"
+		"AbilityCooldown"   "0"
+		"OnSpellStart"
+		{
 	       "ApplyModifier"
             {
 			    "ModifierName"    "modifier_stunsystem_stun"
                 "Target"          "TARGET"
             }
 	     
-      }
-	  "Modifiers"
-      {
+		}
+		"Modifiers"
+		{
             "modifier_stunsystem_stun"
             {
 			    "States"
@@ -364,26 +364,26 @@
 				    "MODIFIER_STATE_STUNNED"		    "MODIFIER_STATE_VALUE_ENABLED"
 			    }
             }
-      }
+		}
 	}	
 	
 	"ability_sliencesystem_Silence"
 	{
-      "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-      "BaseClass"         "ability_datadriven"
-      "AbilityCooldown"   "0"
-	  "MaxLevel"          "1"
-      "OnSpellStart"
-      {
+		"AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"BaseClass"         "ability_datadriven"
+		"AbilityCooldown"   "0"
+		"MaxLevel"          "1"
+		"OnSpellStart"
+		{
 	       "ApplyModifier"
             {
 			    "ModifierName"    "modifier_sliencesystem_silence"
                 "Target"          "TARGET"
             }
 	     
-      }
-	  "Modifiers"
-      {
+		}
+		"Modifiers"
+	    {
             "modifier_sliencesystem_silence"
             {
 			    "States"
@@ -391,26 +391,26 @@
 				    "MODIFIER_STATE_SILENCED"		    "MODIFIER_STATE_VALUE_ENABLED"
 			    }
             }
-      }
+		}
 	}	
 	
 	"ability_system_magicImmune"
 	{
-      "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-      "BaseClass"         "ability_datadriven"
-      "AbilityCooldown"   "0"
-	  "MaxLevel"          "1"
-      "OnSpellStart"
-      {
+		"AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"BaseClass"         "ability_datadriven"
+		"AbilityCooldown"   "0"
+		"MaxLevel"          "1"
+		"OnSpellStart"
+		{
 	       "ApplyModifier"
             {
 			    "ModifierName"    "modifier_system_magicImmune"
                 "Target"          "TARGET"
             }
 	     
-      }
-	  "Modifiers"
-      {
+		}
+		"Modifiers"
+		{
             "modifier_system_magicImmune"
             {
 			    "States"
@@ -418,7 +418,7 @@
 				    "MODIFIER_STATE_MAGIC_IMMUNE"		    "MODIFIER_STATE_VALUE_ENABLED"
 			    }
             }
-      }
+		}
 	}	
 
     "ability_dota2x_reimu01"
@@ -442,48 +442,48 @@
 
         "OnSpellStart"
         {
-          "RunScript"
-          {
-            "ScriptFile"        "scripts/vscripts/abilities/abilityReimu.lua"
-            "Function"          "OnReimu01SpellStart"
-            "Target"            "POINT"
-          }
-          "DelayedAction"
-          {
-            "Delay"   "0"
-            "Action"
-            {
-                "ApplyModifier"
-                {
-                    "Target"    "CASTER"
-                    "ModifierName"    "modifier_dota2x_reimu01_think_interval"
-                }
+			"RunScript"
+			{
+				"ScriptFile"        "scripts/vscripts/abilities/abilityReimu.lua"
+				"Function"          "OnReimu01SpellStart"
+				"Target"            "POINT"
+			}
+			"DelayedAction"
+			{
+				"Delay"   "0"
+				"Action"
+				{
+					"ApplyModifier"
+					{
+						"Target"    "CASTER"
+						"ModifierName"    "modifier_dota2x_reimu01_think_interval"
+					}
             }
           }
       
         }
         "Modifiers"
         {
-          "modifier_dota2x_reimu01_think_interval"
-          {
-               "RemoveOnDeath"     "0"
-               "IsHidden"          "0"
-               "Duration"          "2.6"
-               "ThinkInterval"     "0.1"
-               "OnIntervalThink"
-               {
-                   "RunScript"
-                   {
-                       "ScriptFile"        "scripts/vscripts/abilities/abilityReimu.lua"
-                       "Function"          "OnReimu01ReleaseBall"
-                       "Caster"            "CASTER"
-                       "Target"            "TARGET"
-					   "StunDuration"	   "%stun_duration"
-					   "DamageDecrease"    "%damage_decrease"
-					   "Radius"			   "%radius"
-                   }
-              }
-          }
+			"modifier_dota2x_reimu01_think_interval"
+			{
+				"RemoveOnDeath"     "0"
+				"IsHidden"          "0"
+				"Duration"          "2.6"
+				"ThinkInterval"     "0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"        "scripts/vscripts/abilities/abilityReimu.lua"
+						"Function"          "OnReimu01ReleaseBall"
+						"Caster"            "CASTER"
+						"Target"            "TARGET"
+						"StunDuration"	   "%stun_duration"
+						"DamageDecrease"    "%damage_decrease"
+						"Radius"			   "%radius"
+					}
+				}
+			}
         }
 	
 	
@@ -723,5 +723,329 @@
 		}	
 	}
 	
+	"ability_thdots_marisa01"
+    {
+        "ID"                       "2003"
+        "AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetType"	   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "BaseClass"                "ability_datadriven"
+        "AbilityTextureName"       "ability_thdots_marisa01"
+    	"AbilityCastAnimation"     "Act_DOTA_CAST_ABILITY_1"
+        "MaxLevel"                 "4"
+
+        // Stats 
+        //----------------------------------------------------------------
+        "AbilityCastRange"          "500 600 700 800"
+        "AbilityManaCost"           "70"
+        "AbilityCastPoint"          "0.3"
+        "AbilityCooldown"           "11 9.2 7.4 5.6"
+        "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+	    "AbilityDamage"				"60 80 100 120"
+
+        "OnSpellStart"
+        {
+		    "RunScript"
+            {
+                "ScriptFile"        "scripts/vscripts/abilities/abilityMarisa.lua"
+                "Function"          "OnMarisa01SpellStart"
+                "Caster"            "CASTER"
+                "Target"            "POINT"
+				       
+            }
+			"DelayedAction"
+			{
+				"Delay"   "0"
+				"Action"
+				{
+                    "ApplyModifier"
+			        {
+				        "Target"            "CASTER"
+				        "ModifierName"      "modifier_thdots_marisa01_think_interval"
+			        }
+				}
+			}
+        }
+        "Modifiers"
+        {
+			"modifier_thdots_marisa01_think_interval"
+			{
+				"RemoveOnDeath"     "0"
+				"IsHidden"          "0"
+				"Duration"          "%move_duration"
+				"ThinkInterval"     "0.02"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"        "scripts/vscripts/abilities/abilityMarisa.lua"
+						"Function"          "OnMarisa01SpellMove"
+						"Caster"            "CASTER"
+						"Target"
+						{
+							"Center"			"CASTER"
+							"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					        "Radius"			"%damage_radius"
+						}
+						"MoveSpeed"	       "%move_speed"
+					}
+				}
+				"States"
+				{
+					"MODIFIER_STATE_NO_UNIT_COLLISION"    "MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+        }
+	
+	
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"move_speed"				"1250"  
+		    }
+			"02"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"damage_radius"			    "200"  
+		    }
+			"03"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"move_duration"			    "0.4 0.48 0.56 0.64"  
+		    }
+	    }
+    }
+	
+	"ability_thdots_marisa02"
+    {
+        "ID"                       "2004"
+        "AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"AbilityUnitTargetType"	   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "BaseClass"                "ability_datadriven"
+        "AbilityTextureName"       "ability_thdots_marisa01"
+    	"AbilityCastAnimation"     "Act_DOTA_CAST_ABILITY_1"
+        "MaxLevel"                 "4"
+
+        // Stats 
+        //----------------------------------------------------------------
+        "AbilityCastRange"          "300"
+        "AbilityManaCost"           "80 105 125 145"
+        "AbilityCastPoint"          "0.3"
+        "AbilityCooldown"           "8"
+        "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+	    "AbilityDamage"				"75 150 225 300"
+		"AbilityChannelTime"		"0.5"
+
+        "OnSpellStart"
+        {    
+			"RunScript"
+            {
+                "ScriptFile"        "scripts/vscripts/abilities/abilityMarisa.lua"
+                "Function"          "OnMarisa02SpellStart"
+                "Caster"            "CASTER"
+                "Target"            "POINT"
+				       
+            }
+            "ApplyModifier"
+			{
+				"Target"            "CASTER"
+				"ModifierName"      "modifier_thdots_marisa02_think_interval"
+			}
+        }
+		"OnChannelInterrupted"
+		{
+			"RemoveModifier"
+			{
+				"Target"		"CASTER"
+				"ModifierName"	"modifier_thdots_marisa02_think_interval"
+			}
+		}
+        "Modifiers"
+        {
+			"modifier_thdots_marisa02_think_interval"
+			{
+				"RemoveOnDeath"     "0"
+				"IsHidden"          "0"
+				"Duration"          "%damage_duration"
+				"ThinkInterval"     "0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"        "scripts/vscripts/abilities/abilityMarisa.lua"
+						"Function"          "OnMarisa02SpellDamage"
+						"Caster"            "CASTER"
+						"TargetPoint"       "POINT"
+						"Target"
+						{
+							"Center"			"CASTER"
+							"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					        "Radius"			"%damage_radius"
+						}
+					}
+				}
+			}
+        }
+	
+	
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"damage_duration"			"0.5"  
+		    }
+			"02"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"damage_radius"			    "410"  
+		    }
+	    }
+    }
+	"ability_thdots_marisa03"
+    {
+	    "ID"    				    "2005"
+		"AbilityBehavior"   	    "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"BaseClass"           	    "ability_datadriven"
+		"AbilityTextureName"	    "ability_thdots_marisa03"
+		"AbilityCastAnimation"      "Act_DOTA_CAST_ABILITY_3"
+		
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityManaCost"           "95 120 135 155"
+		"AbilityCastPoint"          "0.2"
+		"AbilityCooldown"           "18"
+		"AbilityUnitDamageType"	    "DAMAGE_TYPE_MAGICAL"
+	    "AbilityDamage"				"25 40 55 70"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"        "scripts/vscripts/abilities/abilityMarisa.lua"
+				"Function"          "OnMarisa03SpellStart"
+				"AbilityDuration"   "%ability_duration"
+				"Caster"            "CASTER"	
+			}
+
+			"DelayedAction"
+			{
+				"Delay"   "0"
+				"Action"
+				{
+					"ApplyModifier"
+					{
+						"Target"          "CASTER"
+						"ModifierName"    "modifier_thdots_marisa03_think_interval"
+					}
+				}
+			}
+		}
+		
+		"Modifiers"
+		{
+			"modifier_thdots_marisa03_think_interval"
+			{
+				"RemoveOnDeath"     "0"
+				"IsHidden"          "0"
+				"Duration"          "%ability_duration"
+				"ThinkInterval"     "0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"        "scripts/vscripts/abilities/abilityMarisa.lua"
+						"Function"          "OnMarisa03SpellThink"
+						"Caster"            "CASTER"	
+					}
+				}
+			}
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_duration"		"8"
+			}
+		}	
+        
+    }
+	
+	"ability_thdots_marisa04"
+    {
+        "ID"                       "2006"
+        "AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"AbilityUnitTargetType"	   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityType"			   "DOTA_ABILITY_TYPE_ULTIMATE"
+        "BaseClass"                "ability_datadriven"
+        "AbilityTextureName"       "ability_thdots_marisa04"
+    	"AbilityCastAnimation"     "Act_DOTA_CAST_ABILITY_4"
+
+        // Stats 
+        //----------------------------------------------------------------
+        "AbilityCastRange"          "900"
+        "AbilityManaCost"           "250 360 500"
+        "AbilityCastPoint"          "0.3"
+        "AbilityCooldown"           "100 85 70"
+        "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+	    "AbilityDamage"				"360 540 720"
+		"AbilityChannelTime"		"1.4"
+
+        "OnSpellStart"
+        {    
+            "CreateThinker"
+			{
+				"ModifierName"	"modifier_thdots_marisa04_think_interval"
+				"Target"		"POINT"
+			}
+        }
+		"OnChannelInterrupted"
+		{
+			"RemoveModifier"
+			{
+				"Target"		    "POINT"
+				"ModifierName"		"modifier_thdots_marisa04_think_interval"
+			}
+		}
+        "Modifiers"
+        {
+			"modifier_thdots_marisa04_think_interval"
+			{
+				"Duration"          "1.4"
+				"ThinkInterval"     "0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"        "scripts/vscripts/abilities/abilityMarisa.lua"
+						"Function"          "OnMarisa04SpellThink"
+						"Caster"            "CASTER"
+						"Target"            "TARGET"
+						"DamageWidth"       "%damage_width"
+						"DamageLenth"       "%damage_lenth"
+					}
+				}
+			}
+        }
+	
+	
+	    "AbilitySpecial"
+	    {
+			"01"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"damage_width"			    "150"  
+		    }
+			"02"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"damage_lenth"			    "900"  
+		    }
+	    }
+    }
 }
   

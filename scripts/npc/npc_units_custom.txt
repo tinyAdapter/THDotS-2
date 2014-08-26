@@ -67,6 +67,28 @@
   		"WakesNeutrals"			"0"
   	}
 	
+	"npc_thdots_unit_marisa03_star"
+  	{
+		"model"						"models/props_gameplay/rune_haste01.vmdl"
+  		"BaseClass"					"npc_dota_creep_neutral"
+		"Ability1"					"ability_dummy_unit"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"1"		// Damage range min.
+		"AttackDamageMax"			"2"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorMagical"
+  		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		"AttackRate"				"1.35"			// Speed of attack.
+		"AttackAnimationPoint"		"0.1"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
+		"AttackRange"				"700"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/base_attacks/ranged_tower_good.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"700"		// Speed of projectile.
+  		"VisionDaytimeRange"		"100"
+  		"VisionNighttimeRange"		"100"
+  		"HasInventory"				"0"
+  		"WakesNeutrals"				"0"
+  	}
+	
 	//=================================================================================
 	// Tower: Holdout Tower
 	//=================================================================================

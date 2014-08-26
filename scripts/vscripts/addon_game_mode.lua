@@ -34,11 +34,13 @@ end
 -- 载入项目所有文件
 loadModule ( 'thdots' )
 loadModule ( 'abilities/abilityReimu' )
+loadModule ( 'abilities/abilityMarisa' )
 loadModule ( 'util/damage' )
 loadModule ( 'util/stun' )
 loadModule ( 'util/silence' )
 loadModule ( 'util/magic_immune' )
 loadModule ( 'util/timers' )
+loadModule ( 'util/util' )
 
 
 

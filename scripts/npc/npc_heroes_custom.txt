@@ -112,7 +112,7 @@
 			//晚上视野大小
 	}
 	
-	"npc_dota_hero_lina"
+	"npc_dota_hero_reimu"
 	{
 		"override_hero"			"npc_dota_hero_lina"
 		"Ability1"				"ability_dota2x_reimu01" 
@@ -159,4 +159,50 @@
 		"VisionNighttimeRange"		"700"
 			//晚上视野大小
     }
+	"npc_dota_hero_marisa"
+	{
+		"override_hero"			"npc_dota_hero_crystal_maiden"
+		"Ability1"				"ability_thdots_marisa01" 
+		"Ability2"				"ability_thdots_marisa02" 
+		"Ability3"				"ability_thdots_marisa03" 
+		"Ability4"				"ability_thdots_marisa04" 
+			
+		"ArmorPhysical"				"0"
+			//物理护甲
+		"AttackDamageMin"			"22"
+			//最大攻击力
+		"AttackDamageMax"			"34"
+			//最小攻击力
+			
+		"AttributeBaseStrength"		"20"
+			//基础力量
+		"AttributeStrengthGain"		"2.0"
+			//每级增加的力量，力量成长
+		"AttributeBaseAgility"		"16"
+			//基础敏捷
+		"AttributeAgilityGain"		"1.5"
+			//每级增加的敏捷，敏捷成长
+		"AttributeBaseIntelligence"	"24"
+			//基础智力
+		"AttributeIntelligenceGain"	"2.5"
+			//每级增加的智力，智力成长
+			
+		"MovementSpeed"				"300"
+			//基础移动速度
+		"MovementTurnRate"			"1.0"
+			//转身速度
+		"StatusHealth"				"135"
+			//基础生命值
+		"StatusHealthRegen"			"0.5"
+			//基础生命恢复
+		"StatusMana"				"40"
+			//基础魔法值
+		"StatusManaRegen"			"0.0"
+			//基础魔法恢复
+
+		"VisionDaytimeRange"		"1050"
+			//白天视野大小
+		"VisionNighttimeRange"		"700"
+			//晚上视野大小
+	}
 }

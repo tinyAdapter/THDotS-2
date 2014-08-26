@@ -289,7 +289,7 @@ function AbilityReimu:OnReimu02OnLight (keys)
 					
 		            local vecenemy = FollowTarget:GetOrigin()
 		
-		            local radian = GetAngleBetweenTwoVec(vec,vecenemy)
+		            local radian = GetRadBetweenTwoVec2D(vec,vecenemy)
 		   
 		            vec.x = math.cos(radian) * REIMU02_LIGHTSPEED + vec.x
 		            vec.y = math.sin(radian) * REIMU02_LIGHTSPEED + vec.y
@@ -434,54 +434,4 @@ function AbilityReimu:OnReimu04Think(keys)
 			end
 		end
 	end
-end
-
-function distance(a, b)
-    local xx = (a.x-b.x)
-    local yy = (a.y-b.y)
-    return math.sqrt(xx*xx + yy*yy)
-end
-
-function GetAngleBetweenTwoVec(a,b)
-	local y = b.y - a.y
-	local x = b.x - a.x
-	return math.atan2(y,x)
-end
-
-function PrintTable(t, indent, done)
-	--print ( string.format ('PrintTable type %s', type(keys)) )
-    if type(t) ~= "table" then return end
-
-    done = done or {}
-    done[t] = true
-    indent = indent or 0
-
-    local l = {}
-    for k, v in pairs(t) do
-        table.insert(l, k)
-    end
-
-    table.sort(l)
-    for k, v in ipairs(l) do
-        -- Ignore FDesc
-        if v ~= 'FDesc' then
-            local value = t[v]
-
-            if type(value) == "table" and not done[value] then
-                done [value] = true
-                print(string.rep ("\t", indent)..tostring(v)..":")
-                PrintTable (value, indent + 2, done)
-            elseif type(value) == "userdata" and not done[value] then
-                done [value] = true
-                print(string.rep ("\t", indent)..tostring(v)..": "..tostring(value))
-                PrintTable ((getmetatable(value) and getmetatable(value).__index) or getmetatable(value), indent + 2, done)
-            else
-                if t.FDesc and t.FDesc[v] then
-                    print(string.rep ("\t", indent)..tostring(t.FDesc[v]))
-                else
-                    print(string.rep ("\t", indent)..tostring(v)..": "..tostring(value))
-                end
-            end
-        end
-    end
 end

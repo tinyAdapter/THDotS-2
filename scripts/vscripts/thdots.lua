@@ -4,6 +4,9 @@ STARTING_GOLD = 500--650
 DEBUG = true
 GameMode = nil
 
+TRUE = 1
+FALSE = 0
+
 
 if THDOTSGameMode == nil then
 	THDOTSGameMode = class({})
