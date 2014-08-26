@@ -317,16 +317,9 @@
 			}
 		}
 	}
-      //这里还有一个比较重要的技能，就是我们在WE里面经常使用到的一个技能，蝗虫
-      //就是通过定义五个属性
-      //MODIFIER_STATE_UNSELECTABLE 不可选择
-      //MODIFIER_STATE_INVULNERABLE 无敌
-      //MODIFIER_STATE_NOT_ON_MINIMAP 不在小地图上显示
-      //MODIFIER_STATE_NO_HEALTH_BAR 无血条
-      //MODIFIER_STATE_NO_UNIT_COLLISION 无碰撞体积
-      //拥有这个技能的单位，就可以作为一个马甲完成各种工作……
-  "ability_dummy_unit"
-  {
+	
+	"ability_dummy_unit"
+    {
 		"BaseClass" 					"ability_datadriven"
 		"AbilityTextureName"            "rubick_empty1"
     
@@ -334,7 +327,7 @@
 	    {
 	    	"dummy_unit"
             {
-                "Passive"                        "1"
+                "Passive"                         "1"
                 "IsHidden"                        "1"    
                 "States"
                 {
@@ -348,126 +341,196 @@
 		}
     }
 	
-	
 	"ability_stunsystem_stun"
 	{
-      "ID"      "2016"
       "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
       "BaseClass"         "ability_datadriven"
       "AbilityCooldown"   "0"
       "OnSpellStart"
       {
-        "Stun"
-		{
-			"Target"		"TARGET"
-			"Duration"		"1.0"
-		}
+	       "ApplyModifier"
+            {
+			    "ModifierName"    "modifier_stunsystem_stun"
+                "Target"          "TARGET"
+            }
+	     
+      }
+	  "Modifiers"
+      {
+            "modifier_stunsystem_stun"
+            {
+			    "States"
+			    {
+				    "MODIFIER_STATE_STUNNED"		    "MODIFIER_STATE_VALUE_ENABLED"
+			    }
+            }
       }
 	}	
 	
-	
-"ability_reimu01_damage"
-  {
-      "ID"      "2015"
+	"ability_sliencesystem_Silence"
+	{
       "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
       "BaseClass"         "ability_datadriven"
       "AbilityCooldown"   "0"
-	  "MaxLevel"              "4"
-	
+	  "MaxLevel"          "1"
       "OnSpellStart"
       {
-        "Damage"
-        {
-          "Type"          "DAMAGE_TYPE_PURE"
-          "Damage"        "100 150 200 250"
-          "Target"        "TARGET"
-        }
+	       "ApplyModifier"
+            {
+			    "ModifierName"    "modifier_sliencesystem_silence"
+                "Target"          "TARGET"
+            }
+	     
       }
-  }
+	  "Modifiers"
+      {
+            "modifier_sliencesystem_silence"
+            {
+			    "States"
+			    {
+				    "MODIFIER_STATE_SILENCED"		    "MODIFIER_STATE_VALUE_ENABLED"
+			    }
+            }
+      }
+	}	
+	
+	"ability_system_magicImmune"
+	{
+      "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+      "BaseClass"         "ability_datadriven"
+      "AbilityCooldown"   "0"
+	  "MaxLevel"          "1"
+      "OnSpellStart"
+      {
+	       "ApplyModifier"
+            {
+			    "ModifierName"    "modifier_system_magicImmune"
+                "Target"          "TARGET"
+            }
+	     
+      }
+	  "Modifiers"
+      {
+            "modifier_system_magicImmune"
+            {
+			    "States"
+			    {
+				    "MODIFIER_STATE_MAGIC_IMMUNE"		    "MODIFIER_STATE_VALUE_ENABLED"
+			    }
+            }
+      }
+	}	
 
-"ability_dota2x_reimu01"
-  {
-    "ID"    "1999"
-    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_POINT"
-    "BaseClass"           "ability_datadriven"
-    "AbilityTextureName"      "ability_dota2x_reimu01"
-	"AbilityCastAnimation"    "Act_DOTA_CAST_ABILITY_1"
-    "MaxLevel"              "4"
-
-    // Stats
-    //----------------------------------------------------------------
-    "AbilityCastRange"        "1200"
-    "AbilityManaCost"         "95 85 75 65"
-    "AbilityCastPoint"        "0.3"
-    "AbilityCooldown"         "8"
-    "AbilityUnitDamageType"     "DAMAGE_TYPE_PURE"
-
-    "OnSpellStart"
+    "ability_dota2x_reimu01"
     {
-      "RunScript"
-      {
-        "ScriptFile"        "scripts/vscripts/abilityReimu.lua"
-        "Function"          "OnReimu01SpellStart"
-        "Target"            "POINT"
-      }
-      "DelayedAction"
-      {
-        "Delay"   "0"
-        "Action"
-        {
-        "ApplyModifier"
-          {
-            "Target"    "CASTER"
-            "ModifierName"    "modifier_dota2x_reimu01_think_interval"
-          }
-        }
-      }
-      
-    }
-    "Modifiers"
-    {
-      "modifier_dota2x_reimu01_think_interval"
-      {
-        "RemoveOnDeath"     "0"
-        "IsHidden"          "0"
-        "Duration"          "2.60"
-        "ThinkInterval"     "0.01"
-        "OnIntervalThink"
+        "ID"                       "1999"
+        "AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "BaseClass"                "ability_datadriven"
+        "AbilityTextureName"       "ability_dota2x_reimu01"
+    	"AbilityCastAnimation"     "Act_DOTA_CAST_ABILITY_1"
+        "MaxLevel"                 "4"
+
+        // Stats 
+        //----------------------------------------------------------------
+        "AbilityCastRange"          "600"
+        "AbilityManaCost"           "90 105 125 140"
+        "AbilityCastPoint"          "0.3"
+        "AbilityCooldown"           "14"
+        "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+	    "AbilityDamage"				"125 205 270 320"
+
+        "OnSpellStart"
         {
           "RunScript"
           {
-            "ScriptFile"        "scripts/vscripts/abilityReimu.lua"
-            "Function"          "OnReimu01ReleaseBall"
-            "Caster"            "CASTER"
+            "ScriptFile"        "scripts/vscripts/abilities/abilityReimu.lua"
+            "Function"          "OnReimu01SpellStart"
             "Target"            "POINT"
           }
+          "DelayedAction"
+          {
+            "Delay"   "0"
+            "Action"
+            {
+                "ApplyModifier"
+                {
+                    "Target"    "CASTER"
+                    "ModifierName"    "modifier_dota2x_reimu01_think_interval"
+                }
+            }
+          }
+      
         }
-      }
-    }
-  }
+        "Modifiers"
+        {
+          "modifier_dota2x_reimu01_think_interval"
+          {
+               "RemoveOnDeath"     "0"
+               "IsHidden"          "0"
+               "Duration"          "2.6"
+               "ThinkInterval"     "0.1"
+               "OnIntervalThink"
+               {
+                   "RunScript"
+                   {
+                       "ScriptFile"        "scripts/vscripts/abilities/abilityReimu.lua"
+                       "Function"          "OnReimu01ReleaseBall"
+                       "Caster"            "CASTER"
+                       "Target"            "TARGET"
+					   "StunDuration"	   "%stun_duration"
+					   "DamageDecrease"    "%damage_decrease"
+					   "Radius"			   "%radius"
+                   }
+              }
+          }
+        }
+	
+	
+	    "AbilitySpecial"
+	    {
+	    	"01"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"stun_duration"				"0.5"  
+		    }
+	    	"02"
+		    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"damage_decrease"		     "0.33"
+	    	}
+	    	"03"
+	    	{
+	    		"var_type"					"FIELD_INTEGER"
+	    		"radius"			        "400"
+	    	}
+	    }
+     }
 
 	
 	"ability_dota2x_reimu02"
 	{
-		"ID"    				"2016"
-		"AbilityBehavior"   	"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"           	"ability_datadriven"
-		"AbilityTextureName"	"ability_dota2x_reimu02"
-		"AbilityCastAnimation"    "Act_DOTA_CAST_ABILITY_2"
-		"MaxLevel"              "4"
+		"ID"    				    "2000"
+		"AbilityBehavior"   	    "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"BaseClass"           	    "ability_datadriven"
+		"AbilityTextureName"	    "ability_dota2x_reimu02"
+		"AbilityCastAnimation"      "Act_DOTA_CAST_ABILITY_2"
+		"MaxLevel"                  "4"
 		
 		// Stats
 		//----------------------------------------------------------------
-		"AbilityManaCost"       "60"
-		"AbilityCastPoint"      "0.2"
-		"AbilityCooldown"       "4"
-		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
+		"AbilityManaCost"           "120 140 160 180"
+		"AbilityCastPoint"          "0.2"
+		"AbilityCooldown"           "9"
+		"AbilityUnitDamageType"	    "DAMAGE_TYPE_MAGICAL"
+	    "AbilityDamage"				"70 80 90 100"
 		
 		"OnSpellStart"
 		{
 			"RunScript"
 			{
-				"ScriptFile"        "scripts/vscripts/abilityReimu.lua"
+				"ScriptFile"        "scripts/vscripts/abilities/abilityReimu.lua"
 				"Function"          "OnReimu02SpellStart"
 				"Caster"            "CASTER"	
 			}
@@ -479,7 +542,7 @@
 				{
 					"ApplyModifier"
 					{
-						"Target"    "CASTER"
+						"Target"          "CASTER"
 						"ModifierName"    "modifier_dota2x_reimu02_think_interval"
 					}
 				}
@@ -492,40 +555,173 @@
 			{
 				"RemoveOnDeath"     "0"
 				"IsHidden"          "0"
-				"Duration"          "5.00"
-				"ThinkInterval"     "0.01"
+				"Duration"          "3.00"
+				"ThinkInterval"     "0.1"
 				"OnIntervalThink"
 				{
 					"RunScript"
 					{
-						"ScriptFile"        "scripts/vscripts/abilityReimu.lua"
+						"ScriptFile"        "scripts/vscripts/abilities/abilityReimu.lua"
 						"Function"          "OnReimu02OnLightStart"
-						"Caster"            "CASTER"			
+						"Caster"            "CASTER"	
 					}
 				}
 			}
 		}	
 	}
 	
-	"ability_reimu02_damage"
+	"ability_dota2x_reimu03"
 	{
-		"ID"					"2017"
-	    "AbilityBehavior"   	"DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"BaseClass"         	"ability_datadriven"
-		"AbilityCooldown"   	"0"
-		"MaxLevel"          	"4"
-	
+		"ID"						"2001"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityBehavior"		   	"DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"		"ability_dota2x_reimu03"
+		"AbilityCastAnimation"	  	"ACT_DOTA_CAST_ABILITY_3"
+		"MaxLevel"				  	"4"
+
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityCastRange"			"600"
+		"AbilityManaCost"		 	"50 75 100 125"
+		"AbilityCastPoint"			"0.3"
+		"AbilityCooldown"		 	"12"
+
 		"OnSpellStart"
 		{
-			"Damage"
+			"RunScript"
 			{
-				"Type"          "DAMAGE_TYPE_PURE"
-				"Damage"        "70 100 130 160"
-				"Target"        "TARGET"
+				"ScriptFile"        "scripts/vscripts/abilities/abilityReimu.lua"
+				"Function"          "OnReimu03SpellStart"
+				"Caster"            "CASTER"	
+				"Target"            "TARGET"		
+				"Duration"          "%ability_duration"	
+			}
+			"ApplyModifier"
+			{
+				"Target"          "TARGET"
+				"ModifierName"    "modifier_ability_dota2x_reimu03_effect"
+			}
+		}
+		
+		"Modifiers"
+		{
+			"modifier_ability_dota2x_reimu03_effect"
+			{
+				"Passive"				"1"
+				"IsHidden"				"1"
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"Target"			"TARGET"
+						"EffectName"		"particles/dire_fx/tower_bad_face.vpcf"
+						"EffectAttachType"	"follow_origin"
+					}
+				}
+			}
+		}	
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_duration"		"2 3 4 5"
 			}
 		}
 	}
-	
+	"ability_dota2x_reimu04"
+	{
+		"ID"    				    "2002"
+		"AbilityBehavior"   	    "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityType"				"DOTA_ABILITY_TYPE_ULTIMATE"
+		"BaseClass"           	    "ability_datadriven"
+		"AbilityTextureName"	    "ability_dota2x_reimu04"
+		"AbilityCastAnimation"      "Act_DOTA_CAST_ABILITY_4"
+		
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityManaCost"           "0 300 400"
+		"AbilityCastPoint"          "0.2"
+		"AbilityCooldown"           "0"
+		"AbilityUnitDamageType"	    "DAMAGE_TYPE_MAGICAL"
+	    "AbilityDamage"				"120 160 200"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"        "scripts/vscripts/abilities/abilityReimu.lua"
+				"Function"          "OnReimu04SpellStart"
+				"Ability_Duration"  "%ability_duration"
+				"Caster"            "CASTER"	
+			}
+
+			"DelayedAction"
+			{
+				"Delay"   "0"
+				"Action"
+				{
+					"ApplyModifier"
+					{
+						"Target"          "CASTER"
+						"ModifierName"    "modifier_dota2x_reimu04_think_interval"
+					}
+				}
+			}
+		}
+		
+		"Modifiers"
+		{
+			"modifier_dota2x_reimu04_think_interval"
+			{
+				"RemoveOnDeath"     "0"
+				"IsHidden"          "0"
+				"Duration"          "%ability_duration"
+				"ThinkInterval"     "0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"        "scripts/vscripts/abilities/abilityReimu.lua"
+						"Function"          "OnReimu04SpellThink"
+						"Caster"            "CASTER"	
+						"Ability_Duration"  "%ability_duration"
+						"Stun_Duration"     "%stun_duration"
+						"Radius"            "%radius"
+						"Damage_Count"      "%damage_count"
+					}
+				}
+			}
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_duration"		"3 4 5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"radius"		        "400 500 600"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"		    "0.3"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_count"		    "3 4 5"
+			}
+		}	
+	}
 	
 }
   
