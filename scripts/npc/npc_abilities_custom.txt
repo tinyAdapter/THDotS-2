@@ -1047,5 +1047,227 @@
 		    }
 	    }
     }
+	
+	"ability_thdots_youmu01"
+    {
+        "ID"                       "2007"
+        "AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetType"	   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "BaseClass"                "ability_datadriven"
+        "AbilityTextureName"       "ability_thdots_youmu01"
+    	"AbilityCastAnimation"     "Act_DOTA_CAST_ABILITY_1"
+        "MaxLevel"                 "4"
+
+        // Stats 
+        //----------------------------------------------------------------
+        "AbilityCastRange"          "700 800 900 1000"
+        "AbilityManaCost"           "85"
+        "AbilityCastPoint"          "0.3"
+        "AbilityCooldown"           "13 11 9 7"
+        "AbilityUnitDamageType"     "DAMAGE_TYPE_PHYSICAL"
+	    "AbilityDamage"				"50 75 100 125"
+
+        "OnSpellStart"
+        {
+		    "RunScript"
+            {
+                "ScriptFile"        "scripts/vscripts/abilities/abilityYoumu.lua"
+                "Function"          "OnYoumu01SpellStart"
+                "Caster"            "CASTER"
+                "Target"            "POINT"
+				       
+            }
+			"DelayedAction"
+			{
+				"Delay"   "0"
+				"Action"
+				{
+                    "ApplyModifier"
+			        {
+				        "Target"            "CASTER"
+				        "ModifierName"      "modifier_thdots_youmu01_think_interval"
+			        }
+				}
+			}
+        }
+        "Modifiers"
+        {
+			"modifier_thdots_youmu01_think_interval"
+			{
+				"RemoveOnDeath"     "0"
+				"IsHidden"          "0"
+				"Duration"          "%move_duration"
+				"ThinkInterval"     "0.2"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"        "scripts/vscripts/abilities/abilityMarisa.lua"
+						"Function"          "OnYoumu01SpellMove"
+						"Caster"            "CASTER"
+						"Target"
+						{
+							"Center"			"CASTER"
+							"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					        "Radius"			"%damage_radius"
+						}
+					}
+				}
+				"States"
+				{
+					"MODIFIER_STATE_NO_UNIT_COLLISION"    "MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+        }
+	
+	
+	    "AbilitySpecial"
+	    {
+			"01"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"damage_radius"			    "300"  
+		    }
+			"02"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"move_duration"			    "0.4"  
+		    }
+	    }
+    }
+	"ability_thdots_youmu02"
+	{
+		"ID"						"2008"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityTextureName"		"ability_crystal_maiden_ability_02"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"				  	"4"
+		
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityUnitDamageType"   	"DAMAGE_TYPE_PHYSICAL"
+		
+		"Modifiers"
+	    {
+			"passive_youmu02_attack"
+            {
+			    "Passive"                                     "1"
+                "OnAttackLanded"
+		        {
+				    "Damage"
+					{
+						"Target"		"TARGET"
+						"Damage"		"%bouns_damage"
+						"Type"			"DAMAGE_TYPE_PHYSICAL"
+					}
+					"RunScript"					
+	    	        {
+			            "Target"		     	"TARGET"
+		    	        "ScriptFile"			"scripts/vscripts/abilities/abilityYoumu.lua"
+			            "Function"		  		"OnYoumu02SpellStart"
+						"DecreaseArmor"     	"%decrease_armor"
+						"DecreaseMaxArmor"      "%decrease_max_armor"
+						"Duration"   			"%duration"
+		            }
+	        	}
+            }
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"decrease_armor"		"0.75 1.5 2.25 3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"decrease_max_armor"	"12 24 36 48"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bouns_damage"			"12 18 24 30"
+			}
+			"04"
+			{
+				"var_type"		  		"FIELD_FLOAT"
+				"duration"			    "12"
+			}
+		}
+	}
+	"ability_thdots_youmu03"
+    {
+	    "ID"    				    "2009"
+		"AbilityBehavior"   	    "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"BaseClass"           	    "ability_datadriven"
+		"AbilityTextureName"	    "ability_thdots_youmu03"
+		"AbilityCastAnimation"      "Act_DOTA_CAST_ABILITY_3"
+		
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityManaCost"           "100"
+		"AbilityCastPoint"          "0.2"
+		"AbilityCooldown"           "18"
+		
+		"OnSpellStart"
+		{
+			"RunScript"					
+	    	{
+			    "Target"		     	"TARGET"
+		    	"ScriptFile"			"scripts/vscripts/abilities/abilityYoumu.lua"
+			    "Function"		  		"OnYoumu03SpellStart"
+				"BounsDamage"           "%bouns_damage"
+				"Duration"              "%ability_duration"
+		    }
+			"ApplyModifier"
+			{
+				"Target"          "CASTER"
+				"ModifierName"    "modifier_thdots_youmu03_spawn"
+			}
+		}
+		
+		"Modifiers"
+		{
+			"modifier_thdots_youmu03_spawn"
+			{
+			    "OnAttackStart"
+				{
+					"RunScript"					
+	    	        {
+			            "Target"		     	"TARGET"
+		    	        "ScriptFile"			"scripts/vscripts/abilities/abilityYoumu.lua"
+			            "Function"		  		"OnYoumu03SpellOrderAttack"
+		            }
+				}
+				"OnOrder"
+		        {
+					"RunScript"					
+	    	        {
+			            "Target"		     	"TARGET"
+		    	        "ScriptFile"			"scripts/vscripts/abilities/abilityYoumu.lua"
+			            "Function"		  		"OnYoumu03SpellOrderMoved"
+		            }
+	        	}
+			}
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_duration"		"3 5 7 9"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bouns_damage"		    "0.5"
+			}
+		}	
+        
+    }
 }
   

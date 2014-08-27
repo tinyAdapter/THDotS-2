@@ -316,11 +316,11 @@ function AbilityReimu:OnReimu03Start(keys)
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	if(caster:GetTeam() == keys.target:GetTeam())then
 		keys.target:SetPhysicalArmorBaseValue(keys.target:GetPhysicalArmorBaseValue() + 99999)	
-		GameRules:GetGameModeEntity():SetContextThink(DoUniqueString('SetPhysicalArmor99999'),
+		keys.target:SetContextThink(DoUniqueString('SetPhysicalArmor99999'),
     	function ()
-	        keys.target:SetPhysicalArmorBaseValue(keys.target:GetPhysicalArmorBaseValue() - 99999)	
+			keys.target:SetPhysicalArmorBaseValue(keys.target:GetPhysicalArmorBaseValue() - 99999)	
 			keys.target:RemoveModifierByName("modifier_ability_dota2x_reimu03_effect")
-	    	return nil
+			return nil
     	end,keys.Duration)
 	else
 	    UtilSilence:UnitSilenceTarget(caster,keys.target,keys.Duration)

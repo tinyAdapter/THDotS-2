@@ -24,10 +24,7 @@ function Precache( context )
 	PrecacheResource( "model", "models/particle/snowball.vmdl", context )
 	PrecacheResource( "model", "models/development/invisiblebox.vmdl", context )
 	PrecacheResource( "model", "models/props_gameplay/rune_haste01.vmdl", context )
-<<<<<<< HEAD
-=======
 	--PrecacheResource( "model", "models/thd2/yyy.vmdl", context )
->>>>>>> origin/master
 	PrecacheResource( "particle", "particles/dire_fx/tower_bad_face.vpcf", context )
 	PrecacheResource( "particle", "particles/items2_fx/teleport_end_i.vpcf", context )--像妖梦樱花
 	PrecacheResource( "particle", "particles/econ/events/ti4/teleport_start_d_ti4.vpcf", context )--灵梦大
@@ -38,6 +35,7 @@ end
 loadModule ( 'thdots' )
 loadModule ( 'abilities/abilityReimu' )
 loadModule ( 'abilities/abilityMarisa' )
+loadModule ( 'abilities/abilityYoumu' )
 loadModule ( 'util/damage' )
 loadModule ( 'util/stun' )
 loadModule ( 'util/silence' )
