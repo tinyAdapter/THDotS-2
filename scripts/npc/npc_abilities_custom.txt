@@ -1513,9 +1513,30 @@
 				"ModifierName"		"modifier_thdots_aya02_buff"
 			}
 			
+			"ApplyModifier"
+			{
+				"Target"          	"TARGET"
+				"ModifierName"    	"modifier_thdots_aya02_effect"
+			}
 		}
 		"Modifiers"
-		{
+		{	
+			"modifier_thdots_aya02_effect"
+			{
+				"Duration"				"%duration"
+				"Passive"				"1"
+				"IsHidden"				"1"
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"		"particles/units/heroes/hero_beastmaster/beastmaster_wildaxe_glow.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"TARGET"
+					}
+				}
+			}
+			
 			"modifier_thdots_aya02_buff"
 			{
 				"Duration"				"%duration"
@@ -1528,13 +1549,6 @@
 						"Damage"		"%bouns_damage"
 						"Type"			"DAMAGE_TYPE_PURE"
 					}
-				}
-				
-				"AttachEffect"
-				{
-					"EffectName"		"particles/units/heroes/hero_beastmaster/beastmaster_wildaxe_glow.vpcf"
-					"EffectAttachType"	"follow_origin"
-					"Target"			"TARGET"
 				}
 				
 				"States"
@@ -1598,8 +1612,8 @@
 							
 							"ApplyModifier"
 							{
-								"ModifierName" 			"modifier_aya03_effect"
-								"Target"				"TARGET"
+								"ModifierName" 		"modifier_aya03_effect"
+								"Target"			"TARGET"
 							}
 							
 							"ApplyModifier"
@@ -1620,23 +1634,29 @@
 			
 			"modifier_aya03_slow"
 			{
-				"Duration" 		"%move_slow_duration"
-				"Properties"
+				"Duration" 						"%move_slow_duration"
+				"OnCreated"
 				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" 		"%move_slow"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" 		"%move_slow"
+					}
 				}
 			}
 			
 			"modifier_aya03_effect"
 			{
 				"Duration" 						"%move_slow_duration"
-				"FireEffect"
+				"OnCreated"
 				{
-					"TargetPoint" 				"TARGET"
-					"EffectName" 				"particles/econ/items/windrunner/windrunner_cape_cascade/windrunner_windrun_cascade.vpcf"
-					"EffectAttachType" 			"world_origin"
-					"EffectRadius" 				"%move_slow_radius"
+					"AttachEffect"
+					{
+						"EffectName"		"particles/econ/items/windrunner/windrunner_cape_cascade/windrunner_windrun_cascade.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"TARGET"
+					}
 				}
+				
 			}
 		}
 		
