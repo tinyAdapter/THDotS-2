@@ -211,5 +211,90 @@
 		"Ability1"				"ability_thdots_youmu01" 
 		"Ability2"				"ability_thdots_youmu02" 
 		"Ability3"				"ability_thdots_youmu03" 
+		"Ability4"				"ability_thdots_youmu04" 
+			
+		"ArmorPhysical"				"0"
+			//物理护甲
+		"AttackDamageMin"			"32"
+			//最大攻击力
+		"AttackDamageMax"			"34"
+			//最小攻击力
+			
+		"AttributeBaseStrength"		"19"
+			//基础力量
+		"AttributeStrengthGain"		"1.8"
+			//每级增加的力量，力量成长
+		"AttributeBaseAgility"		"26"
+			//基础敏捷
+		"AttributeAgilityGain"		"2.7"
+			//每级增加的敏捷，敏捷成长
+		"AttributeBaseIntelligence"	"15"
+			//基础智力
+		"AttributeIntelligenceGain"	"1.5"
+			//每级增加的智力，智力成长
+			
+		"MovementSpeed"				"320"
+			//基础移动速度
+		"MovementTurnRate"			"1.2"
+			//转身速度
+		"StatusHealth"				"190"
+			//基础生命值
+		"StatusHealthRegen"			"1.5"
+			//基础生命恢复
+		"StatusMana"				"50"
+			//基础魔法值
+		"StatusManaRegen"			"0.0"
+			//基础魔法恢复
+
+		"VisionDaytimeRange"		"1050"
+			//白天视野大小
+		"VisionNighttimeRange"		"700"
+			//晚上视野大小
+	}
+	"npc_dota_hero_Aya"
+	{
+		"override_hero"			"npc_dota_hero_slark"
+		"Ability1"				"ability_thdots_aya01" 
+		"Ability2"				"ability_thdots_aya02" 
+		"Ability3"				"ability_thdots_aya03" 
+		"Ability4"				"ability_thdots_aya04" 
+			
+		"ArmorPhysical"				"0"
+			//物理护甲
+		"AttackDamageMin"			"35"
+			//最大攻击力
+		"AttackDamageMax"			"38"
+			//最小攻击力
+			
+		"AttributeBaseStrength"		"18"
+			//基础力量
+		"AttributeStrengthGain"		"1.6"
+			//每级增加的力量，力量成长
+		"AttributeBaseAgility"		"28"
+			//基础敏捷
+		"AttributeAgilityGain"		"2.8"
+			//每级增加的敏捷，敏捷成长
+		"AttributeBaseIntelligence"	"14"
+			//基础智力
+		"AttributeIntelligenceGain"	"1.6"
+			//每级增加的智力，智力成长
+			
+		"MovementSpeed"				"320"
+			//基础移动速度
+		"MovementTurnRate"			"3.0"
+			//转身速度
+		"StatusHealth"				"220"
+			//基础生命值
+		"StatusHealthRegen"			"1.5"
+			//基础生命恢复
+		"StatusMana"				"60"
+			//基础魔法值
+		"StatusManaRegen"			"0.0"
+			//基础魔法恢复
+
+		"VisionDaytimeRange"		"1050"
+			//白天视野大小
+		"VisionNighttimeRange"		"700"
+			//晚上视野大小
 	}
 }

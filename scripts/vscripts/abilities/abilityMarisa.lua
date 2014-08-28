@@ -25,6 +25,18 @@ function OnMarisa03SpellThink(keys)
 	AbilityMarisa:OnMarisa03Think(keys)
 end
 
+function OnMarisa04SpellStart(keys)
+	--[[local caster = EntIndexToHScript(keys.caster_entindex)
+	local unit = CreateUnitByName(
+		"npc_dota2x_unit_marisa04_spark"
+		,caster:GetOrigin()
+		,false
+		,caster
+		,caster
+		,caster:GetTeam()
+	)]]--
+end
+
 function OnMarisa04SpellThink(keys)
 	AbilityMarisa:OnMarisa04Think(keys)
 end
@@ -34,7 +46,9 @@ function AbilityMarisa:OnMarisa01Start(keys)
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local targetPoint = keys.target_points[1]
 	local marisa01rad = GetRadBetweenTwoVec2D(caster:GetOrigin(),targetPoint)
+	local marisa01dis = GetDistanceBetweenTwoVec2D(caster:GetOrigin(),targetPoint)
 	caster:SetContextNum("ability_marisa01_Rad",marisa01rad,0)
+	caster:SetContextNum("ability_marisa01_Dis",marisa01dis,0)
 end
 
 function AbilityMarisa:OnMarisa01Move(keys)
@@ -69,6 +83,14 @@ function AbilityMarisa:OnMarisa01Move(keys)
 	local marisa01rad = caster:GetContext("ability_marisa01_Rad")
 	local vec = Vector(vecCaster.x+math.cos(marisa01rad)*keys.MoveSpeed/50,vecCaster.y+math.sin(marisa01rad)*keys.MoveSpeed/50,vecCaster.z)
 	caster:SetOrigin(vec)
+	local marisa01dis = caster:GetContext("ability_marisa01_Dis")
+	if(marisa01dis<0)then
+		caster:SetContextNum("ability_marisa01_Dis",0,0)
+		caster:RemoveModifierByName("modifier_thdots_marisa01_think_interval")
+	else
+	    marisa01dis = marisa01dis - keys.MoveSpeed/50
+	    caster:SetContextNum("ability_marisa01_Dis",marisa01dis,0)
+	end
 end
 
 function AbilityMarisa:OnMarisa02Start(keys)

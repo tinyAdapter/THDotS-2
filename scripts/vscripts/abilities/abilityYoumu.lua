@@ -26,9 +26,9 @@ function OnYoumu03SpellOrderAttack(keys)
 	AbilityYoumu:OnYoumu03OrderAttack(keys)
 end
 
---[[function OnYoumu04SpellThink(keys)
+function OnYoumu04SpellThink(keys)
 	AbilityYoumu:OnYoumu04Think(keys)
-end]]--
+end
 
 function AbilityYoumu:OnYoumu01Start(keys)
 	print("[AbilityYoumu01]Start")
@@ -55,7 +55,7 @@ function AbilityYoumu:OnYoumu01Move(keys)
 					attacker = caster,
 					damage = keys.ability:GetAbilityDamage(),
 					damage_type = keys.ability:GetAbilityDamageType(), 
-					damage_flags = 0
+					damage_flags = keys.ability:GetAbilityTargetFlags()
 				}
 				UnitDamageTarget(damage_table)
 		end
@@ -104,6 +104,8 @@ function AbilityYoumu:OnYoumu03Start(keys)
 	local bounsDamage = caster:GetAttackDamage()*keys.BounsDamage
 	unit:SetBaseDamageMax(bounsDamage+1)
 	unit:SetBaseDamageMin(bounsDamage-1)
+	unit:SetBaseMoveSpeed(caster:GetBaseMoveSpeed())
+	unit:SetBaseAttackTime(caster:GetBaseAttackTime())
 	GameRules:GetGameModeEntity():SetThink(
 			function()
 			    caster:RemoveModifierByName("modifier_thdots_youmu03_spawn")
@@ -127,4 +129,55 @@ function AbilityYoumu:OnYoumu03OrderAttack(keys)
 	local unitIndex = caster:GetContext("Youmu03_Effect_Unit")
 	local unit = EntIndexToHScript(unitIndex)
 	unit:MoveToTargetToAttack(target)
+end
+
+function AbilityYoumu:OnYoumu04Think(keys)
+	local caster = EntIndexToHScript(keys.caster_entindex)
+	local target = keys.target
+	local vecCaster = caster:GetOrigin()
+	local vecTarget = target:GetOrigin()
+	local Youmu04Rad
+	local count
+	
+	if(caster:GetContext("ability_Youmu04_Count") == nil)then
+	    caster:SetContextNum("ability_Youmu04_Count",0,0)
+	end
+	if(caster:GetContext("ability_Youmu04_Rad") == nil or caster:GetContext("ability_Youmu04_Rad") == 0) then
+		Youmu04Rad = GetRadBetweenTwoVec2D(vecTarget,vecCaster)
+		caster:SetContextNum("ability_Youmu04_Rad",Youmu04Rad,0)
+	end
+	Youmu04Rad = caster:GetContext("ability_Youmu04_Rad")
+	count = caster:GetContext("ability_Youmu04_Count")
+	if(count == 0)then
+	    UnitPauseTarget(caster,keys.target,1.0)
+		UnitPauseTarget(caster,keys.target,1.0)
+	end
+	
+	if(count%2 == 0)then
+		Youmu04Rad = Youmu04Rad + 210*math.pi/180
+		caster:SetContextNum("ability_Youmu04_Rad",Youmu04Rad,0)
+		local deal_damage = keys.ability:GetAbilityDamage() + keys.AbilityMulti * caster:GetPrimaryStatValue()
+		print(tostring(deal_damage))
+		local damage_table = {
+				victim = keys.target,
+				attacker = caster,
+				damage = deal_damage/5,
+				damage_type = keys.ability:GetAbilityDamageType(), 
+				damage_flags = keys.ability:GetAbilityTargetFlags()
+		}
+		
+	    PrintTable(damage_table)
+		UnitDamageTarget(damage_table)
+	end
+	local vec = Vector(vecTarget.x+math.cos(Youmu04Rad)*250,vecTarget.y+math.sin(Youmu04Rad)*250,vecCaster.z)
+	caster:SetOrigin(vec)
+	count = count +1
+	caster:SetContextNum("ability_Youmu04_Count",count,0)
+	print(tostring(count))
+	if(count>=10)then
+		caster:SetOrigin(vecTarget)
+		caster:SetContextNum("ability_Youmu04_Count",0,0)
+		caster:SetContextNum("ability_Youmu04_Rad",0,0)
+		return
+	end
 end

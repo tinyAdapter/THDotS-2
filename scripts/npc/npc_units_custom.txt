@@ -43,8 +43,9 @@
 
     "npc_dota2x_unit_reimu01_ball"
   	{
-  		"model"					"models/particle/snowball.vmdl"
+  		"model"					"models/thd2/yyy.vmdl"
   		"BaseClass"				"npc_dota_creep_neutral"
+		"ModelScale" 			"2.0"
 		"Ability1"				"ability_dummy_unit"
   		"AttackCapabilities"	"DOTA_UNIT_CAP_NO_ATTACK"
   		"MovementCapabilities"	"DOTA_UNIT_CAP_MOVE_NONE"
@@ -89,19 +90,31 @@
   		"WakesNeutrals"				"0"
   	}
 	
+	"npc_dota2x_unit_marisa04_spark"
+  	{
+		"model"					"models/thd2/masterspark.vmdl"
+  		"BaseClass"				"npc_dota_creep_neutral"
+		"Ability1"				"ability_dummy_unit"
+  		"AttackCapabilities"	"DOTA_UNIT_CAP_NO_ATTACK"
+  		"MovementCapabilities"	"DOTA_UNIT_CAP_MOVE_NONE"
+  		"VisionDaytimeRange"	"100"
+  		"VisionNighttimeRange"	"100"
+  		"HasInventory"			"0"
+  		"WakesNeutrals"			"0"
+  	}
+	
 	"npc_thdots_unit_youmu03_unit"
   	{
-		"model"						"models/props_gameplay/rune_haste01.vmdl"
-  		"BaseClass"					"npc_dota_creep_neutral"
+		"model"						"models/heroes/juggernaut/juggernaut.vmdl"
+  		"BaseClass"					"npc_dota_creature"
 		"Ability1"					"ability_dummy_unit"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"			"1"		// Damage range min.
 		"AttackDamageMax"			"2"		// Damage range max.
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"			// Type of locomotion - ground, air
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"			// Type of locomotion - ground, air
 		"MovementSpeed"				"522"		// Speed
 		"MovementTurnRate"			"1.0"		// Turning rate.
-		
 		"AttackRate"				"1.35"		// Speed of attack.
 		"AttackAnimationPoint"		"0.1"		// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
@@ -112,6 +125,32 @@
   		"VisionNighttimeRange"		"100"
   		"HasInventory"				"0"
   		"WakesNeutrals"				"0"
+		"Creature"
+		{
+			"AttachWearables"
+			{
+				"Wearable1"
+				{
+					"ItemDef"			"6"
+				}
+				"Wearable2"
+				{
+					"ItemDef"			"7"
+				}
+				"Wearable3"
+				{
+					"ItemDef"			"8"
+				}
+				"Wearable4"
+				{
+					"ItemDef"			"9"
+				}
+				"Wearable5"
+				{
+					"ItemDef"			"62"
+				}
+			}
+		}
   	}
 	
 	//=================================================================================
