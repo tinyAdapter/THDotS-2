@@ -1442,6 +1442,21 @@
 						}
 						"MoveSpeed"	       "%move_speed"
 					}
+					"FireEffect"
+					{
+						"TargetPoint" 				"CASTER"
+						"EffectName" 				"particles/units/heroes/hero_brewmaster/brewmaster_windwalk_dust.vpcf"
+						"EffectAttachType" 			"world_origin"
+						"EffectRadius" 				"%damage_radius"
+						"EffectDurationScale" 		"1"
+						"EffectLifeDurationScale"	"1"
+					}
+				}
+				"AttachEffect"
+				{
+					"EffectName"		"particles/units/heroes/hero_windrunner/windrunner_spell_powershot_trail_e.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"CASTER"
 				}
 				"States"
 				{
@@ -1514,6 +1529,14 @@
 						"Type"			"DAMAGE_TYPE_PURE"
 					}
 				}
+				
+				"AttachEffect"
+				{
+					"EffectName"		"particles/units/heroes/hero_beastmaster/beastmaster_wildaxe_glow.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+				
 				"States"
 				{
 					"MODIFIER_STATE_PROVIDES_VISION"    	"MODIFIER_STATE_VALUE_ENABLED"
@@ -1572,6 +1595,13 @@
 		    	            	"ScriptFile"			"scripts/vscripts/abilities/abilityAya.lua"
 			                	"Function"		  		"OnAya03SpellStart"
 		                 	}
+							
+							"ApplyModifier"
+							{
+								"ModifierName" 			"modifier_aya03_effect"
+								"Target"				"TARGET"
+							}
+							
 							"ApplyModifier"
 							{
 								"ModifierName" 			"modifier_aya03_slow"
@@ -1587,12 +1617,25 @@
 			        }
 	        	}
             }
+			
 			"modifier_aya03_slow"
 			{
 				"Duration" 		"%move_slow_duration"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" 		"%move_slow"
+				}
+			}
+			
+			"modifier_aya03_effect"
+			{
+				"Duration" 						"%move_slow_duration"
+				"FireEffect"
+				{
+					"TargetPoint" 				"TARGET"
+					"EffectName" 				"particles/econ/items/windrunner/windrunner_cape_cascade/windrunner_windrun_cascade.vpcf"
+					"EffectAttachType" 			"world_origin"
+					"EffectRadius" 				"%move_slow_radius"
 				}
 			}
 		}
@@ -1690,6 +1733,14 @@
 			            "Function"		  		"OnAya04SpellOrderMoved"
 						"BlinkRange"            "%blink_range"
 		            }
+					"FireEffect"
+					{
+						"TargetPoint" 				"CASTER"
+						"EffectName" 				"particles/units/heroes/hero_windrunner/windrunner_poof.vpcf"
+						"EffectAttachType" 			"world_origin"
+						"EffectDurationScale" 		"1"
+						"EffectLifeDurationScale"	"1"
+					}
 	        	}
 				"States"
 				{

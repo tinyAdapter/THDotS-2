@@ -34,7 +34,8 @@ function OnMarisa04SpellStart(keys)
 		,caster
 		,caster
 		,caster:GetTeam()
-	)]]--
+	)
+	unit:SetForwardVector(caster:GetForwardVector())]]--
 end
 
 function OnMarisa04SpellThink(keys)

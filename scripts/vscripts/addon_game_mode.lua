@@ -30,6 +30,11 @@ function Precache( context )
 	PrecacheResource( "particle", "particles/dire_fx/tower_bad_face.vpcf", context )
 	PrecacheResource( "particle", "particles/items2_fx/teleport_end_i.vpcf", context )--像妖梦樱花
 	PrecacheResource( "particle", "particles/econ/events/ti4/teleport_start_d_ti4.vpcf", context )--灵梦大
+	PrecacheResource( "particle", "particles/units/heroes/hero_brewmaster/brewmaster_windwalk_dust.vpcf", context )--文文D
+	PrecacheResource( "particle", "particles/units/heroes/hero_windrunner/windrunner_spell_powershot_trail_e.vpcf", context )--文文D
+	PrecacheResource( "particle", "particles/units/heroes/hero_beastmaster/beastmaster_wildaxe_glow.vpcf", context )--文文F
+	PrecacheResource( "particle", "particles/econ/items/windrunner/windrunner_cape_cascade/windrunner_windrun_cascade.vpcf", context )--文文R
+	PrecacheResource( "particle", "particles/units/heroes/hero_windrunner/windrunner_poof.vpcf", context )--文文W
 
 end
 
