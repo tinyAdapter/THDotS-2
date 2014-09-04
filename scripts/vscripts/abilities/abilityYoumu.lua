@@ -14,6 +14,23 @@ function OnYoumu02SpellStart(keys)
 	AbilityYoumu:OnYoumu02Start(keys)
 end
 
+function OnYoumu02SpellStartDamage(keys)
+	local caster = EntIndexToHScript(keys.caster_entindex)
+	local target = keys.target
+	local damage_table = {
+			    victim = target,
+			    attacker = caster,
+			    damage = keys.BounsDamage,
+			    damage_type = keys.ability:GetAbilityDamageType(), 
+	    	    damage_flags = 0
+	}
+	UnitDamageTarget(damage_table)
+end
+
+function OnYoumu02SpellStartUnit(keys)
+	AbilityYoumu:OnYoumu02StartUnit(keys)
+end
+
 function OnYoumu03SpellStart(keys)
 	AbilityYoumu:OnYoumu03Start(keys)
 end
@@ -60,14 +77,47 @@ function AbilityYoumu:OnYoumu01Move(keys)
 				UnitDamageTarget(damage_table)
 		end
 		caster:SetContextNum("ability_Youmu01_Count",0,0)
+		local effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/youmu/youmu_01_blink_effect.vpcf", PATTACH_CUSTOMORIGIN, caster)
+		ParticleManager:SetParticleControl(effectIndex, 3, caster:GetOrigin())
+		ParticleManager:ReleaseParticleIndex(effectIndex)
 	end
 	local Youmu01rad = caster:GetContext("ability_Youmu01_Rad")
 	local Youmu01MoveSpeed = caster:GetContext("ability_Youmu01_Move_Speed")
 	local vec = Vector(vecCaster.x+math.cos(Youmu01rad)*Youmu01MoveSpeed,vecCaster.y+math.sin(Youmu01rad)*Youmu01MoveSpeed,vecCaster.z)
+	local unitIndex = caster:GetContext("Youmu03_Effect_Unit")
+	if(unitIndex~=nil)then
+		local unit = EntIndexToHScript(unitIndex)
+		if(unit~=nil)then
+			unit:SetOrigin(vec)
+		end
+	end
 	caster:SetOrigin(vec)
 end
 
 function AbilityYoumu:OnYoumu02Start(keys)
+	local caster = EntIndexToHScript(keys.caster_entindex)
+	local target = keys.target
+	if(target:GetContext("ability_Youmu02_Armor_Decrease")==nil)then
+		target:SetContextNum("ability_Youmu02_Armor_Decrease",0,0)
+	end
+	local decreaseArmor = target:GetContext("ability_Youmu02_Armor_Decrease")
+	decreaseArmor = decreaseArmor + keys.DecreaseArmor
+	if(decreaseArmor<keys.DecreaseMaxArmor)then
+		target:SetContextNum("ability_Youmu02_Armor_Decrease",decreaseArmor,0)
+		target:SetPhysicalArmorBaseValue(keys.target:GetPhysicalArmorBaseValue() - keys.DecreaseArmor)
+		target:SetThink(
+			function()
+				target:SetPhysicalArmorBaseValue(keys.target:GetPhysicalArmorBaseValue() + keys.DecreaseArmor)	
+				local decreaseArmorNow = target:GetContext("ability_Youmu02_Armor_Decrease") + keys.DecreaseArmor
+				target:SetContextNum("ability_Youmu02_Armor_Decrease",decreaseArmorNow,0)	
+			end, 
+			DoUniqueString("ability_Youmu02_Armor_Decrease_Duration"), 
+			keys.Duration
+			)	
+	end
+end
+
+function AbilityYoumu:OnYoumu02StartUnit(keys)
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local target = keys.target
 	if(target:GetContext("ability_Youmu02_Armor_Decrease")==nil)then
@@ -106,6 +156,10 @@ function AbilityYoumu:OnYoumu03Start(keys)
 	unit:SetBaseDamageMin(bounsDamage-1)
 	unit:SetBaseMoveSpeed(caster:GetBaseMoveSpeed())
 	unit:SetBaseAttackTime(caster:GetBaseAttackTime())
+	unit:AddAbility("ability_thdots_youmu02_unit")
+	local ability_unit_youmu02 = unit:FindAbilityByName("ability_thdots_youmu02_unit")
+	local ability_caster_youmu02_level = caster:FindAbilityByName("ability_thdots_youmu02"):GetLevel()
+	ability_unit_youmu02:SetLevel(ability_caster_youmu02_level)
 	GameRules:GetGameModeEntity():SetThink(
 			function()
 			    caster:RemoveModifierByName("modifier_thdots_youmu03_spawn")
@@ -165,7 +219,11 @@ function AbilityYoumu:OnYoumu04Think(keys)
 				damage_type = keys.ability:GetAbilityDamageType(), 
 				damage_flags = keys.ability:GetAbilityTargetFlags()
 		}
-		
+		local effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/youmu/youmu_04_sword_effect.vpcf", PATTACH_CUSTOMORIGIN, caster)
+		local effect2VecForward = Vector(vecTarget.x+math.cos(Youmu04Rad)*500,vecTarget.y+math.sin(Youmu04Rad)*500,vecCaster.z)
+		ParticleManager:SetParticleControl(effectIndex, 0, caster:GetOrigin())
+		ParticleManager:SetParticleControl(effectIndex, 1, effect2VecForward)
+		ParticleManager:ReleaseParticleIndex(effectIndex)
 	    PrintTable(damage_table)
 		UnitDamageTarget(damage_table)
 	end

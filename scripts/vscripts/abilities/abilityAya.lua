@@ -10,6 +10,19 @@ function OnAya01SpellMove(keys)
 	AbilityAya:OnAya01Move(keys)
 end
 
+function OnAya02SpellStart(keys)
+	local caster = EntIndexToHScript(keys.caster_entindex)
+	local target = keys.target
+	local damage_table = {
+			    victim = target,
+			    attacker = caster,
+			    damage = keys.BounsDamage,
+			    damage_type = keys.ability:GetAbilityDamageType(), 
+	    	    damage_flags = 0
+	}
+	UnitDamageTarget(damage_table)
+end
+
 function OnAya03SpellStart(keys)
 	AbilityAya:OnAya03Start(keys)
 end
@@ -99,8 +112,6 @@ function AbilityAya:OnAya04OrderMoved(keys)
 	if(caster:GetContext("ability_Aya04_blink_lock")==FALSE)then
 		return
 	end
-	--local faceRad = caster:GetAngles()*180/math.pi
-	--local vecMove = Vector(caster:GetOrigin().x+math.cos(faceRad)*keys.BlinkRange,caster:GetOrigin().y+math.sin(faceRad)*keys.BlinkRange,caster:GetOrigin().z)
 	local vecMove = caster:GetOrigin() + keys.BlinkRange * caster:GetForwardVector()
 	caster:SetOrigin(vecMove)
 	if(caster:GetContext("ability_Aya04_blink_lock")==TRUE or caster:GetContext("ability_Aya04_blink_lock")==nil)then

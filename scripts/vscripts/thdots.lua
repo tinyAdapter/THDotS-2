@@ -434,7 +434,7 @@ function THDOTSGameMode:OnEntityKilled( keys )
   -- 储存被击杀的单位
   local killedUnit = EntIndexToHScript( keys.entindex_killed )
   -- 储存杀手单位
-  local killerEntity =EntIndexToHScript( keys.entindex_attacker )
+  local killerEntity = EntIndexToHScript( keys.entindex_attacker )
 
   -- 具体要做些什么，就要看实际需求了
 end

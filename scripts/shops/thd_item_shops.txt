@@ -1,0 +1,7 @@
+"dota_shops"
+{
+	"consumables"
+	{
+		"item"		"item_monkey_king_bar_child"
+	}
+}

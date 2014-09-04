@@ -97,8 +97,8 @@
 		"Ability1"				"ability_dummy_unit"
   		"AttackCapabilities"	"DOTA_UNIT_CAP_NO_ATTACK"
   		"MovementCapabilities"	"DOTA_UNIT_CAP_MOVE_NONE"
-  		"VisionDaytimeRange"	"100"
-  		"VisionNighttimeRange"	"100"
+  		"VisionDaytimeRange"	"1000"
+  		"VisionNighttimeRange"	"1000"
   		"HasInventory"			"0"
   		"WakesNeutrals"			"0"
   	}
@@ -258,64 +258,6 @@
 		
 		"Ability1"					"ability_dummy_unit"
 
-		"ArmorPhysical"				"0"			// Physical protection.
-		"MagicalResistance"				"0"			// Magical protection.
-
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-			//这里是定义一个远程攻击单位的实例
-		"AttackDamageMin"			"0"			// Damage range min.
-		"AttackDamageMax"			"0"			// Damage range max.
-		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"AttackRate"				"1"
-			//攻击频率
-		"AttackAnimationPoint"		"0.5"
-			//攻击动画点，也就是动画前摇
-		"AttackAcquisitionRange"	"800"
-			//攻击获取距离，例如攻击动作已经开始，单位如果还在攻击获取距离之内的话，那么这个攻击动作将会继续
-		"AttackRange"				"500"
-			//攻击距离，攻击可以开始的距离
-		//"ProjectileModel"			"keeper_of_the_light_base_attack"
-			//攻击的特效文件，这里是光法的基础攻击粒子特效
-
-			//这里要特别注意的是，如果你定义了一个远程攻击的弹道，那么你必须在下方以
-			//"ParticleFile"				"particles/units/heroes/hero_keeper_of_the_light.pcf"
-			//的方式载入粒子特效文件，不然将看不到弹道
-
-		"ProjectileSpeed"			"900"
-			//攻击弹道的速度
-
-		"AttributeBaseStrength"		"0"			// Base strength
-		"AttributeStrengthGain"		"0"			// Strength bonus per level.
-		"AttributeBaseIntelligence"	"0"			// Base intelligence
-		"AttributeIntelligenceGain"	"0"			// Intelligence bonus per level.
-		"AttributeBaseAgility"		"0"			// Base agility
-		"AttributeAgilityGain"		"0"			// Agility bonus per level.
-
-		"BountyXP"					"0"			// Experience earn.
-		"BountyGoldMin"				"0"			// Gold earned min.
-		"BountyGoldMax"				"0"			// Gold earned max.
-
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"			// Hull type used for navigation/locomotion.
-
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"			// Type of locomotion - ground, air
-		"MovementSpeed"				"450"		// Speed
-		"MovementTurnRate"			"1.0"		// Turning rate.
-		"FollowRange"				"250"		// Distance to keep when following
-
-		"StatusHealth"				"1"			// Base health.
-		"StatusHealthRegen"			"0"			// Health regeneration rate.
-		"StatusMana"				"0"			// Base mana.
-		"StatusManaRegen"			"0"			// Mana regeneration rate.
-
-		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_SOFT"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
-		
-		"VisionDaytimeRange"		"0"		// Range of vision during day light.
-		"VisionNighttimeRange"		"0"		// Range of vision at night time.
-
-		"AttackDesire"				"1.5"		// How much bots want to attack them vs other non-hero things
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
 	}	
-
 }

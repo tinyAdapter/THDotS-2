@@ -67,6 +67,8 @@ function AbilityReimu:OnReimu01Start(keys)
 	local targetPoint = keys.target_points[1]
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local nPlayerID = keys.unit:GetPlayerID()
+	local FireIndex = ParticleManager:CreateParticle("particles/thd2/heroes/reimu/reimu_01_effect_fire.vpcf", PATTACH_CUSTOMORIGIN, caster)
+	caster:SetContextNum("Reimu01_Effect_Fire_Index" , FireIndex, 0)
 	
 	-- 如果球存在则return
 	if self.tReimu01Elements[nPlayerID].Ball.unit ~= nil then 
@@ -83,7 +85,7 @@ function AbilityReimu:OnReimu01Start(keys)
 		,caster
 		,caster:GetTeam()
 		)
-	
+		
 	--获取地面Z轴坐标
 	self.tReimu01Elements[nPlayerID].OriginZ = GetGroundPosition(targetPoint,nil).z
 	if unit then
@@ -115,10 +117,16 @@ function AbilityReimu:OnReimu01Release( keys )
 	local vec = Vector(headOrigin.x,headOrigin.y,uz)
 	local locability = keys.ability
 	local abilitylevel = locability:GetLevel()
-	
+		
+	local fireIndex = caster:GetContext("Reimu01_Effect_Fire_Index")
+	ParticleManager:SetParticleControl(fireIndex, 0, vec)
 	uHead:SetOrigin(vec)
 	print("[AbilityReimu01]z="..tostring(vec.z))
 	if uz <= self.tReimu01Elements[nPlayerID].OriginZ+80 then
+		local effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/reimu/reimu_01_effect.vpcf", PATTACH_CUSTOMORIGIN, caster)
+		ParticleManager:SetParticleControl(effectIndex, 0, vec)
+		ParticleManager:SetParticleControl(effectIndex, 2, vec)
+		ParticleManager:ReleaseParticleIndex(effectIndex)
 		self.tReimu01Elements[nPlayerID].Ball.v = self.tReimu01Elements[nPlayerID].Ball.v / math.sqrt(1.5) * -1
 		vec = Vector(headOrigin.x,headOrigin.y,self.tReimu01Elements[nPlayerID].OriginZ+80.1)
 		uHead:SetOrigin(vec)
@@ -333,6 +341,7 @@ function AbilityReimu:OnReimu03Start(keys)
 end
 
 function AbilityReimu:OnReimu04Start(keys)
+	print("[AbilityReimu04]start")
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local unit = CreateUnitByName(
 		"npc_dummy_unit"
@@ -342,8 +351,21 @@ function AbilityReimu:OnReimu04Start(keys)
 		,caster
 		,caster:GetTeam()
 	)
-	local nEffectIndex = ParticleManager:CreateParticle("particles/econ/events/ti4/teleport_start_d_ti4.vpcf",PATTACH_CUSTOMORIGIN,unit)
+	local nEffectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/reimu/reimu_04_effect.vpcf",PATTACH_CUSTOMORIGIN,unit)
+	local vecCorlor = Vector(255,0,0)
 	ParticleManager:SetParticleControl( nEffectIndex, 0, caster:GetOrigin())
+	ParticleManager:SetParticleControl( nEffectIndex, 1, caster:GetOrigin())
+	ParticleManager:SetParticleControl( nEffectIndex, 2, vecCorlor)
+	ParticleManager:SetParticleControl( nEffectIndex, 3, caster:GetForwardVector())
+	ParticleManager:SetParticleControl( nEffectIndex, 4, caster:GetOrigin())
+	ParticleManager:SetParticleControl( nEffectIndex, 5, caster:GetOrigin())
+	
+	unit:SetOwner(caster)
+	unit:AddAbility("ability_dota2x_reimu04_unit")
+	local unitAbility = unit:FindAbilityByName("ability_dota2x_reimu04_unit")
+	unitAbility:SetLevel(keys.ability:GetLevel())
+	unit:CastAbilityImmediately(unitAbility,0)
+		
 	caster:SetContextNum("Reimu04_Effect_Unit" , unit:GetEntityIndex(), 0)
 	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString('ability_reimu04_damage'),
     	function ()
@@ -351,23 +373,14 @@ function AbilityReimu:OnReimu04Start(keys)
 		        unit:RemoveSelf()
 		    	return nil
 			end
-	    end,keys.Ability_Duration+0.5)
+	    end,keys.Ability_Duration+0.1)
 end
 
 function AbilityReimu:OnReimu04Think(keys)
+	print("[AbilityReimu04]think")
 	local caster = EntIndexToHScript(keys.caster_entindex)
-	local unitIndex = caster:GetContext("Reimu04_Effect_Unit")
-	local effectUnit = EntIndexToHScript(unitIndex)
-	local Targets = FindUnitsInRadius(
-		       effectUnit:GetTeam(),		--caster team
-		       effectUnit:GetOrigin(),		--find position
-		       nil,					        --find entity
-	    	   keys.Radius,		            --find radius
-	    	   DOTA_UNIT_TARGET_TEAM_BOTH,
-	    	   DOTA_UNIT_TARGET_ALL,
-	    	   0, FIND_CLOSEST,
-	    	   false
-	)
+	local Targets = keys.target_entities
+	
 	for k,v in pairs(Targets) do
 		if(v:GetTeam() == caster:GetTeam())then
 			if(v:GetContext("Reimu04_Effect_MAGIC_IMMUNE")~=0) then

@@ -16,6 +16,18 @@ end
 function OnMarisa02SpellDamage(keys)
 	AbilityMarisa:OnMarisa02Damage(keys)
 end
+function OnMarisa02SpellRemove(keys)
+	local caster = EntIndexToHScript(keys.caster_entindex)
+	local unitIndex = caster:GetContext("ability_marisa02_effectUnit")
+	local unit = EntIndexToHScript(unitIndex)
+	if(unit~=nil)then
+		Timer.Wait 'ability_marisa02_effectUnit_release' (0.5,
+			function()
+				unit:RemoveSelf()
+			end
+	    )
+	end
+end
 
 function OnMarisa03SpellStart(keys)
 	AbilityMarisa:OnMarisa03Start(keys)
@@ -26,7 +38,8 @@ function OnMarisa03SpellThink(keys)
 end
 
 function OnMarisa04SpellStart(keys)
-	--[[local caster = EntIndexToHScript(keys.caster_entindex)
+	local caster = EntIndexToHScript(keys.caster_entindex)
+	local targetPoint = keys.target_points[1]
 	local unit = CreateUnitByName(
 		"npc_dota2x_unit_marisa04_spark"
 		,caster:GetOrigin()
@@ -35,11 +48,32 @@ function OnMarisa04SpellStart(keys)
 		,caster
 		,caster:GetTeam()
 	)
-	unit:SetForwardVector(caster:GetForwardVector())]]--
+	forwardRad = GetRadBetweenTwoVec2D(targetPoint,caster:GetOrigin()) 
+	vecForward = Vector(math.cos(math.pi/2 + forwardRad),math.sin(math.pi/2 + forwardRad),0)
+	unit:SetForwardVector(vecForward)
+	vecUnit = caster:GetOrigin() + Vector(0,0,90)
+	vecColor = Vector(255,255,255)
+	unit:SetOrigin(vecUnit)
+	local effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/marisa/marisa_04_spark.vpcf", PATTACH_CUSTOMORIGIN, unit)
+	local effect2ForwardRad = GetRadBetweenTwoVec2D(caster:GetOrigin(),targetPoint) 
+	local effect2VecForward = Vector(math.cos(effect2ForwardRad)*900,math.sin(effect2ForwardRad)*900,0) + caster:GetOrigin()
+	ParticleManager:SetParticleControl(effectIndex, 0, caster:GetOrigin())
+	ParticleManager:SetParticleControl(effectIndex, 1, effect2VecForward)
+	ParticleManager:SetParticleControl(effectIndex, 2, vecColor)
+	caster:SetContextNum("ability_marisa_04_spark_unit",unit:GetEntityIndex(),0)
 end
 
 function OnMarisa04SpellThink(keys)
 	AbilityMarisa:OnMarisa04Think(keys)
+end
+
+function OnMarisa04SpellRemove(keys)
+	local caster = EntIndexToHScript(keys.caster_entindex)
+	local unitIndex = caster:GetContext("ability_marisa_04_spark_unit")
+	local unit = EntIndexToHScript(unitIndex)
+	if(unit~=nil)then
+		unit:RemoveSelf()
+	end
 end
 
 function AbilityMarisa:OnMarisa01Start(keys)
@@ -101,6 +135,15 @@ function AbilityMarisa:OnMarisa02Start(keys)
 	caster:SetContextNum("ability_marisa02_point_x",targetPoint.x,0)
 	caster:SetContextNum("ability_marisa02_point_y",targetPoint.y,0)
 	caster:SetContextNum("ability_marisa02_point_z",targetPoint.z,0)
+	local unit = CreateUnitByName(
+		"npc_dummy_unit"
+		,caster:GetOrigin()
+		,false
+		,caster
+		,caster
+		,caster:GetTeam()
+	)
+	caster:SetContextNum("ability_marisa02_effectUnit",unit:GetEntityIndex(),0)
 end
 
 function AbilityMarisa:OnMarisa02Damage(keys)
@@ -113,6 +156,13 @@ function AbilityMarisa:OnMarisa02Damage(keys)
 	local pointRad1 = pointRad + math.pi/3
 	local pointRad2 = pointRad - math.pi/3
 	vecCaster = Vector(vecCaster.x - math.cos(pointRad)*60,vecCaster.y - math.sin(pointRad)*60,vecCaster.z)
+	
+	local unitIndex = caster:GetContext("ability_marisa02_effectUnit")
+	local unit = EntIndexToHScript(unitIndex)
+	local effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/marisa/marisa_02_stars.vpcf", PATTACH_CUSTOMORIGIN, unit)
+	local vecForward = Vector(500 * caster:GetForwardVector().x,500 * caster:GetForwardVector().y,caster:GetForwardVector().z)
+	ParticleManager:SetParticleControl(effectIndex, 0, caster:GetOrigin())
+	ParticleManager:SetParticleControl(effectIndex, 3, vecForward)
 	
 	-- 循坏各个目标单位
 	for _,v in pairs(targets) do
