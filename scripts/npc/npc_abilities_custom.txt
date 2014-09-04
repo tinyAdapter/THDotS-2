@@ -469,6 +469,7 @@
         "AbilityCooldown"           "14"
         "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
 	    "AbilityDamage"				"125 205 270 320"
+		"AOERadius"                 "%radius"
 
         "OnSpellStart"
         {
@@ -1196,6 +1197,7 @@
         "AbilityTextureName"       "ability_thdots_youmu01"
     	"AbilityCastAnimation"     "Act_DOTA_CAST_ABILITY_1"
         "MaxLevel"                 "4"
+		"AOERadius"                "%damage_radius"
 
         // Stats 
         //----------------------------------------------------------------
@@ -1982,7 +1984,70 @@
 				"bonus_speed"	    	"50 131 202"
 			}
 		}	
-        
     }
+	
+	"ability_thdots_tensi02"
+	{
+		"ID"						"2015"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityTextureName"		"ability_thdots_tensi02"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"				  	"4"
+		
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityUnitDamageType"   	"DAMAGE_TYPE_MAGICAL"
+		
+		"Modifiers"
+	    {
+			"passive_aya03_attack"
+            {
+			    "Passive"              	"1"
+                "OnAttackLanded"
+		        {
+		            
+		            "RunScript"					
+	    	        {
+			            "Target"
+						{
+							"Center"		    "TARGET"
+							"Radius"		    "%stun_radius"
+						    "Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
+						}
+						"Duration"        	    "%stun_duration"
+						"BounsDamage"      		"%bouns_damage"
+						"AbilityMulti"      	"%ability_multi"
+						"ScriptFile"			"scripts/vscripts/abilities/abilityTensi.lua"
+			            "Function"		  		"OnTensi02SpellStart"
+		            }
+				}
+			}
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bouns_damage"			"60 80 100 120"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"0.5 0.6 0.7 0.8"
+			}
+			"03"
+			{
+				"var_type"		  		"FIELD_FLOAT"
+				"stun_radius"		    "300 340 380 420"
+			}
+			"04"
+			{
+				"var_type"		  		"FIELD_FLOAT"
+				"ability_multi"			"360"
+			}
+		}
+	}
 }
   

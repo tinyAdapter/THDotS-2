@@ -44,6 +44,7 @@ function Precache( context )
 	PrecacheResource( "particle", "particles/units/heroes/hero_beastmaster/beastmaster_wildaxe_glow.vpcf", context )--文文F
 	PrecacheResource( "particle", "particles/econ/items/windrunner/windrunner_cape_cascade/windrunner_windrun_cascade.vpcf", context )--文文R
 	PrecacheResource( "particle", "particles/units/heroes/hero_windrunner/windrunner_poof.vpcf", context )--文文W
+	PrecacheResource( "particle", "particles/econ/items/earthshaker/egteam_set/hero_earthshaker_egset/earthshaker_echoslam_start_fallback_low_egset.vpcf", context )--天子F
 
 end
 
@@ -53,6 +54,7 @@ loadModule ( 'abilities/abilityReimu' )
 loadModule ( 'abilities/abilityMarisa' )
 loadModule ( 'abilities/abilityYoumu' )
 loadModule ( 'abilities/abilityAya' )
+loadModule ( 'abilities/abilityTensi' )
 loadModule ( 'util/damage' )
 loadModule ( 'util/stun' )
 loadModule ( 'util/pauseunit' )
