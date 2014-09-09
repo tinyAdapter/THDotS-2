@@ -18,26 +18,6 @@ end
 function THDOTSGameMode:InitGameMode()
   print('[THDOTS] Starting to load THDots gamemode...')
 
-  GameRules:SetUseUniversalShopMode( true )
-  -- 设定可否使用全地图商店模式（万圣节打肉山的时候就是全地图商店模式）
-
-  GameRules:SetSameHeroSelectionEnabled( false )
-  -- 设定是否可以选择相同英雄
-
-  GameRules:SetHeroSelectionTime( 30.0 )
-  -- 设定英雄选择时间
-
-  GameRules:SetPreGameTime( 30.0)
-  -- 设定游戏准备时间
-
-  GameRules:SetPostGameTime( 60.0 )
-  -- 设定游戏结束后在分数面板的停留时间
-
-  GameRules:SetTreeRegrowTime( 60.0 )
-  -- 设定树木的重生时间
-
-  GameRules:SetGoldPerTick(2)
-  -- 设定每秒工资数
 
   InitLogFile( "log/dota2x.txt","")
   -- 初始化记录文件
@@ -70,6 +50,9 @@ function THDOTSGameMode:InitGameMode()
   -- 玩家连接事件
 
   ListenToGameEvent('dota_player_used_ability', Dynamic_Wrap(THDOTSGameMode, 'AbilityUsed'), self)
+
+  ListenToGameEvent('dota_player_learned_ability', Dynamic_Wrap(THDOTSGameMode, 'AbilityLearn'), self)
+ 
   -- 玩家使用了某个技能事件
 
   -- 注册控制台命令的参数
@@ -142,9 +125,9 @@ function THDOTSGameMode:CaptureGameMode()
     GameMode:SetCameraDistanceOverride( 1504.0 )
 
     -- 设定使用自定义的买活话费，买活冷却，设定是否能买活参数
-    GameMode:SetCustomBuybackCostEnabled( true )
-    GameMode:SetCustomBuybackCooldownEnabled( true )
-    GameMode:SetBuybackEnabled( false )
+    --GameMode:SetCustomBuybackCostEnabled( true )
+    --GameMode:SetCustomBuybackCooldownEnabled( true )
+    --GameMode:SetBuybackEnabled( false )
 
     -- 设定GAMEMODE这个实体的循环函数，0.1秒执行一次，其实每一个实体都可以通过SetContextThink来
     -- 设定一个循环函数
@@ -171,6 +154,18 @@ end
 function THDOTSGameMode:AbilityUsed(keys)
   print('[DOTA2X] AbilityUsed')
   --PrintTable(keys)
+end
+function THDOTSGameMode:AbilityLearn(keys)
+	local ply = EntIndexToHScript(keys.player)
+	local caster = ply:GetAssignedHero()
+	--[[PrintTable(weapons)
+	for _,v in pairs(weapons) do
+		v:DetachFromParent()
+    end]]--
+	local abilityCollection = caster:FindAbilityByName("ability_collection_power")
+	if(abilityCollection:GetLevel()<1)then
+		abilityCollection:SetLevel(1)
+	end
 end
 
 function THDOTSGameMode:CleanupPlayer(keys)
@@ -428,13 +423,83 @@ function THDOTSGameMode:ExampleConsoleCommand()
 end
 
 function THDOTSGameMode:OnEntityKilled( keys )
-  --print( '[DOTA2X] OnEntityKilled Called' )
-  --PrintTable( keys )
+	--print( '[DOTA2X] OnEntityKilled Called' )
+	--PrintTable( keys )
   
-  -- 储存被击杀的单位
-  local killedUnit = EntIndexToHScript( keys.entindex_killed )
-  -- 储存杀手单位
-  local killerEntity = EntIndexToHScript( keys.entindex_attacker )
+	-- 储存被击杀的单位
+	local killedUnit = EntIndexToHScript( keys.entindex_killed )
+	-- 储存杀手单位
+	local killerEntity = EntIndexToHScript( keys.entindex_attacker )
 
-  -- 具体要做些什么，就要看实际需求了
+	if(killedUnit:IsHero()==false)then
+		local i = RandomInt(0,100)
+		if(i<15)then
+			local unit = CreateUnitByName(
+				"npc_coin_up_unit"
+				,killedUnit:GetOrigin()
+				,false
+				,killedUnit
+				,killedUnit
+				,DOTA_UNIT_TARGET_TEAM_NONE
+				)
+			unit:SetThink(
+				function()
+					unit:RemoveSelf()
+					return nil
+				end, 
+				"ability_collection_power_remove",
+			30.0)
+		end
+		i = RandomInt(0,100)
+		if(i<15)then
+			local unit = CreateUnitByName(
+				"npc_power_up_unit"
+				,killedUnit:GetOrigin()
+				,false
+				,killedUnit
+				,killedUnit
+				,DOTA_UNIT_TARGET_TEAM_NONE
+				)
+			unit:SetThink(
+				function()
+					unit:RemoveSelf()
+					return nil
+				end, 
+				"ability_collection_power_remove",
+			30.0)
+		end
+	end
+	if(killedUnit:IsHero()==true)then
+		local powerStatValue = killedUnit:GetContext("hero_bouns_stat_power_count")
+		if(powerStatValue==nil)then
+			return
+		end
+		local powerDecrease = (powerStatValue - powerStatValue%2)/2
+		killedUnit:SetContextNum("hero_bouns_stat_power_count",powerStatValue-powerDecrease,0)
+		if(killedUnit:GetPrimaryAttribute()==0)then
+			killedUnit:SetBaseStrength(killedUnit:GetBaseStrength()-powerDecrease)
+		elseif(killedUnit:GetPrimaryAttribute()==1)then
+			killedUnit:SetBaseAgility(killedUnit:GetBaseAgility()-powerDecrease)
+		elseif(killedUnit:GetPrimaryAttribute()==2)then
+			killedUnit:SetBaseIntellect(killedUnit:GetBaseIntellect()-powerDecrease)
+		end
+		for i= 0,powerDecrease do
+			local vecRan = RandomVector(100)
+			local power = CreateUnitByName(
+				"npc_power_up_unit"
+				,killedUnit:GetOrigin()+vecRan
+				,false
+				,killedUnit
+				,killedUnit
+				,DOTA_UNIT_TARGET_TEAM_NONE
+				)
+			power:SetThink(
+				function()
+					power:RemoveSelf()
+					return nil
+				end, 
+				"ability_collection_power_remove",
+			30.0)
+		end
+	end
 end

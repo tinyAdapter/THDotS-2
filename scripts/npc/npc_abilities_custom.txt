@@ -450,6 +450,37 @@
             }
 		}
 	}	
+	
+	"ability_collection_power"
+    {
+		"AbilityBehavior"   	    "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityType"				"DOTA_ABILITY_TYPE_HIDDEN"
+		"BaseClass"           	    "ability_datadriven"
+		"AbilityTextureName"	    "ability_collection_power"
+		"MaxLevel"        	  		"1"
+		
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityManaCost"           "0"
+		"AbilityCastPoint"          "0"
+		"AbilityCooldown"           "0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"					
+	    	{
+			    "Target"		     	
+				{
+					"Center"			"CASTER"
+					"Teams"				"DOTA_UNIT_TARGET_TEAM_NONE"
+				    "Radius"			"1500"
+				}
+		    	"ScriptFile"			"scripts/vscripts/abilities/abilityCollection.lua"
+			    "Function"		  		"OnCollectionPower"
+		    }
+		}
+    }
 
     "ability_dota2x_reimu01"
     {
@@ -1737,7 +1768,7 @@
 			{
 				"Duration"				"%duration"
 				"IsDebuff"				"1"
-				"OnAttackLanded"
+				"OnAttacked"
 		        {
 				    "RunScript"					
 	    	        {
@@ -1997,10 +2028,11 @@
 		// Stats
 		//----------------------------------------------------------------
 		"AbilityUnitDamageType"   	"DAMAGE_TYPE_MAGICAL"
+	    "AbilityDamage"				"60 80 100 120"
 		
 		"Modifiers"
 	    {
-			"passive_aya03_attack"
+			"passive_tensi02_attack"
             {
 			    "Passive"              	"1"
                 "OnAttackLanded"
@@ -2047,6 +2079,269 @@
 				"var_type"		  		"FIELD_FLOAT"
 				"ability_multi"			"360"
 			}
+		}
+	}
+	
+	"ability_thdots_tensi03"
+	{
+		"ID"						"2016"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityTextureName"		"ability_thdots_tensi03"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"				  	"4"
+		
+		"Modifiers"
+	    {
+			"passive_tensi03_attacked"
+            {
+			    "Passive"              	"1"
+                "OnAttacked"
+		        {
+					"RunScript"					
+	    	        {
+			            "Target"				"TARGET"
+						"BounsHealth"        	"%bonus_health"
+						"BounsMana"      		"%bonus_mana"
+						"ScriptFile"			"scripts/vscripts/abilities/abilityTensi.lua"
+			            "Function"		  		"OnTensi03SpellStart"
+		            }	
+				}
+			}
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bonus_health"			"2 4 6 8"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bonus_mana"			"2 4 6 8"
+			}
+		}
+	}
+	
+	"ability_thdots_byakuren01"
+    {
+        "ID"                       "2017"
+        "AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET "
+		"AbilityUnitTargetType"	   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	   "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "BaseClass"                "ability_datadriven"
+        "AbilityTextureName"       "ability_thdots_byakuren01"
+    	"AbilityCastAnimation"     "Act_DOTA_CAST_ABILITY_1"
+
+        // Stats 
+        //----------------------------------------------------------------
+        "AbilityCastRange"          "125"
+        "AbilityManaCost"           "95 120 145 170"
+        "AbilityCastPoint"          "0.3"
+        "AbilityCooldown"           "15 12.5 10 7.5"
+        "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+	    "AbilityDamage"				"125 200 275 350"
+
+        "OnSpellStart"
+		{
+			"RunScript"					
+			{
+				"Target"    
+				{
+					"Center"		    "TARGET"
+					"Radius"		    "%radius"
+					"Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
+				}
+				"StunDuration"          "%stun_duration"
+				"AOEDamage"             "%aoe_damage"
+				"ScriptFile"			"scripts/vscripts/abilities/abilityByakuren.lua"
+				"Function"		  		"OnByakuren01SpellStart"
+			}	
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"1.2 1.4 1.6 1.8"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"radius"				"350"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"aoe_damage"			"80 120 160 180"
+			}
+		}
+	}
+	
+	"ability_thdots_byakuren02"
+    {
+        "ID"                       "2018"
+        "AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET "
+		"AbilityUnitTargetType"	   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	   "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "BaseClass"                "ability_datadriven"
+        "AbilityTextureName"       "ability_thdots_byakuren02"
+    	"AbilityCastAnimation"     "Act_DOTA_CAST_ABILITY_2"
+
+        // Stats 
+        //----------------------------------------------------------------
+        "AbilityCastRange"          "125"
+        "AbilityManaCost"           "0"
+        "AbilityCastPoint"          "0.3"
+        "AbilityCooldown"           "8 7 6 5"
+        "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+
+        "OnSpellStart"
+		{
+			"RunScript"					
+			{
+				"Target"  				"TARGET"
+				"AbilityMulti"          "%ability_multi"
+				"ManaCost"         	    "%mana_cost"
+				"ScriptFile"			"scripts/vscripts/abilities/abilityByakuren.lua"
+				"Function"		  		"OnByakuren02SpellStart"
+			}	
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_multi"			"0.5 0.8 1.1 1.4"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"mana_cost"				"0.2"
+			}
+		}
+	}
+	
+	"ability_thdots_byakuren03"
+    {
+        "ID"                       "2019"
+        "AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET "
+		"AbilityUnitTargetType"	   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	   "DOTA_UNIT_TARGET_TEAM_BOTH"
+        "BaseClass"                "ability_datadriven"
+        "AbilityTextureName"       "ability_thdots_byakuren03"
+    	"AbilityCastAnimation"     "Act_DOTA_CAST_ABILITY_3"
+
+        // Stats 
+        //----------------------------------------------------------------
+        "AbilityCastRange"          "400 500 600 700"
+        "AbilityManaCost"           "100"
+        "AbilityCastPoint"          "0.3"
+        "AbilityCooldown"           "17 16 15 14"
+
+        "OnSpellStart"
+		{
+			"RunScript"					
+			{
+				"Target"  				"TARGET"
+				"ScriptFile"			"scripts/vscripts/abilities/abilityByakuren.lua"
+				"Function"		  		"OnByakuren03SpellStart"
+			}	
+			
+			"ApplyModifier"
+			{
+				"Target"				"TARGET"
+				"ModifierName"			"modifier_byakuren03_effect"
+			}
+		}
+		"Modifiers"
+	    {
+			"modifier_byakuren03_effect"
+			{
+				"Duration" 					"3.0"
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"		"particles/econ/events/ti4/teleport_start_counter_ti4.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"TARGET"
+					}
+				}
+			}
+		}
+	}
+	
+	"ability_thdots_byakuren04"
+	{
+		"ID"						"2020"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityTextureName"		"ability_thdots_byakuren04"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"			    "DOTA_ABILITY_TYPE_ULTIMATE"
+		
+		// Stats
+		//----------------------------------------------------------------
+		"AbilityUnitDamageType"   	"DAMAGE_TYPE_MAGICAL"
+		"AbilityDamage"				"15 30 45"
+		
+		"Modifiers"
+	    {
+			"passive_byakuren04_attack"
+            {
+			    "Passive"              	"1"
+                "OnAttackLanded"
+		        {
+		            "RunScript"					
+	    	        {
+			            "Target"
+						{
+							"Center"		    "TARGET"
+							"Radius"		    "%radius"
+							"Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
+						}
+		            	"AbilityMulti"			"%ability_multi"			//加成
+		    	        "ScriptFile"			"scripts/vscripts/abilities/abilityByakuren.lua"
+			            "Function"		  		"OnByakuren04SpellStart"
+		            }
+	        	}
+				
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"        "scripts/vscripts/abilities/abilityByakuren.lua"
+						"Function"          "OnByakuren04SpellThinkStart"
+						"Caster"            "CASTER"
+						"BounsHealth"       "%health_increase"
+					}
+				}
+            }
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ability_multi"			"0.01 0.02 0.03"
+			}
+			"02"
+			{
+				"var_type"		  		"FIELD_FLOAT"
+				"radius"				"150"
+			}
+			"03"
+			{
+				"var_type"		  		"FIELD_FLOAT"
+				"health_increase"		"0.3 0.45 0.6"
+			}
+			
 		}
 	}
 }

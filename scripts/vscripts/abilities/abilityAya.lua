@@ -12,6 +12,9 @@ end
 
 function OnAya02SpellStart(keys)
 	local caster = EntIndexToHScript(keys.caster_entindex)
+	if(keys.attacker~=caster)then
+		return
+	end
 	local target = keys.target
 	local damage_table = {
 			    victim = target,

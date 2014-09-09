@@ -54,14 +54,12 @@ function AbilityReimu:initBallData()
 			OriginZ = 0,
 		}
 	end
-	print("[AbilityReimu01] Finish init Ball data")
 end
 
 function AbilityReimu:OnReimu01Start(keys)
 	-- 初始化常量
 	self:initBallData()
 	
-	PrintTable(self.tReimu01Elements[i])
 	
 	-- 基础数据获取
 	local targetPoint = keys.target_points[1]
@@ -72,7 +70,6 @@ function AbilityReimu:OnReimu01Start(keys)
 	
 	-- 如果球存在则return
 	if self.tReimu01Elements[nPlayerID].Ball.unit ~= nil then 
-		print("[AbilityReimu01] Ball.unit~=nil!") 
 		return 
 	end
 	
@@ -89,7 +86,6 @@ function AbilityReimu:OnReimu01Start(keys)
 	--获取地面Z轴坐标
 	self.tReimu01Elements[nPlayerID].OriginZ = GetGroundPosition(targetPoint,nil).z
 	if unit then
-		print("[AbilityReimu01]Create ball succeed!")
 		self.tReimu01Elements[nPlayerID].Ball.unit = unit
 		local diffVec = targetPoint - caster:GetOrigin()
 		--unit:SetForwardVector(diffVec:Normalized())
@@ -99,7 +95,6 @@ function AbilityReimu:OnReimu01Start(keys)
 end
 
 function AbilityReimu:OnReimu01Release( keys )
-	print("[AbilityReimu01]Enter OnReimu01Release")
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local nPlayerID = caster:GetPlayerID()
 	local uHead = self.tReimu01Elements[nPlayerID].Ball.unit
@@ -121,7 +116,6 @@ function AbilityReimu:OnReimu01Release( keys )
 	local fireIndex = caster:GetContext("Reimu01_Effect_Fire_Index")
 	ParticleManager:SetParticleControl(fireIndex, 0, vec)
 	uHead:SetOrigin(vec)
-	print("[AbilityReimu01]z="..tostring(vec.z))
 	if uz <= self.tReimu01Elements[nPlayerID].OriginZ+80 then
 		local effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/reimu/reimu_01_effect.vpcf", PATTACH_CUSTOMORIGIN, caster)
 		ParticleManager:SetParticleControl(effectIndex, 0, vec)
@@ -149,13 +143,10 @@ function AbilityReimu:OnReimu01Release( keys )
 	                damage_type = keys.ability:GetAbilityDamageType(), 
 	                damage_flags = 1
            }
-		   PrintTable(DamageTable)
 		   UnitDamageTarget(DamageTable)
 		   UtilStun:UnitStunTarget(caster,v,keys.StunDuration)
-		   print("[AbilityReimu01]Damagetargets")
 		end
 		self.tReimu01Elements[nPlayerID].Decrease = self.tReimu01Elements[nPlayerID].Decrease + keys.DamageDecrease
-		print("[AbilityReimu01]Z=0:uv="..tostring(uv))
 	end
 	
 	if ut >= 2.6 then
@@ -167,15 +158,12 @@ function AbilityReimu:OnReimu01Release( keys )
 		uHead:RemoveSelf()
 		
 		self.tReimu01Elements[nPlayerID].Ball.unit = nil
-		PrintTable(self.tReimu01Elements[nPlayerID])
-		print("[AbilityReimu01]End")
 	end
 end
 -- Reimu01End
 
 -- Reimu02
 function AbilityReimu:initLightData(level)
-	print("init Light data in")
 	self.tReimu02Light = self.tReimu02Light or {}
 	zincrease = REIMU02_LIGHTSPEED
 	for i = 0,level+4 do
@@ -184,7 +172,6 @@ function AbilityReimu:initLightData(level)
 			Target = nil,
 		}
 	end
-	print("init Light data out")
 end
 
 function AbilityReimu:OnReimu02Start(keys)
@@ -193,7 +180,6 @@ function AbilityReimu:OnReimu02Start(keys)
 	local ability = keys.ability
 	local abilitylevel = ability:GetLevel()
 	
-	PrintTable(keys)
 	
 	AbilityReimu:initLightData(abilitylevel)
 
@@ -210,12 +196,9 @@ function AbilityReimu:OnReimu02Start(keys)
 		
 		
 		if self.tReimu02Light[i].Ball.unit then
-			print("create unit["..i.."] suceess")
 			self.tReimu02Light[i].Ball.unit:SetOrigin(veccre)
-			print("end spell start")
 		else
 		    self.tReimu02Light[i].Ball.unit = nil 
-		    print("create unit["..i.."] error")
 		end
 	end
 end
@@ -274,7 +257,7 @@ function AbilityReimu:OnReimu02OnLight (keys)
 		          nil,					--find entity
 		          REIMU02_FOLLOW_RADIUS,		--find radius
 		          DOTA_UNIT_TARGET_TEAM_ENEMY,
-		          DOTA_UNIT_TARGET_ALL,
+				  keys.ability:GetAbilityTargetType(),
 		          0, FIND_CLOSEST,
 		          false
 	            )
@@ -283,7 +266,6 @@ function AbilityReimu:OnReimu02OnLight (keys)
 			
 		        for k,v in pairs(FollowTargets) do
 				   if (v == nil) then
-		             print("FollowTargets notfind")
 		             self.tReimu02Light[i].Ball.unit:RemoveSelf()
 				     self.tReimu02Light[i].Ball.unit = nil
 		             break
@@ -341,7 +323,6 @@ function AbilityReimu:OnReimu03Start(keys)
 end
 
 function AbilityReimu:OnReimu04Start(keys)
-	print("[AbilityReimu04]start")
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local unit = CreateUnitByName(
 		"npc_dummy_unit"
@@ -377,14 +358,12 @@ function AbilityReimu:OnReimu04Start(keys)
 end
 
 function AbilityReimu:OnReimu04Think(keys)
-	print("[AbilityReimu04]think")
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local Targets = keys.target_entities
 	
 	for k,v in pairs(Targets) do
 		if(v:GetTeam() == caster:GetTeam())then
 			if(v:GetContext("Reimu04_Effect_MAGIC_IMMUNE")~=0) then
-				print("[AbilityReimu04]Buff Targets!")
 			    v:SetContextNum("Reimu04_Effect_MAGIC_IMMUNE" , 1, 0)
 			    UnitMagicImmune(caster,v,keys.Ability_Duration)
 				GameRules:GetGameModeEntity():SetContextThink(DoUniqueString('ability_reimu04_magic_immune'),
@@ -397,7 +376,6 @@ function AbilityReimu:OnReimu04Think(keys)
 			end
 		else
 			if(v:GetContext("Reimu04_Effect_Damage")==nil)then
-				print("[AbilityReimu04]Damage Targets!")
 			    v:SetContextNum("Reimu04_Effect_Damage" , 1, 0)
 				v:SetContextNum("Reimu04_Effect_Damage_Count" , 4, 0)
 			end
@@ -434,11 +412,9 @@ function AbilityReimu:OnReimu04Think(keys)
 					count = count - 1
 					if (count<=0) then
 						v:SetContextNum("Reimu04_Effect_Damage_Count" , 0, 0)
-						print(tostring(count))
 						return nil
 					else
 					    if(v~=nil)then
-							print(tostring(count))
 							v:SetContextNum("Reimu04_Effect_Damage_Count" , count, 0)
 						end
 					end

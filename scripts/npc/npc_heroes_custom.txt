@@ -115,12 +115,19 @@
 	"npc_dota_hero_reimu"
 	{
 		"override_hero"			"npc_dota_hero_lina"
+		"AbilityLayout" 		"5"
 		"Ability1"				"ability_dota2x_reimu01" 
 		"Ability2"				"ability_dota2x_reimu02"
 		"Ability3"				"ability_dota2x_reimu03"
-		"Ability4"				"ability_dota2x_reimu04"
+		"Ability4"				"ability_collection_power"
+		"Ability5"				"ability_dota2x_reimu04"
 		
-		
+		"Model"                 "models/thd2/reimu/reimu.vmdl"
+			
+		"AttackAnimationPoint"		"0.6"	
+			//攻击前摇
+		"AttackRate"				"1.6"			
+			//攻击速度
 		"ArmorPhysical"				"0"
 			//物理护甲
 		"AttackDamageMin"			"25"
@@ -162,10 +169,12 @@
 	"npc_dota_hero_marisa"
 	{
 		"override_hero"			"npc_dota_hero_crystal_maiden"
+		"AbilityLayout" 		"5"
 		"Ability1"				"ability_thdots_marisa01" 
 		"Ability2"				"ability_thdots_marisa02" 
 		"Ability3"				"ability_thdots_marisa03" 
-		"Ability4"				"ability_thdots_marisa04" 
+		"Ability4"				"ability_collection_power"
+		"Ability5"				"ability_thdots_marisa04" 
 			
 		"ArmorPhysical"				"0"
 			//物理护甲
@@ -208,10 +217,12 @@
 	"npc_dota_hero_youmu"
 	{
 		"override_hero"			"npc_dota_hero_juggernaut"
+		"AbilityLayout" 		"5"
 		"Ability1"				"ability_thdots_youmu01" 
 		"Ability2"				"ability_thdots_youmu02" 
 		"Ability3"				"ability_thdots_youmu03" 
-		"Ability4"				"ability_thdots_youmu04" 
+		"Ability4"				"ability_collection_power"
+		"Ability5"				"ability_thdots_youmu04" 
 			
 		"ArmorPhysical"				"0"
 			//物理护甲
@@ -254,10 +265,14 @@
 	"npc_dota_hero_Aya"
 	{
 		"override_hero"			"npc_dota_hero_slark"
+		"AbilityLayout" 		"5"
 		"Ability1"				"ability_thdots_aya01" 
 		"Ability2"				"ability_thdots_aya02" 
 		"Ability3"				"ability_thdots_aya03" 
-		"Ability4"				"ability_thdots_aya04" 
+		"Ability4"				"ability_collection_power"
+		"Ability5"				"ability_thdots_aya04" 
+		
+		"Model"                 "models/thd2/aya/aya.vmdl"
 			
 		"ArmorPhysical"				"0"
 			//物理护甲
@@ -299,38 +314,42 @@
 	}
 	"npc_dota_hero_Tensi"
 	{
-		"override_hero"			"npc_dota_hero_earthshaker"
-		"Ability2"				"ability_thdots_tensi02" 
+		"override_hero"				"npc_dota_hero_earthshaker"
+		"AbilityLayout" 			"5"
+		"Ability2"					"ability_thdots_tensi02" 
+		"Ability3"					"ability_thdots_tensi03" 
+		"Ability4"					"ability_collection_power"
+		"Ability5"             	 	"zuus_thundergods_wrath"
 			
 		"ArmorPhysical"				"0"
 			//物理护甲
-		"AttackDamageMin"			"35"
+		"AttackDamageMin"			"34"
 			//最大攻击力
-		"AttackDamageMax"			"38"
+		"AttackDamageMax"			"40"
 			//最小攻击力
 			
-		"AttributeBaseStrength"		"18"
+		"AttributeBaseStrength"		"25"
 			//基础力量
-		"AttributeStrengthGain"		"1.6"
+		"AttributeStrengthGain"		"2.5"
 			//每级增加的力量，力量成长
-		"AttributeBaseAgility"		"28"
+		"AttributeBaseAgility"		"17"
 			//基础敏捷
-		"AttributeAgilityGain"		"2.8"
+		"AttributeAgilityGain"		"2.3"
 			//每级增加的敏捷，敏捷成长
-		"AttributeBaseIntelligence"	"14"
+		"AttributeBaseIntelligence"	"18"
 			//基础智力
-		"AttributeIntelligenceGain"	"1.6"
+		"AttributeIntelligenceGain"	"1.8"
 			//每级增加的智力，智力成长
 			
-		"MovementSpeed"				"320"
+		"MovementSpeed"				"300"
 			//基础移动速度
-		"MovementTurnRate"			"3.0"
+		"MovementTurnRate"			"2.0"
 			//转身速度
-		"StatusHealth"				"220"
+		"StatusHealth"				"135"
 			//基础生命值
 		"StatusHealthRegen"			"1.5"
 			//基础生命恢复
-		"StatusMana"				"60"
+		"StatusMana"				"30"
 			//基础魔法值
 		"StatusManaRegen"			"0.0"
 			//基础魔法恢复
@@ -340,4 +359,63 @@
 		"VisionNighttimeRange"		"700"
 			//晚上视野大小
 	}
+	
+	"npc_dota_hero_Byakuren"
+	{
+		"override_hero"				"npc_dota_hero_dark_seer"
+		"AbilityLayout" 			"5"
+		"Ability1"					"ability_thdots_byakuren01" 
+		"Ability2"					"ability_thdots_byakuren02"
+		"Ability3"					"ability_thdots_byakuren03"
+		"Ability4"					"ability_collection_power"
+		"Ability6"					"ability_thdots_byakuren04"
+		
+		"Model"                 	"models/thd2/byakuren/byakuren.vmdl"
+
+		"AbilityDraftDisabled"		"0"
+		
+		"AttackAnimationPoint"		"0.56"	
+			//攻击前摇
+		"AttackRate"				"1.6"			
+			//攻击速度
+		"ArmorPhysical"				"0"
+			//物理护甲
+		"AttackDamageMin"			"22"
+			//最大攻击力
+		"AttackDamageMax"			"37"
+			//最小攻击力
+			
+		"AttributeBaseStrength"		"18"
+			//基础力量
+		"AttributeStrengthGain"		"1.6"
+			//每级增加的力量，力量成长
+		"AttributeBaseAgility"		"18"
+			//基础敏捷
+		"AttributeAgilityGain"		"2.4"
+			//每级增加的敏捷，敏捷成长
+		"AttributeBaseIntelligence"	"28"
+			//基础智力
+		"AttributeIntelligenceGain"	"2.8"
+			//每级增加的智力，智力成长
+			
+		"MovementSpeed"				"310"
+			//基础移动速度
+		"MovementTurnRate"			"1.2"
+			//转身速度
+		"StatusHealth"				"135"
+			//基础生命值
+		"StatusHealthRegen"			"1.5"
+			//基础生命恢复
+		"StatusMana"				"0"
+			//基础魔法值
+		"StatusManaRegen"			"0.0"
+			//基础魔法恢复
+
+		"VisionDaytimeRange"		"1050"
+			//白天视野大小
+		"VisionNighttimeRange"		"700"
+			//晚上视野大小
+	
+	}
+	
 }

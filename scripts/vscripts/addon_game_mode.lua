@@ -21,9 +21,13 @@ end
 
 function Precache( context )
 	
+	PrecacheResource( "model", "models/props_winter/present.vmdl", context )
+	PrecacheResource( "model", "models/thd2/aya/aya.vmdl", context )
+	PrecacheResource( "model", "models/props_gameplay/halloween_candy.vmdl", context )
 	PrecacheResource( "model", "models/particle/snowball.vmdl", context )
 	PrecacheResource( "model", "models/development/invisiblebox.vmdl", context )
 	PrecacheResource( "model", "models/thd2/yyy.vmdl", context )--灵梦D
+	PrecacheResource( "model", "models/courier/juggernaut_dog/juggernaut_dog_wings.vmdl", context )--
 	PrecacheResource( "particle", "particles/thd2/heroes/reimu/reimu_01_effect_fire.vpcf", context )--灵梦D
 	PrecacheResource( "particle", "particles/thd2/heroes/reimu/reimu_01_effect.vpcf", context )--灵梦D
 	PrecacheResource( "particle", "particles/dire_fx/tower_bad_face.vpcf", context )--灵梦R
@@ -45,6 +49,12 @@ function Precache( context )
 	PrecacheResource( "particle", "particles/econ/items/windrunner/windrunner_cape_cascade/windrunner_windrun_cascade.vpcf", context )--文文R
 	PrecacheResource( "particle", "particles/units/heroes/hero_windrunner/windrunner_poof.vpcf", context )--文文W
 	PrecacheResource( "particle", "particles/econ/items/earthshaker/egteam_set/hero_earthshaker_egset/earthshaker_echoslam_start_fallback_low_egset.vpcf", context )--天子F
+	PrecacheResource( "particle", "particles/units/heroes/hero_zuus/zuus_thundergods_wrath_start.vpcf", context )--天子大
+	PrecacheResource( "particle", "particles/units/heroes/hero_zuus/zuus_thundergods_wrath_start_bolt_parent.vpcf", context )--天子大
+	PrecacheResource( "particle", "particles/units/heroes/hero_abaddon/abaddon_aphotic_shield_explosion.vpcf",context)--白莲D
+	PrecacheResource( "particle", "particles/units/heroes/hero_leshrac/leshrac_pulse_nova_h.vpcf",context)--白莲F
+	PrecacheResource( "particle", "particles/econ/events/ti4/teleport_start_counter_ti4.vpcf",context)--白莲R
+	
 
 end
 
