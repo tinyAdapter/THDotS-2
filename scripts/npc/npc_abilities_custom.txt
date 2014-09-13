@@ -371,6 +371,58 @@
 		}
 	}	
 	
+	"ability_system_disarmed"
+	{
+		"AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"BaseClass"         "ability_datadriven"
+		"AbilityCooldown"   "0"
+		"OnSpellStart"
+		{
+	       "ApplyModifier"
+            {
+			    "ModifierName"    "modifier_system_disarmed"
+                "Target"          "TARGET"
+            }
+	     
+		}
+		"Modifiers"
+		{
+            "modifier_system_disarmed"
+            {
+			    "States"
+			    {
+				    "MODIFIER_STATE_DISARMED"		    "MODIFIER_STATE_VALUE_ENABLED"
+			    }
+            }
+		}
+	}	
+
+	"ability_system_invulnerable"
+	{
+		"AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"BaseClass"         "ability_datadriven"
+		"AbilityCooldown"   "0"
+		"OnSpellStart"
+		{
+	       "ApplyModifier"
+            {
+			    "ModifierName"    "modifier_system_invulnerable"
+                "Target"          "TARGET"
+            }
+	     
+		}
+		"Modifiers"
+		{
+            "modifier_system_invulnerable"
+            {
+			    "States"
+			    {
+				    "MODIFIER_STATE_INVULNERABLE"		    "MODIFIER_STATE_VALUE_ENABLED"
+			    }
+            }
+		}
+	}	
+
 	"ability_stunsystem_pause"
 	{
 		"AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_TURN | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
@@ -396,6 +448,7 @@
             }
 		}
 	}	
+	
 	
 	"ability_sliencesystem_Silence"
 	{
@@ -501,7 +554,7 @@
         "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
 	    "AbilityDamage"				"125 205 270 320"
 		"AOERadius"                 "%radius"
-
+		
         "OnSpellStart"
         {
 			"RunScript"
@@ -2344,5 +2397,160 @@
 			
 		}
 	}
+
+	"ability_thdots_yuyukoEx"
+	{
+		"ID"						"2021"
+		"BaseClass"				 	"ability_datadriven"
+		"AbilityTextureName"		"ability_thdots_yuyukoEx"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"				"DOTA_ABILITY_TYPE_HIDDEN"
+		"MaxLevel"				  	"1"
+		
+		"Modifiers"
+	    {
+			"passive_yuyukoEx"
+            {
+			    "Passive"              	"1"
+			    "ThinkInterval"     	"0.1"
+                "OnIntervalThink"
+		        {
+					"RunScript"					
+	    	        {
+						"ScriptFile"			"scripts/vscripts/abilities/abilityYuyuko.lua"
+			            "Function"		  		"OnYuyukoExSpellStart"
+			            "LifeDuration"			"10"
+		            }	
+				}
+			}
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"life_duration"			"10"
+			}
+		}
+	}
+	"ability_thdots_yuyuko04"
+    {
+        "ID"                       "2022"
+        "AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NORMAL_WHEN_STOLEN"
+		"AbilityUnitTargetType"	   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	   "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityType"			   "DOTA_ABILITY_TYPE_ULTIMATE"
+        "BaseClass"                "ability_datadriven"
+        "AbilityTextureName"       "ability_thdots_yuyuko04"
+    	"AbilityCastAnimation"     "Act_DOTA_CAST_ABILITY_4"
+    	"OverrideAnimation"		   "ACT_DOTA_CHANNEL_ABILITY_4"
+
+        // Stats 
+        //----------------------------------------------------------------
+        "AbilityManaCost"           "180 300 420"
+        "AbilityCastPoint"          "2.0"
+        "AbilityCooldown"           "110"
+		//"AbilityCooldown"           "0"
+        "AbilityUnitDamageType"     "DAMAGE_TYPE_PURE"
+	    "AbilityDamage"				"175 225 275"
+		"AbilityChannelTime"		"2.0"
+
+        "OnSpellStart"
+        {    
+			"RunScript"
+			{
+				"ScriptFile"        "scripts/vscripts/abilities/abilityYuyuko.lua"
+				"Function"          "OnYuyuko04SpellStart"
+				"Caster"            "CASTER"
+				"DamageCount"		"%damage_count"
+			}
+			
+            "CreateThinker"
+			{
+				"ModifierName"		"modifier_thdots_yuyuko04_think_interval"
+				"Target"			"CASTER"
+			}
+        }
+
+		"OnChannelInterrupted"
+		{
+			"RemoveModifier"
+			{
+				"Target"		    "POINT"
+				"ModifierName"		"modifier_thdots_yuyuko04_think_interval"
+			}
+
+			"RunScript"
+			{
+				"ScriptFile"        "scripts/vscripts/abilities/abilityYuyuko.lua"
+				"Function"          "OnYuyuko04SpellRemove"
+				"Caster"            "CASTER"
+			}
+		}
+
+		"OnChannelFinish"
+		{
+			"RunScript"
+			{
+				"ScriptFile"        "scripts/vscripts/abilities/abilityYuyuko.lua"
+				"Function"          "OnYuyuko04SpellRemove"
+				"Caster"            "CASTER"
+			}
+		}
+
+        "Modifiers"
+        {
+			"modifier_thdots_yuyuko04_think_interval"
+			{
+				"Duration"          "2.0"
+				"ThinkInterval"     "0.2"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"        "scripts/vscripts/abilities/abilityYuyuko.lua"
+						"Function"          "OnYuyuko04SpellThink"
+						"Caster"            "CASTER"
+						"Target"
+						{
+							"Center"			"CASTER"
+							"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types"	  			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+					        "Radius"			"%effect_radius"
+						}
+					
+						"DamageRadius"      "%damage_radius"
+						"DamageMulti"		"%damage_multi"
+					}
+				}
+			}
+        }
+	
+	
+	    "AbilitySpecial"
+	    {
+			"01"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"damage_radius"			    "550"  
+		    }
+		    "02"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"effect_radius"			    "650"  
+		    }
+		    "03"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"damage_multi"			    "0.5 0.6 0.7"  
+		    }
+		    "04"
+	  	    {
+	    		"var_type"					"FIELD_FLOAT"
+	    		"damage_count"			    "5 7 9"  
+		    }
+	    }
+    }
 }
   

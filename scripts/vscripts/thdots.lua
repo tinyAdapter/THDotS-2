@@ -118,8 +118,7 @@ end
 -- 主要是设置属于游戏模式的相关规则，并且开启循环计时器
 function THDOTSGameMode:CaptureGameMode()
   if GameMode == nil then
-    -- 从游戏规则中获取游戏模式实体
-    GameMode = GameRules:GetGameModeEntity()		
+	GameMode = GameRules:GetGameModeEntity()		
 
     -- 设定镜头距离的大小，默认为1134
     GameMode:SetCameraDistanceOverride( 1504.0 )
@@ -128,7 +127,7 @@ function THDOTSGameMode:CaptureGameMode()
     --GameMode:SetCustomBuybackCostEnabled( true )
     --GameMode:SetCustomBuybackCooldownEnabled( true )
     --GameMode:SetBuybackEnabled( false )
-
+	
     -- 设定GAMEMODE这个实体的循环函数，0.1秒执行一次，其实每一个实体都可以通过SetContextThink来
     -- 设定一个循环函数
     -- 语法为
@@ -138,6 +137,60 @@ function THDOTSGameMode:CaptureGameMode()
   end 
 end
 
+function PrecacheHeroResource(hero)
+	local heroName = hero:GetClassname()
+	local context
+
+	local abilityCollection = hero:FindAbilityByName("ability_collection_power")
+  abilityCollection:SetLevel(1)
+  local abilityEx
+
+	if(heroName == "npc_dota_hero_slark")then
+		require( 'abilities/abilityAya' )
+		--[[PrecacheResource( "particle", "particles/units/heroes/hero_brewmaster/brewmaster_windwalk_dust.vpcf", context )--文文D
+		PrecacheResource( "particle", "particles/units/heroes/hero_windrunner/windrunner_spell_powershot_trail_e.vpcf", context )--文文D
+		PrecacheResource( "particle", "particles/units/heroes/hero_beastmaster/beastmaster_wildaxe_glow.vpcf", context )--文文F
+		PrecacheResource( "particle", "particles/econ/items/windrunner/windrunner_cape_cascade/windrunner_windrun_cascade.vpcf", context )--文文R
+		PrecacheResource( "particle", "particles/units/heroes/hero_windrunner/windrunner_poof.vpcf", context )--文文W]]--
+	elseif(heroName == "npc_dota_hero_lina")then
+		require( 'abilities/abilityReimu' )
+		--[[PrecacheResource( "model", "models/thd2/yyy.vmdl", context )--灵梦D
+		PrecacheResource( "particle", "particles/thd2/heroes/reimu/reimu_01_effect_fire.vpcf", context )--灵梦D
+		PrecacheResource( "particle", "particles/thd2/heroes/reimu/reimu_01_effect.vpcf", context )--灵梦D
+		PrecacheResource( "particle", "particles/dire_fx/tower_bad_face.vpcf", context )--灵梦R
+		PrecacheResource( "particle", "particles/thd2/heroes/reimu/reimu_03_effect.vpcf", context )--灵梦R
+		PrecacheResource( "particle", "particles/thd2/heroes/reimu/reimu_04_effect.vpcf", context )--灵梦W]]--
+	elseif(heroName == "npc_dota_hero_juggernaut")then
+		require( 'abilities/abilityYoumu' )
+		--[[PrecacheResource( "particle", "particles/thd2/heroes/youmu/youmu_01_blink_effect.vpcf", context )--妖梦D
+		PrecacheResource( "model", "models/heroes/juggernaut/juggernaut.vmdl", context )--妖梦R
+		PrecacheResource( "particle", "particles/items2_fx/teleport_end_i.vpcf", context )--像妖梦樱花
+		PrecacheResource( "particle", "particles/thd2/heroes/youmu/youmu_04_sword_effect.vpcf", context )--妖梦大
+		PrecacheResource( "particle", "particles/thd2/heroes/youmu/youmu_04_blossoms_effect.vpcf", context )--妖梦大]]--
+	elseif(heroName == "npc_dota_hero_earthshaker")then
+		require( 'abilities/abilityTensi' )
+		--[[PrecacheResource( "particle", "particles/econ/items/earthshaker/egteam_set/hero_earthshaker_egset/earthshaker_echoslam_start_fallback_low_egset.vpcf", 
+	context )--天子F
+		PrecacheResource( "particle", "particles/units/heroes/hero_zuus/zuus_thundergods_wrath_start.vpcf", context )--天子大
+		PrecacheResource( "particle", "particles/units/heroes/hero_zuus/zuus_thundergods_wrath_start_bolt_parent.vpcf", context )--天子大]]--
+	elseif(heroName == "npc_dota_hero_dark_seer")then
+		require( 'abilities/abilityByakuren' )
+		--[[PrecacheResource( "particle", "particles/units/heroes/hero_abaddon/abaddon_aphotic_shield_explosion.vpcf",context)--白莲D
+		PrecacheResource( "particle", "particles/units/heroes/hero_leshrac/leshrac_pulse_nova_h.vpcf",context)--白莲F
+		PrecacheResource( "particle", "particles/econ/events/ti4/teleport_start_counter_ti4.vpcf",context)--白莲R]]--
+	elseif(heroName == "npc_dota_hero_crystal_maiden")then
+		require( 'abilities/abilityMarisa' )
+		--[[PrecacheResource( "particle", "particles/thd2/heroes/marisa/marisa_01_rocket.vpcf", context )--魔理沙D
+		PrecacheResource( "particle", "particles/thd2/heroes/marisa/marisa_02_stars.vpcf", context )--魔理沙F
+		PrecacheResource( "model", "models/props_gameplay/rune_haste01.vmdl", context )--魔理沙R
+		PrecacheResource( "model", "models/thd2/masterspark.vmdl", context )--魔理沙 魔炮
+		PrecacheResource( "particle", "particles/thd2/heroes/marisa/marisa_04_spark.vpcf", context )--魔理沙 魔炮特效]]--
+  elseif(heroName == "npc_dota_hero_necrolyte")then
+    require( 'abilities/abilityYuyuko' )
+    abilityEx = hero:FindAbilityByName("ability_thdots_yuyukoEx")
+    abilityEx:SetLevel(1)
+	end
+end
 -- 以下的这些函数，大多都是把传递的数值Print出来
 -- PrintTable和print的东西，都会显示在控制台上
 -- PrintTable会显示例如
@@ -162,10 +215,6 @@ function THDOTSGameMode:AbilityLearn(keys)
 	for _,v in pairs(weapons) do
 		v:DetachFromParent()
     end]]--
-	local abilityCollection = caster:FindAbilityByName("ability_collection_power")
-	if(abilityCollection:GetLevel()<1)then
-		abilityCollection:SetLevel(1)
-	end
 end
 
 function THDOTSGameMode:CleanupPlayer(keys)
@@ -215,13 +264,28 @@ function THDOTSGameMode:PlayerSay(keys)
 end
 
 function THDOTSGameMode:AutoAssignPlayer(keys)
-  --PrintTable(keys)
-  -- 这里调用CaptureGameMode这个函数，执行游戏模式初始化
-  THDOTSGameMode:CaptureGameMode()
+	--PrintTable(keys)
+	-- 这里调用CaptureGameMode这个函数，执行游戏模式初始化
+	THDOTSGameMode:CaptureGameMode()
   
-  -- 这里的index是玩家的index 0-9，但是EntIndexToHScript需要1-10，所以要+1
-  local entIndex = keys.index+1
-  local ply = EntIndexToHScript(entIndex)
+	-- 这里的index是玩家的index 0-9，但是EntIndexToHScript需要1-10，所以要+1
+	local entIndex = keys.index+1
+	local ply = EntIndexToHScript(entIndex)
+
+	if(ply~=nil)then
+		ply:SetContextThink(DoUniqueString("Thdots_Listen_Select_Hero"),
+			function()
+				local hero = ply:GetAssignedHero()
+				-- 确认已经获取到这个英雄
+				if (hero ~= nil) then
+					PrecacheHeroResource(hero)
+					return nil
+				end
+				return 0.1
+			end
+		,0.1)
+	end
+	
   
   -- 获取玩家的ID
   local playerID = ply:GetPlayerID()
@@ -247,7 +311,7 @@ function THDOTSGameMode:AutoAssignPlayer(keys)
     playerID = ply:GetPlayerID()
   end
 
-  -- 自动分配英雄，使用的依然是Timer
+  --[[ 自动分配英雄，使用的依然是Timer
   self:CreateTimer('assign_player_'..entIndex,{
     endTime = Time(),
     callback = function(dota2x, args)
@@ -261,7 +325,7 @@ function THDOTSGameMode:AutoAssignPlayer(keys)
         return Time() + 1.0
       end
 	end
-})
+})]]--
 end
 
 function THDOTSGameMode:LoopOverPlayers(callback)
@@ -430,7 +494,7 @@ function THDOTSGameMode:OnEntityKilled( keys )
 	local killedUnit = EntIndexToHScript( keys.entindex_killed )
 	-- 储存杀手单位
 	local killerEntity = EntIndexToHScript( keys.entindex_attacker )
-
+	
 	if(killedUnit:IsHero()==false)then
 		local i = RandomInt(0,100)
 		if(i<15)then
@@ -469,6 +533,14 @@ function THDOTSGameMode:OnEntityKilled( keys )
 			30.0)
 		end
 	end
+	
+	if(killerEntity:IsHero()==true)then
+		local abilityLevel = killerEntity:FindAbilityByName("necrolyte_heartstopper_aura"):GetLevel()
+		if(abilityLevel~=nil)then
+			killerEntity:SetMana(killerEntity:GetMana()+(abilityLevel*5+5))
+		end
+	end
+	
 	if(killedUnit:IsHero()==true)then
 		local powerStatValue = killedUnit:GetContext("hero_bouns_stat_power_count")
 		if(powerStatValue==nil)then
