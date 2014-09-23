@@ -57,7 +57,7 @@
 	
 	"npc_dota2x_unit_reimu02_light"
   	{
-		"model"					"models/props_gameplay/rune_haste01.vmdl"
+		"model"					"models/thd2/fantasy_seal.vmdl"
   		"BaseClass"				"npc_dota_creep_neutral"
 		"Ability1"				"ability_dummy_unit"
   		"AttackCapabilities"	"DOTA_UNIT_CAP_NO_ATTACK"
@@ -105,7 +105,7 @@
 	
 	"npc_thdots_unit_youmu03_unit"
   	{
-		"model"						"models/heroes/juggernaut/juggernaut.vmdl"
+		"model"						"models/thd2/youmu/youmu.vmdl"
   		"BaseClass"					"npc_dota_creature"
 		"Ability1"					"ability_dummy_unit"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
@@ -125,32 +125,6 @@
   		"VisionNighttimeRange"		"100"
   		"HasInventory"				"0"
   		"WakesNeutrals"				"0"
-		"Creature"
-		{
-			"AttachWearables"
-			{
-				"Wearable1"
-				{
-					"ItemDef"			"6"
-				}
-				"Wearable2"
-				{
-					"ItemDef"			"7"
-				}
-				"Wearable3"
-				{
-					"ItemDef"			"8"
-				}
-				"Wearable4"
-				{
-					"ItemDef"			"9"
-				}
-				"Wearable5"
-				{
-					"ItemDef"			"62"
-				}
-			}
-		}
   	}
 	
 	//=================================================================================
@@ -257,6 +231,21 @@
 		
 		
 		"Ability1"					"ability_dummy_unit"
+
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+	}	
+
+	"npc_reimu_04_dummy_unit"
+	{
+		"BaseClass"					"npc_dota_creep_neutral"
+		"Model"						"models/development/invisiblebox.vmdl"
+		"SoundSet"					"Creep_Good_Range"
+		"Level"						"0"
+		"UnitLabel"					"healing_ward"
+		
+		"Ability1"					"ability_reimu04_dummy_unit"
+
+		"StatusHealth"				"100000"		// Base health.
 
 		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
 	}	

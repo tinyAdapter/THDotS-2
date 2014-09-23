@@ -36,6 +36,7 @@ function OnReimu04SpellStart(keys)
 end
 
 function OnReimu04SpellThink(keys)
+	print("04spellstart")
 	AbilityReimu:OnReimu04Think(keys)
 end
 
@@ -147,6 +148,7 @@ function AbilityReimu:OnReimu01Release( keys )
 		   UtilStun:UnitStunTarget(caster,v,keys.StunDuration)
 		end
 		self.tReimu01Elements[nPlayerID].Decrease = self.tReimu01Elements[nPlayerID].Decrease + keys.DamageDecrease
+		uHead:EmitSound("Visage_Familar.StoneForm.Cast")
 	end
 	
 	if ut >= 2.6 then
@@ -193,7 +195,6 @@ function AbilityReimu:OnReimu02Start(keys)
 			,caster
 			,caster:GetTeam()
 		)
-		
 		
 		if self.tReimu02Light[i].Ball.unit then
 			self.tReimu02Light[i].Ball.unit:SetOrigin(veccre)
@@ -242,6 +243,7 @@ function AbilityReimu:OnReimu02OnLight (keys)
 	                    damage_type = keys.ability:GetAbilityDamageType(), 
 	                    damage_flags = 1
                    }
+				   v:EmitSound("Hero_Wisp.Spirits.Target")
 				   UnitDamageTarget(DamageTable)
 				   self.tReimu02Light[i].Ball.unit:RemoveSelf()
 				   self.tReimu02Light[i].Ball.unit = nil
@@ -323,9 +325,10 @@ function AbilityReimu:OnReimu03Start(keys)
 end
 
 function AbilityReimu:OnReimu04Start(keys)
+	print("04start")
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local unit = CreateUnitByName(
-		"npc_dummy_unit"
+		"npc_reimu_04_dummy_unit"
 		,caster:GetOrigin()
 		,false
 		,caster
@@ -360,7 +363,20 @@ end
 function AbilityReimu:OnReimu04Think(keys)
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local Targets = keys.target_entities
-	
+
+	if(caster:GetContext("Reimu04_Effect_MAGIC_IMMUNE")~=0) then
+		    print("startIMMUNE")
+			caster:SetContextNum("Reimu04_Effect_MAGIC_IMMUNE" , 1, 0)
+			UnitMagicImmune(caster,caster,keys.Ability_Duration)
+			GameRules:GetGameModeEntity():SetContextThink(DoUniqueString('ability_reimu04_magic_immune'),
+				function ()
+					if (caster~=nil) then
+		            	caster:SetContextNum("Reimu04_Effect_MAGIC_IMMUNE" , 0, 0)
+						return nil
+					end
+		    end,keys.Ability_Duration)
+	end
+
 	for k,v in pairs(Targets) do
 		if(v:GetTeam() == caster:GetTeam())then
 			if(v:GetContext("Reimu04_Effect_MAGIC_IMMUNE")~=0) then

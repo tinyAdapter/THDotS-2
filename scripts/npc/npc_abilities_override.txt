@@ -123,6 +123,7 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"	
+		"AbilityCastAnimation"     		"Act_DOTA_CAST_ABILITY_4"
 
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
@@ -372,6 +373,143 @@
 			}
 		}
 	}
+
+	"naga_siren_mirror_image"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"5467"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.65"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"30.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"40 80 120 160"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"illusion_duration"			"9.0 10.0 11.0 12.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"outgoing_damage"			"-88 -82 -76 -70"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"incoming_damage"			"100"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"images_count"				"3 3 3 3"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"invuln_duration"			"0.3"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"outgoing_damage_tooltip"	"12 18 24 30"
+			}
+		}
+	}
+
+	"skeleton_king_vampiric_aura"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"5087"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vampiric_aura_radius"	"60"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vampiric_aura"			"9 18 27 36"
+			}
+		}
+	}
+
+	"phoenix_supernova"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"5630"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.01"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"70.0 40.0 20.0 5.0"
+		"AbilityDuration"				"7.0 6.0 5.0 4.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"aura_radius"		"100"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"damage_per_sec"	"0"
+			}
+			
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"stun_duration"		"0.0"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"max_hero_attacks"	"1"
+			}
+			"05"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"tooltip_duration"	"7 6 5 4"
+			}
+		}
+	}
+
 
 
 	//下面这些是用来给商店中移除物品的，如果你想从商店中移除某个物品，就把他前面的//去掉，

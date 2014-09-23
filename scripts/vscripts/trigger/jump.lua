@@ -8,7 +8,7 @@ function ThdotsJumpTrigger( data )
 	local jumpRad = GetRadBetweenTwoVec2D(vecTarget,vecLocation)
 	local jumpS = vecTarget.z - vecLocation.z
 	local jumpDistance = GetDistanceBetweenTwoVec2D(vecLocation,vecTarget)
-	local jumpSpeed = 20
+	local jumpSpeed = 40
 	local fallSpeed = 100
 	local fallG = 10
 	
@@ -21,9 +21,6 @@ function ThdotsJumpTrigger( data )
 				vecGround = GetGroundPosition(vecMove,nil)
 				
 				fallSpeed = fallSpeed - fallG
-				--print("x="..tostring(vecMove.x))
-				--print("y="..tostring(vecMove.y))
-				print("fallSpeed="..tostring(fallSpeed))
 			    vecMove = vecMove + Vector(math.cos(jumpRad)*jumpSpeed,math.sin(jumpRad)*jumpSpeed,fallSpeed)
 				if(vecMove.z<=vecGround.z)then
 					target:RemoveModifierByName("modifier_stunsystem_pause")

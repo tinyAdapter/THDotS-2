@@ -189,6 +189,14 @@ function PrecacheHeroResource(hero)
     require( 'abilities/abilityYuyuko' )
     abilityEx = hero:FindAbilityByName("ability_thdots_yuyukoEx")
     abilityEx:SetLevel(1)
+   elseif(heroName == "npc_dota_hero_templar_assassin")then
+    require( 'abilities/abilitySakuya' )
+    abilityEx = hero:FindAbilityByName("ability_thdots_sakuyaEx")
+    abilityEx:SetLevel(1)
+  elseif(heroName == "npc_dota_hero_naga_siren")then
+    require( 'abilities/abilityFlandre' )
+  elseif(heroName == "npc_dota_hero_chaos_knight")then
+    require( 'abilities/abilityMokou' )
 	end
 end
 -- 以下的这些函数，大多都是把传递的数值Print出来
@@ -535,10 +543,13 @@ function THDOTSGameMode:OnEntityKilled( keys )
 	end
 	
 	if(killerEntity:IsHero()==true)then
-		local abilityLevel = killerEntity:FindAbilityByName("necrolyte_heartstopper_aura"):GetLevel()
-		if(abilityLevel~=nil)then
-			killerEntity:SetMana(killerEntity:GetMana()+(abilityLevel*5+5))
-		end
+		local abilityNecAura = killerEntity:FindAbilityByName("necrolyte_heartstopper_aura")
+    if(abilityNecAura~=nil)then
+      local abilityLevel = abilityNecAura:GetLevel()
+      if(abilityLevel~=nil)then
+       killerEntity:SetMana(killerEntity:GetMana()+(abilityLevel*5+5))
+      end
+    end
 	end
 	
 	if(killedUnit:IsHero()==true)then

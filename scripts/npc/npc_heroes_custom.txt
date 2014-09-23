@@ -328,7 +328,9 @@
 		"Ability3"					"ability_thdots_tensi03" 
 		"Ability4"					"ability_collection_power"
 		"Ability5"             	 	"zuus_thundergods_wrath"
-		"Ability6"				"attribute_bonus"
+		"Ability6"					"attribute_bonus"
+
+		"Model"                     "models/thd2/tenshi/tenshi.vmdl"
 			
 		"ArmorPhysical"				"0"
 			//物理护甲
@@ -378,7 +380,7 @@
 		"Ability3"					"ability_thdots_byakuren03"
 		"Ability4"					"ability_collection_power"
 		"Ability5"					"ability_thdots_byakuren04"
-		"Ability6"				"attribute_bonus"
+		"Ability6"					"attribute_bonus"
 		
 		"Model"                 	"models/thd2/byakuren/byakuren.vmdl"
 
@@ -442,35 +444,35 @@
 		
 		"Model"                 "models/thd2/yuyuko/yuyuko.vmdl"
 			
-		"AttackAnimationPoint"		"0.6"	
+		"AttackAnimationPoint"		"0.54"	
 			//攻击前摇
-		"AttackRate"				"1.6"			
+		"AttackRate"				"1.75"			
 			//攻击速度
 		"ArmorPhysical"				"0"
 			//物理护甲
-		"AttackDamageMin"			"25"
+		"AttackDamageMin"			"27"
 			//最大攻击力
-		"AttackDamageMax"			"36"
+		"AttackDamageMax"			"35"
 			//最小攻击力
 			
 		"AttributeBaseStrength"		"20"
 			//基础力量
-		"AttributeStrengthGain"		"1.7"
+		"AttributeStrengthGain"		"2.2"
 			//每级增加的力量，力量成长
 		"AttributeBaseAgility"		"18"
 			//基础敏捷
-		"AttributeAgilityGain"		"1.9"
+		"AttributeAgilityGain"		"1.6"
 			//每级增加的敏捷，敏捷成长
 		"AttributeBaseIntelligence"	"22"
 			//基础智力
-		"AttributeIntelligenceGain"	"2.4"
+		"AttributeIntelligenceGain"	"2.2"
 			//每级增加的智力，智力成长
 			
-		"MovementSpeed"				"295"
+		"MovementSpeed"				"303"
 			//基础移动速度
 		"MovementTurnRate"			"1.0"
 			//转身速度
-		"StatusHealth"				"135"
+		"StatusHealth"				"97"
 			//基础生命值
 		"StatusHealthRegen"			"0.5"
 			//基础生命恢复
@@ -484,5 +486,174 @@
 		"VisionNighttimeRange"		"700"
 			//晚上视野大小
     }
-	
+
+    "npc_dota_hero_sakuya"
+	{
+		"override_hero"			"npc_dota_hero_templar_assassin"
+		"AbilityLayout" 		"6"
+		"Ability1"				"ability_thdots_sakuya01" 
+		"Ability2"				"ability_thdots_sakuya02" 
+		"Ability3"				"ability_thdots_sakuya03"
+		"Ability4"				"ability_collection_power"
+		"Ability5"				"ability_thdots_sakuyaEx" 
+		"Ability6"				"ability_thdots_sakuya04" 
+		"Ability7"				"attribute_bonus"
+		
+		"Model"                 "models/thd2/sakuya/sakuya.vmdl"
+			
+		"AttackAnimationPoint"		"0.54"	
+			//攻击前摇
+		"AttackRate"				"1.75"			
+			//攻击速度
+		"AttackRange"				"540"
+			//攻击范围
+		"ArmorPhysical"				"0"
+			//物理护甲
+		"AttackDamageMin"			"22"
+			//最大攻击力
+		"AttackDamageMax"			"25"
+			//最小攻击力
+			
+		"AttributeBaseStrength"		"15"
+			//基础力量
+		"AttributeStrengthGain"		"1.5"
+			//每级增加的力量，力量成长
+		"AttributeBaseAgility"		"24"
+			//基础敏捷
+		"AttributeAgilityGain"		"2.5"
+			//每级增加的敏捷，敏捷成长
+		"AttributeBaseIntelligence"	"21"
+			//基础智力
+		"AttributeIntelligenceGain"	"2.0"
+			//每级增加的智力，智力成长
+			
+		"MovementSpeed"				"305"
+			//基础移动速度
+		"MovementTurnRate"			"2.0"
+			//转身速度
+		"StatusHealth"				"120"
+			//基础生命值
+		"StatusHealthRegen"			"0.5"
+			//基础生命恢复
+		"StatusMana"				"70"
+			//基础魔法值
+		"StatusManaRegen"			"0.0"
+			//基础魔法恢复
+
+		"VisionDaytimeRange"		"1050"
+			//白天视野大小
+		"VisionNighttimeRange"		"700"
+			//晚上视野大小
+    }
+
+    "npc_dota_hero_flandre"
+	{
+		"override_hero"			"npc_dota_hero_naga_siren"
+		"AbilityLayout" 		"6"
+		"Ability2"				"ability_thdots_flandre02"
+		"Ability3"				"skeleton_king_vampiric_aura"
+		"Ability4"				"ability_collection_power"
+		"Ability5"				""
+		"Ability6"				"ability_thdots_flandre04"
+		"Ability7"				"attribute_bonus"
+		
+		"Model"                 "models/thd2/flandre/flandre.vmdl"
+				
+		"ArmorPhysical"				"0"
+			//物理护甲
+		"AttackDamageMin"			"32"
+			//最大攻击力
+		"AttackDamageMax"			"34"
+			//最小攻击力
+		"AttackAnimationPoint"		"0.444"	
+			//攻击前摇
+		"AttackRate"				"1.6"			
+			//攻击速度
+		"AttributeBaseStrength"		"18"
+			//基础力量
+		"AttributeStrengthGain"		"1.5"
+			//每级增加的力量，力量成长
+		"AttributeBaseAgility"		"27"
+			//基础敏捷
+		"AttributeAgilityGain"		"3.25"
+			//每级增加的敏捷，敏捷成长
+		"AttributeBaseIntelligence"	"15"
+			//基础智力
+		"AttributeIntelligenceGain"	"1.25"
+			//每级增加的智力，智力成长
+			
+		"MovementSpeed"				"310"
+			//基础移动速度
+		"MovementTurnRate"			"3.0"
+			//转身速度
+		"StatusHealth"				"140"
+			//基础生命值
+		"StatusHealthRegen"			"3.5"
+			//基础生命恢复
+		"StatusMana"				"50"
+			//基础魔法值
+		"StatusManaRegen"			"0.0"
+			//基础魔法恢复
+
+		"VisionDaytimeRange"		"1050"
+			//白天视野大小
+		"VisionNighttimeRange"		"700"
+			//晚上视野大小
+	}
+
+	"npc_dota_hero_Mokou"
+	{
+		"override_hero"				"npc_dota_hero_chaos_knight"
+		"AbilityLayout" 			"5"
+		"Ability1"					"ability_thdots_mokou01" 
+		"Ability2"					"ability_thdots_mokou02" 
+		"Ability3"					"phoenix_supernova" 
+		"Ability4"					"ability_collection_power"
+		"Ability5"             	 	"ability_thdots_mokou04"
+		"Ability6"					"attribute_bonus"
+			
+		"Model"                 	"models/thd2/mokou/mokou.vmdl"
+
+		"ArmorPhysical"				"0"
+			//物理护甲
+		"AttackDamageMin"			"27"
+			//最大攻击力
+		"AttackDamageMax"			"45"
+			//最小攻击力
+		"AttackAnimationPoint"		"0.3"	
+			//攻击前摇
+		"AttackRate"				"1.35"			
+			//攻击速度
+		"AttributeBaseStrength"		"23"
+			//基础力量
+		"AttributeStrengthGain"		"2.3"
+			//每级增加的力量，力量成长
+		"AttributeBaseAgility"		"23"
+			//基础敏捷
+		"AttributeAgilityGain"		"2.4"
+			//每级增加的敏捷，敏捷成长
+		"AttributeBaseIntelligence"	"14"
+			//基础智力
+		"AttributeIntelligenceGain"	"1.3"
+			//每级增加的智力，智力成长
+			
+		"MovementSpeed"				"305"
+			//基础移动速度
+		"MovementTurnRate"			"1.2"
+			//转身速度
+		"StatusHealth"				"135"
+			//基础生命值
+		"StatusHealthRegen"			"1.5"
+			//基础生命恢复
+		"StatusMana"				"0"
+			//基础魔法值
+		"StatusManaRegen"			"0.0"
+			//基础魔法恢复
+
+		"VisionDaytimeRange"		"1050"
+			//白天视野大小
+		"VisionNighttimeRange"		"700"
+			//晚上视野大小
+	}
+
 }

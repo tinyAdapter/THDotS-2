@@ -24,45 +24,25 @@ function Precache( context )
 	PrecacheResource( "model", "models/props_winter/present.vmdl", context )--真の点数
 	PrecacheResource( "model", "models/props_gameplay/halloween_candy.vmdl", context )--真のP点
 	PrecacheResource( "model", "models/development/invisiblebox.vmdl", context )
-	
-	PrecacheResource( "particle", "particles/units/heroes/hero_brewmaster/brewmaster_windwalk_dust.vpcf", context )--文文D
-	PrecacheResource( "particle", "particles/units/heroes/hero_windrunner/windrunner_spell_powershot_trail_e.vpcf", context )--文文D
-	PrecacheResource( "particle", "particles/units/heroes/hero_beastmaster/beastmaster_wildaxe_glow.vpcf", context )--文文F
-	PrecacheResource( "particle", "particles/econ/items/windrunner/windrunner_cape_cascade/windrunner_windrun_cascade.vpcf", context )--文文R
-	PrecacheResource( "particle", "particles/units/heroes/hero_windrunner/windrunner_poof.vpcf", context )--文文W
 
 	PrecacheResource( "model", "models/thd2/yyy.vmdl", context )--灵梦D
-	PrecacheResource( "particle", "particles/thd2/heroes/reimu/reimu_01_effect_fire.vpcf", context )--灵梦D
-	PrecacheResource( "particle", "particles/thd2/heroes/reimu/reimu_01_effect.vpcf", context )--灵梦D
-	PrecacheResource( "particle", "particles/dire_fx/tower_bad_face.vpcf", context )--灵梦R
-	PrecacheResource( "particle", "particles/thd2/heroes/reimu/reimu_03_effect.vpcf", context )--灵梦R
-	PrecacheResource( "particle", "particles/thd2/heroes/reimu/reimu_04_effect.vpcf", context )--灵梦W
+	PrecacheResource( "model", "models/thd2/fantasy_seal.vmdl", context )--灵梦F
 
-	PrecacheResource( "particle", "particles/thd2/heroes/youmu/youmu_01_blink_effect.vpcf", context )--妖梦D
-	PrecacheResource( "model", "models/heroes/juggernaut/juggernaut.vmdl", context )--妖梦R
-	PrecacheResource( "particle", "particles/items2_fx/teleport_end_i.vpcf", context )--像妖梦樱花
-	PrecacheResource( "particle", "particles/thd2/heroes/youmu/youmu_04_sword_effect.vpcf", context )--妖梦大
-	PrecacheResource( "particle", "particles/thd2/heroes/youmu/youmu_04_blossoms_effect.vpcf", context )--妖梦大
+	PrecacheResource( "model", "models/thd2/youmu/youmu.vmdl", context )--妖梦R
 
 	PrecacheResource( "particle", "particles/econ/items/earthshaker/egteam_set/hero_earthshaker_egset/earthshaker_echoslam_start_fallback_low_egset.vpcf", 
 	context )--天子F
-	PrecacheResource( "particle", "particles/units/heroes/hero_zuus/zuus_thundergods_wrath_start.vpcf", context )--天子大
-	PrecacheResource( "particle", "particles/units/heroes/hero_zuus/zuus_thundergods_wrath_start_bolt_parent.vpcf", context )--天子大
+	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts", context )--天子W
+	PrecacheResource( "particle_folder", "particles/units/heroes/hero_zuus", context )--天子W
 
-	PrecacheResource( "particle", "particles/units/heroes/hero_abaddon/abaddon_aphotic_shield_explosion.vpcf",context)--白莲D
-	PrecacheResource( "particle", "particles/units/heroes/hero_leshrac/leshrac_pulse_nova_h.vpcf",context)--白莲F
-	PrecacheResource( "particle", "particles/econ/events/ti4/teleport_start_counter_ti4.vpcf",context)--白莲R
-
-	PrecacheResource( "particle", "particles/thd2/heroes/marisa/marisa_01_rocket.vpcf", context )--魔理沙D
-	PrecacheResource( "particle", "particles/thd2/heroes/marisa/marisa_02_stars.vpcf", context )--魔理沙F
 	PrecacheResource( "model", "models/props_gameplay/rune_haste01.vmdl", context )--魔理沙R
 	PrecacheResource( "model", "models/thd2/masterspark.vmdl", context )--魔理沙 魔炮
-	PrecacheResource( "particle", "particles/thd2/heroes/marisa/marisa_04_spark.vpcf", context )--魔理沙 魔炮特效
 	
-	PrecacheResource( "particle", "particles/econ/items/death_prophet/death_prophet_acherontia/death_prophet_acher_swarm.vpcf", context )--幽幽子D
-	PrecacheResource( "particle", "particles/units/heroes/hero_death_prophet/death_prophet_carrion_swarm.vpcf", context )--幽幽子D
-	PrecacheResource( "particle", "particles/units/heroes/hero_bane/bane_nightmare.vpcf", context )--幽幽子F
 	PrecacheResource( "particle", "particles/dire_fx/tower_bad_face_end_shatter.vpcf", context )--幽幽子F
+	PrecacheResource( "particle_folder", "particles/units/heroes/hero_death_prophet", context )--幽幽子D
+	PrecacheResource( "particle_folder", "particles/units/heroes/hero_bane", context )--幽幽子F
+
+	PrecacheResource( "particle_folder", "particles/units/heroes/hero_phoenix", context )--妹红R
 
 end
 

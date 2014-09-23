@@ -97,6 +97,9 @@ end
 function AbilityYoumu:OnYoumu02Start(keys)
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local target = keys.target
+	if(target:IsTower()==true)then
+		return
+	end
 	if(target:GetContext("ability_Youmu02_Armor_Decrease")==nil)then
 		target:SetContextNum("ability_Youmu02_Armor_Decrease",0,0)
 	end
@@ -120,6 +123,10 @@ end
 function AbilityYoumu:OnYoumu02StartUnit(keys)
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local target = keys.target
+	if(target:IsTower()==true)then
+		return
+	end
+
 	if(target:GetContext("ability_Youmu02_Armor_Decrease")==nil)then
 		target:SetContextNum("ability_Youmu02_Armor_Decrease",0,0)
 	end
@@ -224,7 +231,7 @@ function AbilityYoumu:OnYoumu04Think(keys)
 		ParticleManager:SetParticleControl(effectIndex, 0, caster:GetOrigin())
 		ParticleManager:SetParticleControl(effectIndex, 1, effect2VecForward)
 		ParticleManager:ReleaseParticleIndex(effectIndex)
-	    PrintTable(damage_table)
+	    target:EmitSound("Hero_Juggernaut.Attack")
 		UnitDamageTarget(damage_table)
 	end
 	local vec = Vector(vecTarget.x+math.cos(Youmu04Rad)*250,vecTarget.y+math.sin(Youmu04Rad)*250,vecCaster.z)
