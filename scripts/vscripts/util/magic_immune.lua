@@ -18,7 +18,7 @@
     	local BUFF_TARGET = dummy:FindAbilityByName("ability_system_magicImmune")
 		
 	    dummy:CastAbilityOnTarget(target, BUFF_TARGET, 0 )
-		GameRules:GetGameModeEntity():SetContextThink(DoUniqueString('ability_sliencesystem_silence'),
+		target:SetContextThink(DoUniqueString('ability_sliencesystem_silence'),
     	function ()
 		        target:RemoveModifierByName("modifier_system_magicImmune")
                 dummy:RemoveSelf()

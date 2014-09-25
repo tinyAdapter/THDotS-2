@@ -31,6 +31,10 @@ function OnCollectionPowerMove(target,caster)
 	caster:SetContextNum("ability_collection_power_speed",speed,0)
 	if(GetDistanceBetweenTwoVec2D(vecTarget,vecCaster)<50)then
 		if((target:GetUnitName()=="npc_coin_up_unit"))then
+			local effectIndex = ParticleManager:CreateParticle("particles/items2_fx/hand_of_midas.vpcf", PATTACH_CUSTOMORIGIN, caster)
+			ParticleManager:SetParticleControl(effectIndex, 0, vecCaster)
+			ParticleManager:SetParticleControl(effectIndex, 1, vecCaster)
+			ParticleManager:ReleaseParticleIndex(effectIndex)
 			local ply = caster:GetOwner()
 			local playerId = ply:GetPlayerID()
 			local modifyGold = PlayerResource:GetReliableGold(playerId) + 35
@@ -42,6 +46,9 @@ function OnCollectionPowerMove(target,caster)
 				powerCount = 0
 			end
 			if(powerCount<30)then
+				local effectIndex = ParticleManager:CreateParticle("particles/items_fx/aegis_respawn_spotlight.vpcf", PATTACH_CUSTOMORIGIN, caster)
+				ParticleManager:SetParticleControl(effectIndex, 0, vecCaster)
+				ParticleManager:ReleaseParticleIndex(effectIndex)
 				powerCount = powerCount + 1
 				caster:SetContextNum("hero_bouns_stat_power_count",powerCount,0)
 				if(caster:GetPrimaryAttribute()==0)then

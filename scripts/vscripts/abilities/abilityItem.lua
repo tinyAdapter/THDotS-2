@@ -5,7 +5,7 @@ end
 
 function ItemAbility_Camera_OnAttack(keys)
 	local ItemAbility = keys.ability
-	local damage_to_deal =keys.target:GetMaxHealth()*keys.DamgeHealthPercent
+	local damage_to_deal =keys.target:GetMaxHealth()*keys.DamageHealthPercent
 	local damage_table = {
 		victim = keys.target,
 		attacker = keys.caster,
@@ -18,22 +18,65 @@ function ItemAbility_Camera_OnAttack(keys)
 	ApplyDamage(damage_table)
 end
 
+function ItemAbility_Kafziel_OnAttack(keys)
+	local ItemAbility = keys.ability
+	local Caster = keys.caster
+	local Target = keys.target
+	local damage_to_deal = (caster:GetHealth()-target:GetHealth())*keys.HarvestDamageFactor
+	if (damage_to_deal>0)
+		local damage_table = {
+			victim = keys.target,
+			attacker = keys.caster,
+			damage = damage_to_deal,
+			damage_type = DAMAGE_TYPE_MAGICAL,
+			damage_flags = 1
+		}
+		--PrintTable(damage_table)
+		print("ItemAbility_Kafziel_OnAttack| Damage:"..damage_to_deal)
+		ApplyDamage(damage_table)
+	end
+end
+
+function ItemAbility_Verity_OnAttack(keys)
+	local ItemAbility = keys.ability
+	local Caster = keys.caster
+	local Target = keys.target
+	local RemoveMana = Target:GetMaxMana()*keys.PenetrateRemoveManaPercent*0.01
+	if (RemoveMana>Target:GetMana())then
+		RemoveMana=Target:GetMana()
+	end
+	Target:SetMana(Target:GetMana()-RemoveMana)
+	local damage_to_deal = RemoveMana*keys.PenetrateDamageFactor
+	if (damage_to_deal>0)
+		local damage_table = {
+			victim = keys.target,
+			attacker = keys.caster,
+			damage = damage_to_deal,
+			damage_type = DAMAGE_TYPE_PHYSICAL,
+			damage_flags = 1
+		}
+		--PrintTable(damage_table)
+		print("ItemAbility_Verity_OnAttack| Damage:"..damage_to_deal)
+		ApplyDamage(damage_table)
+	end
+end
+
 function ItemAbility_mushroom_kebab_OnSpellStart(keys)
 	local ItemAbility = keys.ability
-	local caster = keys.caster
-	caster:SetBaseStrength(caster:GetBaseStrength() + keys.IncreaseStrength)
+	local Caster = keys.caster
+	Caster:SetBaseStrength(Caster:GetBaseStrength() + keys.IncreaseStrength)
 end
 
 function ItemAbility_mushroom_pie_OnSpellStart(keys)
 	local ItemAbility = keys.ability
-	local caster = keys.caster
-	caster:SetBaseAgility(caster:GetBaseAgility() + keys.IncreaseAgilit)
+	local Caster = keys.caster
+	Caster:SetBaseAgility(Caster:GetBaseAgility() + keys.IncreaseAgilit)
 end
 
 function ItemAbility_mushroom_soup_OnSpellStart(keys)
 	local ItemAbility = keys.ability
-	local caster = keys.caster
-	caster:SetBaseIntellect(caster:GetBaseIntellect() + keys.IncreaseIntellect)
+	local Caster = keys.caster
+	Caster:SetBaseIntellect(Caster:GetBaseIntellect() + keys.IncreaseIntellect)
 end
 
 function ItemAbility_DonationBox_OnSpellStart(keys)
@@ -60,7 +103,7 @@ end
 function ItemAbility_9ball_OnSpellStart(keys)
 	local ItemAbility = keys.ability
 	local Caster = keys.caster
-	local vecCaster = caster:GetOrigin()
+	local vecCaster = Caster:GetOrigin()
 	local radian = RandomFloat(0,6.28)
 	local range = RandomFloat(BlinkRangeMin,BlinkRangeMax)
 	Caster:SetOrigin(vecCaster.x+math.cos(radian)*range,vecCaster.y+math.sin(radian)*range,vecCaster.z)

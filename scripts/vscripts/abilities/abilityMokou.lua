@@ -36,8 +36,10 @@ function OnMokou01SpellMove(keys)
 			damage_flags = keys.ability:GetAbilityTargetFlags()
 		}
 		UnitDamageTarget(damage_table)
-		local effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/mokou/ability_mokou_01_boom.vpcf", PATTACH_CUSTOMORIGIN, caster)
-		ParticleManager:SetParticleControl(effectIndex, 0, caster:GetOrigin() + Vector(0,0,128))
+		local effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/mouko/ability_mokou_01_boom.vpcf", PATTACH_CUSTOMORIGIN, caster)
+		ParticleManager:SetParticleControl(effectIndex, 0, caster:GetOrigin() + Vector(0,0,256))
+		ParticleManager:SetParticleControl(effectIndex, 1, caster:GetOrigin())
+		ParticleManager:SetParticleControl(effectIndex, 3, caster:GetOrigin())
 		ParticleManager:ReleaseParticleIndex(effectIndex)
 		caster:RemoveModifierByName("modifier_thdots_Mokou01_think_interval")
 		caster:SetContextNum("ability_Mokou01_Distance",120,0)
@@ -110,10 +112,37 @@ function OnMokou04SpellStart(keys)
 	}
 	UnitDamageTarget(damage_table)
 
+	local unit = CreateUnitByName(
+		"npc_dota2x_unit_mokou_04"
+		,caster:GetOrigin() - caster:GetForwardVector() * 15 + Vector(0,0,170)
+		,false
+		,caster
+		,caster
+		,caster:GetTeam()
+	)
+	unit:SetForwardVector(caster:GetForwardVector())
+
 	caster:SetContextNum("ability_Mokou02_damage_bouns",keys.BounsDamage,0)
 	Timer.Wait 'ability_Mokou02_damage_bouns_timer' (20,
 		function()
 			caster:SetContextNum("ability_Mokou02_damage_bouns",0,0)
 		end
 	)
+
+	Timer.Loop 'ability_Mokou04_wing_timer' (0.1, 200,
+		function(i)
+			unit:SetOrigin(caster:GetOrigin() - caster:GetForwardVector() * 15 + Vector(0,0,170))
+			unit:SetForwardVector(caster:GetForwardVector())
+			if(caster:IsAlive()==false)then
+				unit:RemoveSelf()
+				return nil
+			end
+		end
+	)
+	unit:SetContextThink('ability_Mokou04_wing_unit_timer',
+		function()
+			unit:RemoveSelf()
+			return nil
+		end, 
+	20.5)
 end

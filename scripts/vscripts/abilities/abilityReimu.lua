@@ -364,25 +364,12 @@ function AbilityReimu:OnReimu04Think(keys)
 	local caster = EntIndexToHScript(keys.caster_entindex)
 	local Targets = keys.target_entities
 
-	if(caster:GetContext("Reimu04_Effect_MAGIC_IMMUNE")~=0) then
-		    print("startIMMUNE")
-			caster:SetContextNum("Reimu04_Effect_MAGIC_IMMUNE" , 1, 0)
-			UnitMagicImmune(caster,caster,keys.Ability_Duration)
-			GameRules:GetGameModeEntity():SetContextThink(DoUniqueString('ability_reimu04_magic_immune'),
-				function ()
-					if (caster~=nil) then
-		            	caster:SetContextNum("Reimu04_Effect_MAGIC_IMMUNE" , 0, 0)
-						return nil
-					end
-		    end,keys.Ability_Duration)
-	end
-
 	for k,v in pairs(Targets) do
 		if(v:GetTeam() == caster:GetTeam())then
 			if(v:GetContext("Reimu04_Effect_MAGIC_IMMUNE")~=0) then
 			    v:SetContextNum("Reimu04_Effect_MAGIC_IMMUNE" , 1, 0)
 			    UnitMagicImmune(caster,v,keys.Ability_Duration)
-				GameRules:GetGameModeEntity():SetContextThink(DoUniqueString('ability_reimu04_magic_immune'),
+				v:SetContextThink(DoUniqueString('ability_reimu04_magic_immune'),
 				function ()
 				    if (v~=nil) then
 		                v:SetContextNum("Reimu04_Effect_MAGIC_IMMUNE" , 0, 0)
@@ -398,7 +385,7 @@ function AbilityReimu:OnReimu04Think(keys)
 			
 			if(v:GetContext("Reimu04_Effect_Damage")==1)then
 				v:SetContextNum("Reimu04_Effect_Damage" , 0, 0)
-				GameRules:GetGameModeEntity():SetContextThink(DoUniqueString('ability_reimu04_damage'),
+				v:SetContextThink(DoUniqueString('ability_reimu04_damage'),
     	        function ()
 				    v:SetContextNum("Reimu04_Effect_Damage" , 1, 0)
 					v:SetContextNum("Reimu04_Effect_Damage_Count" , 4, 0)

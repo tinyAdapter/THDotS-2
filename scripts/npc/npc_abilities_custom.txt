@@ -506,6 +506,11 @@
 		"AbilityCooldown"   "0"
 		"MaxLevel"          "1"
 
+		"precache"
+		{
+			"particle_folder"			"particles/thd2/heroes/reimu"
+		}
+
 		"OnSpellStart"
 		{
 	       "ApplyModifier"
@@ -517,6 +522,15 @@
 		}
 		"Modifiers"
 		{
+			"OnCreated"
+			{
+				"AttachEffect"
+				{
+					"EffectName"		"particles/thd2/heroes/reimu/reimu_04_effect_buff.vpcf"
+					"EffectAttachType"	"follow_origin"
+					"Target"			"TARGET"
+				}
+			}
             "modifier_system_magicImmune"
             {
 			    "States"
@@ -898,7 +912,7 @@
 						"Caster"            "CASTER"
 						"Target"
 						{
-							"Center"			"CASTER"
+							"Center"			"TARGET"
 							"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
 							"Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
 					        "Radius"			"%radius"
@@ -2394,10 +2408,17 @@
 	    "precache"
 		{
 			"particle_folder"			"particles/units/heroes/hero_abaddon"
+			"soundfile" 				"soundevents/game_sounds_heroes/game_sounds_luna.vsndevts"
 		}
 
         "OnSpellStart"
 		{
+			"FireSound"
+			{
+				"EffectName"		"Hero_Luna.LucentBeam.Target"
+				"Target" 			"TARGET"
+			}
+
 			"RunScript"					
 			{
 				"Target"    
@@ -2455,10 +2476,17 @@
         "precache"
 		{
 			"particle_folder"			"particles/units/heroes/hero_leshrac"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_legion_commander.vsndevts"
 		}
 
         "OnSpellStart"
 		{
+			"FireSound"
+			{
+				"EffectName"		"Hero_LegionCommander.PressTheAttack"
+				"Target" 			"TARGET"
+			}
+
 			"RunScript"					
 			{
 				"Target"  				"TARGET"
@@ -2504,10 +2532,19 @@
         "precache"
 		{
 			"particle_folder"			"particles/econ/events/ti4"
+			"particle_folder"			"particles/thd2/heroes/byakuren"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_templar_assassin.vsndevts"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_weaver.vsndevts"
 		}
 
         "OnSpellStart"
 		{
+			"FireSound"
+			{
+				"EffectName"			"Hero_TemplarAssassin.Trap"
+				"Target" 				"TARGET"
+			}
+
 			"RunScript"					
 			{
 				"Target"  				"TARGET"
@@ -2551,7 +2588,7 @@
 		//----------------------------------------------------------------
 		"AbilityUnitDamageType"   	"DAMAGE_TYPE_MAGICAL"
 		"AbilityDamage"				"15 30 45"
-		
+
 		"Modifiers"
 	    {
 			"passive_byakuren04_attack"
@@ -2559,6 +2596,11 @@
 			    "Passive"              	"1"
                 "OnAttackLanded"
 		        {
+		        	"FireSound"
+		        	{
+		        		"EffectName"		"Hero_Omniknight.Repel"
+		        		"Target"            "TARGET"
+		        	}
 		            "RunScript"					
 	    	        {
 			            "Target"
@@ -2617,6 +2659,11 @@
 		"AbilityType"				"DOTA_ABILITY_TYPE_HIDDEN"
 		"MaxLevel"				  	"1"
 		
+		"precache"
+		{
+			"particle_folder"				"particles/thd2/heroes/yuyuko"
+		}
+
 		"Modifiers"
 	    {
 			"passive_yuyukoEx"
@@ -2665,6 +2712,11 @@
         "AbilityUnitDamageType"     "DAMAGE_TYPE_PURE"
 	    "AbilityDamage"				"175 225 275"
 		"AbilityChannelTime"		"2.0"
+
+		"precache"
+		{
+			"particle_folder"				"particles/thd2/heroes/yuyuko"
+		}
 
         "OnSpellStart"
         {    
@@ -2780,8 +2832,19 @@
 		"AbilityCastPoint"          "0.2"
 		"AbilityCooldown"           "13"
 		
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_invoker.vsndevts"
+		}
+
 		"OnSpellStart"
 		{
+			"FireSound"
+		    {
+		        "EffectName"			"Hero_Invoker.Alacrity"
+		        "Target"           		"CASTER"
+		    }
+
 			"RunScript"					
 	    	{
 			    "Caster"		     	"CASTER"
@@ -2813,6 +2876,7 @@
 	    "precache"
 		{
 			"particle_folder"			"particles/thd2/heroes/sakuya"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
 		}
 
         "OnSpellStart"
@@ -2837,6 +2901,12 @@
         "OnProjectileHitUnit"
 		{
 			"DeleteOnHit"				"false"
+
+			"FireSound"
+		    {
+		        "EffectName"			"Hero_PhantomAssassin.Dagger.Cast"
+		        "Target"           		"TARGET"
+		    }
 
 			"RunScript"
 			{
@@ -2924,10 +2994,17 @@
 	    "precache"
 		{
 			"particle_folder"			"particles/thd2/heroes/sakuya"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_bristleback.vsndevts"
 		}
 
         "OnSpellStart"
         {    
+        	"FireSound"
+        	{
+        		"EffectName"		"Hero_Bristleback.QuillSpray.Cast"
+        		"Target" 			"CASTER"
+        	}
+
         	"RunScript"
             {
                 "ScriptFile"        "scripts/vscripts/abilities/abilitySakuya.lua"
@@ -3009,10 +3086,17 @@
 	    "precache"
 		{
 			"particle_folder"			"particles/thd2/heroes/sakuya"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_antimage.vsndevts"
 		}
 
         "OnSpellStart"
         {
+        	"FireSound"
+        	{
+        		"EffectName"		"Hero_Antimage.Blink_out"
+        		"Target" 			"CASTER"
+        	}
+
 			"RunScript"
             {
                 "ScriptFile"        "scripts/vscripts/abilities/abilitySakuya.lua"
@@ -3102,6 +3186,7 @@
 		"precache"
 		{
 			"particle_folder"			"particles/thd2/heroes/sakuya"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_faceless_void.vsndevts"
 		}
 		
 		"OnSpellStart"
@@ -3127,6 +3212,15 @@
 			{
 				"Duration"          "%ability_duration"
 				"ThinkInterval"     "0.1"
+				"OnCreated"
+				{
+					"FireSound"
+        			{
+        				"EffectName"		"Hero_FacelessVoid.Chronosphere"
+        				"Target" 			"CASTER"
+        			}
+				}
+	
 				"OnIntervalThink"
 				{
 					"RunScript"
@@ -3366,7 +3460,7 @@
 
 		"precache"
 		{
-			"particle_folder"			"particles/thd2/heroes/mokou"
+			"particle_folder"			"particles/thd2/heroes/mouko"
 		}
 
         "OnSpellStart"
@@ -3400,6 +3494,8 @@
 				"IsHidden"          "0"
 				"Duration"          "%move_duration"
 				"ThinkInterval"     "0.02"
+				"OverrideAnimation" "Act_DOTA_CAST_ABILITY_1"
+				
 				"OnIntervalThink"
 				{
 					"RunScript"
@@ -3459,7 +3555,7 @@
 		
 		"precache"
 		{
-			"particle_folder"			"particles/thd2/heroes/mokou"
+			"particle_folder"			"particles/thd2/heroes/mouko"
 		}
 
 		"Modifiers"
@@ -3487,7 +3583,7 @@
 				        	"FireEffect"
 							{
 								"TargetPoint" 				"TARGET"
-								"EffectName" 				"particles/thd2/heroes/Mokou/ability_mokou_02_boom.vpcf"
+								"EffectName" 				"particles/thd2/heroes/mouko/ability_mokou_02_boom.vpcf"
 								"EffectAttachType" 			"world_origin"
 								"EffectDurationScale" 		"1"
 								"EffectLifeDurationScale"	"1"
@@ -3611,6 +3707,7 @@
 			"modifier_thdots_Mokou_04"
 			{
 				"Duration"         	 "%duration"
+
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" 		"%move_speed"

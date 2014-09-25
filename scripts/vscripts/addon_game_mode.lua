@@ -24,6 +24,8 @@ function Precache( context )
 	PrecacheResource( "model", "models/props_winter/present.vmdl", context )--真の点数
 	PrecacheResource( "model", "models/props_gameplay/halloween_candy.vmdl", context )--真のP点
 	PrecacheResource( "model", "models/development/invisiblebox.vmdl", context )
+	PrecacheResource( "particle", "particles/items_fx/aegis_respawn_spotlight.vpcf",context )--真のP点
+	PrecacheResource( "particle", "particles/items2_fx/hand_of_midas.vpcf",context )--真の点数
 
 	PrecacheResource( "model", "models/thd2/yyy.vmdl", context )--灵梦D
 	PrecacheResource( "model", "models/thd2/fantasy_seal.vmdl", context )--灵梦F
@@ -41,8 +43,10 @@ function Precache( context )
 	PrecacheResource( "particle", "particles/dire_fx/tower_bad_face_end_shatter.vpcf", context )--幽幽子F
 	PrecacheResource( "particle_folder", "particles/units/heroes/hero_death_prophet", context )--幽幽子D
 	PrecacheResource( "particle_folder", "particles/units/heroes/hero_bane", context )--幽幽子F
+	PrecacheResource( "model", "models/thd2/yuyuko_fan.vmdl", context )--幽幽子W
 
-	PrecacheResource( "particle_folder", "particles/units/heroes/hero_phoenix", context )--妹红R
+	PrecacheResource( "particle_folder", "particles/units/heroes/hero_phoenix", context )--妹红R	
+	PrecacheResource( "model", "models/thd2/firewing.vmdl", context )--妹红W	
 
 end
 

@@ -1,0 +1,119 @@
+"dota_shops"
+{
+	"consumables"
+	{
+		"item"		"item_fan_of_crow"
+		"item"		"item_cake"
+		"item"		"item_bread"
+		"item"		"item_drink"
+		"item"		"item_wine"
+		"item"		"item_talisman_of_tengu"
+		"item"		"item_zun_hat"
+		"item"		"item_bird"
+		"item"		"item_glue"
+		"item"		"item_candle"
+		"item"		"item_green_tea"
+		"item"		"item_red_tea"
+	}
+
+	"attributes"
+	{
+		"item"		"item_ticket"
+		"item"		"item_cucumber"
+		"item"		"item_mushroom"
+		"item"		"item_ice_block"
+		"item"		"item_cherry_branch"
+		"item"		"item_cherry_leaf"
+		"item"		"item_paper_mask"
+		"item"		"item_catnip"
+		"item"		"item_cat_ear"
+		"item"		"item_cat_foot"
+		"item"		"item_cookbook"
+		"item"		"item_magic_guide_book"
+	}
+
+	"weapons_armor"
+	{
+		"item"		"item_rocket_diagram"
+		"item"		"item_knife"
+		"item"		"item_scissors"
+		"item"		"item_hammer"
+		"item"		"item_screw_driver"
+		"item"		"item_stool"
+		"item"		"item_silver_knife"
+		"item"		"item_aunt_clothes"
+		"item"		"item_sailor_suit"
+		"item"		"item_swimming_suit"
+		"item"		"item_pant"
+		"item"		"item_hunting_cap"
+	}
+	
+	"misc"
+	{
+		"item"		"item_bra"
+		"item"		"item_god_hand"
+		"item"		"item_tengu_fan"
+		"item"		"item_gran_grimoire"
+		"item"		"item_hexie"
+		"item"		"item_camera"
+		"item"		"item_mushroom_kebab"
+		"item"		"item_mushroom_pie"
+		"item"		"item_mushroom_soup"
+		"item"		"item_wind_gun"
+		"item"		"item_luna_chip"
+		"item"		"item_frog"
+		"item"		"item_donation_box"
+	}	
+	
+	// Level 1 - Green Recipes
+	"basics"
+	{
+		"item"		"item_donation_gem"
+		"item"		"item_watermelon"
+		"item"		"item_cirno_claymore"
+		"item"		"item_smash_stick"
+		"item"		"item_rocket"
+		"item"		"item_teeth"
+		"item"		"item_horse_red"
+		"item"		"item_horse_green"
+		"item"		"item_horse_blue"
+		"item"		"item_horse_king"
+		"item"		"item_9ball"
+	}
+
+	// Level 2 - Blue Recipes
+	"support"
+	{
+	}
+	
+	"magics"
+	{
+	}
+	
+	// Level 3 - Purple Recipes
+	"defense"
+	{
+	}
+	
+	"weapons"
+	{
+	}
+	
+	// Level 4 - Orange / Orb / Artifacts
+	"artifacts"
+	{
+	}
+
+	"sideshop1"
+	{
+	}
+
+	"sideshop2"
+	{
+	}
+	
+	"secretshop"
+	{
+
+	}
+}

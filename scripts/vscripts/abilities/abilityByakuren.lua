@@ -70,10 +70,14 @@ function OnByakuren03SpellStart(keys)
 		ParticleManager:SetParticleControl(effectIndex, 1, vecTarget)
 		ParticleManager:SetParticleControl(effectIndex, 2, vecTarget)
 		ParticleManager:ReleaseParticleIndex(effectIndex)
+		target:EmitSound("Hero_Weaver.TimeLapse")
 	else
+		local effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/byakuren/ability_byakuren_03.vpcf", PATTACH_CUSTOMORIGIN, caster)
+		ParticleManager:SetParticleControl(effectIndex, 0, vecTarget)
 		target:SetThink(
 				function()
 					target:SetOrigin(vecTarget)
+					target:EmitSound("Hero_Weaver.TimeLapse")
 					return nil
 				end, 
 		"ability_byakuren_03_return",

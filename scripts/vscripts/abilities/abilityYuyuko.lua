@@ -12,8 +12,12 @@ function OnYuyukoExSpellStart(keys)
 		caster:SetContextNum("abilityyuyuko_Ex_grave", TRUE, 0) 
 	end
 	if(caster:GetHealth()==1)then
-		local effectIndex = ParticleManager:CreateParticle("particles/dire_fx/tower_bad_face_end_shatter.vpcf", PATTACH_CUSTOMORIGIN, caster)
+		local effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/yuyuko/ability_yuyuko_04_effect.vpcf", PATTACH_CUSTOMORIGIN, caster)
 		ParticleManager:SetParticleControl(effectIndex, 0, caster:GetOrigin())
+		ParticleManager:ReleaseParticleIndex(effectIndex) 
+		effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/yuyuko/ability_yuyuko_04_effect_a.vpcf", PATTACH_CUSTOMORIGIN, caster)
+		ParticleManager:SetParticleControl(effectIndex, 0, v:GetOrigin())
+		ParticleManager:SetParticleControl(effectIndex, 5, v:GetOrigin())
 		ParticleManager:ReleaseParticleIndex(effectIndex) 
 		caster:SetHealth(caster:GetMaxHealth())
 		UnitDisarmedTarget(caster,caster,keys.LifeDuration)
@@ -42,6 +46,27 @@ end
 
 function OnYuyuko04SpellStart(keys)
 	local caster = EntIndexToHScript(keys.caster_entindex)
+	local vecForward = caster:GetForwardVector() 
+	local unit = CreateUnitByName(
+		"npc_dota2x_unit_yuyuko_04"
+		,caster:GetOrigin() - vecForward * 100
+		,false
+		,caster
+		,caster
+		,caster:GetTeam()
+	)
+	local forwardRad = GetRadBetweenTwoVec2D(caster:GetOrigin(),unit:GetOrigin())
+	unit:SetForwardVector(Vector(math.cos(forwardRad+math.pi/2),math.sin(forwardRad+math.pi/2),0))
+
+	print("start_create")
+	unit:SetContextThink("ability_yuyuko_04_unit_remove", 
+		function () 
+			unit:RemoveSelf()
+			print("start_remove")
+			return nil
+		end, 
+		2.0)
+
 	caster:SetContextNum("ability_yuyuko_04_time_count", keys.DamageCount, 0) 
 end
 
@@ -59,8 +84,13 @@ function OnYuyuko04SpellThink(keys)
 		caster:SetContextNum("ability_yuyuko_04_time_count", timecount, 0) 
 		for _,v in pairs(targets) do
 			if((v:GetTeam()~=caster:GetTeam()) and (v:IsInvulnerable() == false) and (v:IsTower() == false) and (v:IsAlive() == true))then
-				local effectIndex = ParticleManager:CreateParticle("particles/dire_fx/tower_bad_face_end_shatter.vpcf", PATTACH_CUSTOMORIGIN, caster)
+				local effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/yuyuko/ability_yuyuko_04_effect.vpcf", PATTACH_CUSTOMORIGIN, caster)
 				ParticleManager:SetParticleControl(effectIndex, 0, v:GetOrigin())
+				ParticleManager:ReleaseParticleIndex(effectIndex) 
+
+				effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/yuyuko/ability_yuyuko_04_effect_a.vpcf", PATTACH_CUSTOMORIGIN, caster)
+				ParticleManager:SetParticleControl(effectIndex, 0, v:GetOrigin())
+				ParticleManager:SetParticleControl(effectIndex, 5, v:GetOrigin())
 				ParticleManager:ReleaseParticleIndex(effectIndex) 
 
 				local vecV = v:GetOrigin()
