@@ -290,3 +290,16 @@ function IsRadBetweenTwoRad2D(a,rada,radb)
 	print("a="..tostring(a))
 	return false
 end
+
+function SetTargetToTraversable(target)
+    local vecTarget = target:GetOrigin() 
+    local vecGround = GetGroundPosition(vecTarget, nil)
+    for i=1,10 do
+        if(GridNav:IsTraversable(vecGround)==false)then
+            vecGround = vecGround + target:GetForwardVector() * 50
+        else
+            target:SetOrigin(vecGround)
+            return
+        end
+    end
+end

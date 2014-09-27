@@ -280,11 +280,11 @@
 	"npc_coin_up_unit"
 	{
 		"BaseClass"					"npc_dota_creep_neutral"
-		"Model"						"models/props_winter/present.vmdl"
+		"Model"						"models/thd2/point.vmdl"
 		"SoundSet"					"Creep_Good_Range"
 		"Level"						"0"
 		"UnitLabel"					"healing_ward"
-		
+		"ModelScale" 			    "0.2"
 		
 		"Ability1"					"ability_dummy_unit"
 
@@ -294,10 +294,11 @@
 	"npc_power_up_unit"
 	{
 		"BaseClass"					"npc_dota_creep_neutral"
-		"Model"						"models/props_gameplay/halloween_candy.vmdl"
+		"Model"						"models/thd2/power.vmdl"
 		"SoundSet"					"Creep_Good_Range"
 		"Level"						"0"
 		"UnitLabel"					"healing_ward"
+		"ModelScale" 			    "0.2"
 		
 		
 		"Ability1"					"ability_dummy_unit"

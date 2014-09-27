@@ -172,6 +172,7 @@ function OnSakuya03SpellDamage(keys)
 	ParticleManager:ReleaseParticleIndex(effectIndex)
 
 	caster:SetOrigin(targetPoint)
+	SetTargetToTraversable(caster)
 
 	for _,v in pairs(targets) do
 		local damage_table = {

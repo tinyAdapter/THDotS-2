@@ -85,6 +85,7 @@ function AbilityAya:OnAya01Move(keys)
 	
 	local aya01dis = caster:GetContext("ability_Aya01_Dis")
 	if(aya01dis<0)then
+		SetTargetToTraversable(caster)
 		caster:SetContextNum("ability_Aya01_Dis",0,0)
 		caster:RemoveModifierByName("modifier_thdots_aya01_think_interval")
 	else

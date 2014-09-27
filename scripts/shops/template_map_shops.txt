@@ -2,7 +2,6 @@
 {
 	"consumables"
 	{
-		"item"		"item_fan_of_crow"
 		"item"		"item_cake"
 		"item"		"item_bread"
 		"item"		"item_drink"
@@ -84,15 +83,49 @@
 	// Level 2 - Blue Recipes
 	"support"
 	{
+
+		"item"		"item_gap"
+		"item"	    "item_ghost_balloon"
+		"item"		"item_fox_mask"											
+		"item"		"item_marisa_hat"										
+		"item"		"item_hakurei_amulet"						
+		"item"		"item_yukkuri_stick"							
+		"item"		"item_wing"											
+		"item"		"item_frozen_frog"									
+		"item"		"item_guilty_mask"									
+		"item"		"item_zun_glasses"								
+		"item"		"item_hj_bug"									
+		"item"		"item_brother_sharp"											
 	}
 	
 	"magics"
 	{
+		"item"		"item_loneliness"								
+		"item"		"item_phoenix_wing"									
+		"item"		"item_kafziel"									
+		"item"		"item_verity"										
+		"item"		"item_darkred_umbrella"							
+		"item"		"item_nuclear_stick"								
+		"item"		"item_frock"									
+		"item"		"item_good_lunchbox"						
+		"item"		"item_better_lunchbox"							
+		"item"		"item_best_lunchbox"							
+		"item"		"item_hakurei_ticket"							
+		"item"		"item_yatagarasu"							
 	}
 	
 	// Level 3 - Purple Recipes
 	"defense"
 	{
+		"item"		"item_doctor_doll"								
+		"item"		"item_dummy_doll"									
+		"item"		"item_bone_flute"							
+		"item"		"item_jiao_shou"								
+		"item"		"item_green_dam"							
+		"item"		"item_card_good_man"							
+		"item"		"item_card_bad_man"								
+		"item"		"item_card_worse_man"								
+		"item"		"item_card_love_man"		
 	}
 	
 	"weapons"

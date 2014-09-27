@@ -1260,14 +1260,14 @@
 				"Duration"          "%ability_duration"
 				"ThinkInterval"     "0.1"
 
-				"OnCreated"
-				{
-					"FireSound"
-					{
-						"EffectName"		"Hero_Wisp.Tether"
-						"Target" 			"TARGET"
-					}
-				}
+				//"OnCreated"
+				//{
+					//"FireSound"
+					//{
+					//	"EffectName"		"Hero_Wisp.Tether"
+					//	"Target" 			"TARGET"
+					//}
+				//}
         		
 				"OnIntervalThink"
 				{
@@ -1874,6 +1874,7 @@
 				"RemoveOnDeath"     "0"
 				"IsHidden"          "0"
 				"Duration"          "%move_duration"
+				"OverrideAnimation"	"Act_DOTA_CAST_ABILITY_1"
 				"ThinkInterval"     "0.02"
 				
 				"OnCreated"
@@ -3367,6 +3368,7 @@
 		{
 			"particle_folder"			"particles/units/heroes/hero_phantom_assassin"
 			"particle_folder"			"particles/thd2/heroes/flandre"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
 		}
 		
 		"OnSpellStart"
@@ -3406,6 +3408,12 @@
 
 				"OnAttackLanded"
 				{
+					"FireSound"
+					{
+						"EffectName"		"Hero_PhantomAssassin.CoupDeGrace"
+						"Target" 			"TARGET"
+					}
+
 					"FireEffect"
 					{
 						"EffectName"		 "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
@@ -3461,6 +3469,7 @@
 		"precache"
 		{
 			"particle_folder"			"particles/thd2/heroes/mouko"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
 		}
 
         "OnSpellStart"
@@ -3556,6 +3565,7 @@
 		"precache"
 		{
 			"particle_folder"			"particles/thd2/heroes/mouko"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_ogre_magi.vsndevts"
 		}
 
 		"Modifiers"
@@ -3580,6 +3590,12 @@
 			            "Chance"        "%ability_chance_base"
 				        "OnSuccess"
 				        {
+				        	"FireSound"
+				        	{
+				        		"EffectName"		"Hero_OgreMagi.Fireblast.Target"
+				        		"Target" 			"TARGET"
+				        	}
+
 				        	"FireEffect"
 							{
 								"TargetPoint" 				"TARGET"
@@ -3683,10 +3699,17 @@
 		"precache"
 		{
 			"particle_folder"			"particles/thd2/heroes/mokou"
+			"soundfile"					"soundevents/voscripts/game_sounds_vo_doom_bringer.vsndevts"
 		}
 
 		"OnSpellStart"
 		{
+			"FireSound"
+			{
+				"EffectName"		"Hero_DoomBringer.ScorchedEarthAura"
+				"Target"            "CASTER"
+			}
+
 			"RunScript"
 			{
 				"ScriptFile"        "scripts/vscripts/abilities/abilityMokou.lua"

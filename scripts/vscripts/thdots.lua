@@ -214,6 +214,20 @@ end
 
 function THDOTSGameMode:AbilityUsed(keys)
   print('[DOTA2X] AbilityUsed')
+  local ply = EntIndexToHScript(keys.PlayerID)
+  local caster = ply:GetAssignedHero()
+  local ability = caster:FindAbilityByName(keys.abilityname)
+  if(keys.abilityname == 'phoenix_supernova')then
+    local mokouAbility = caster:FindAbilityByName("ability_thdots_mokou04")
+    if(mokouAbility:GetLevel()>0)then
+      local mokouCooldown = mokouAbility:GetCooldownTimeRemaining()
+      Timer.Wait 'ability_thdots_mokou04_cooldown' (8.1-ability:GetLevel(),
+        function()
+          mokouAbility:StartCooldown(mokouCooldown)
+        end
+      )
+    end 
+  end
   --PrintTable(keys)
 end
 function THDOTSGameMode:AbilityLearn(keys)
@@ -505,7 +519,7 @@ function THDOTSGameMode:OnEntityKilled( keys )
 	
 	if(killedUnit:IsHero()==false)then
 		local i = RandomInt(0,100)
-		if(i<15)then
+		if(i<5)then
 			local unit = CreateUnitByName(
 				"npc_coin_up_unit"
 				,killedUnit:GetOrigin()
@@ -523,7 +537,7 @@ function THDOTSGameMode:OnEntityKilled( keys )
 			30.0)
 		end
 		i = RandomInt(0,100)
-		if(i<15)then
+		if(i<5)then
 			local unit = CreateUnitByName(
 				"npc_power_up_unit"
 				,killedUnit:GetOrigin()
@@ -560,11 +574,11 @@ function THDOTSGameMode:OnEntityKilled( keys )
 		local powerDecrease = (powerStatValue - powerStatValue%2)/2
 		killedUnit:SetContextNum("hero_bouns_stat_power_count",powerStatValue-powerDecrease,0)
 		if(killedUnit:GetPrimaryAttribute()==0)then
-			killedUnit:SetBaseStrength(killedUnit:GetBaseStrength()-powerDecrease)
+			 killedUnit:SetBaseStrength(killedUnit:GetBaseStrength()-powerDecrease)
 		elseif(killedUnit:GetPrimaryAttribute()==1)then
-			killedUnit:SetBaseAgility(killedUnit:GetBaseAgility()-powerDecrease)
+			 killedUnit:SetBaseAgility(killedUnit:GetBaseAgility()-powerDecrease)
 		elseif(killedUnit:GetPrimaryAttribute()==2)then
-			killedUnit:SetBaseIntellect(killedUnit:GetBaseIntellect()-powerDecrease)
+			 killedUnit:SetBaseIntellect(killedUnit:GetBaseIntellect()-powerDecrease)
 		end
 		for i= 0,powerDecrease do
 			local vecRan = RandomVector(100)

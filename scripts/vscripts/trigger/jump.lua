@@ -8,7 +8,7 @@ function ThdotsJumpTrigger( data )
 	local jumpRad = GetRadBetweenTwoVec2D(vecTarget,vecLocation)
 	local jumpS = vecTarget.z - vecLocation.z
 	local jumpDistance = GetDistanceBetweenTwoVec2D(vecLocation,vecTarget)
-	local jumpSpeed = 40
+	local jumpSpeed = 50
 	local fallSpeed = 100
 	local fallG = 10
 	
@@ -23,6 +23,7 @@ function ThdotsJumpTrigger( data )
 				fallSpeed = fallSpeed - fallG
 			    vecMove = vecMove + Vector(math.cos(jumpRad)*jumpSpeed,math.sin(jumpRad)*jumpSpeed,fallSpeed)
 				if(vecMove.z<=vecGround.z)then
+					SetTargetToTraversable(target)
 					target:RemoveModifierByName("modifier_stunsystem_pause")
 					return true
 				end

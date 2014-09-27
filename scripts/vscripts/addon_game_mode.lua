@@ -21,8 +21,8 @@ end
 
 function Precache( context )
 	
-	PrecacheResource( "model", "models/props_winter/present.vmdl", context )--真の点数
-	PrecacheResource( "model", "models/props_gameplay/halloween_candy.vmdl", context )--真のP点
+	PrecacheResource( "model", "models/thd2/point.vmdl", context )--真の点数
+	PrecacheResource( "model", "models/thd2/power.vmdl", context )--真のP点
 	PrecacheResource( "model", "models/development/invisiblebox.vmdl", context )
 	PrecacheResource( "particle", "particles/items_fx/aegis_respawn_spotlight.vpcf",context )--真のP点
 	PrecacheResource( "particle", "particles/items2_fx/hand_of_midas.vpcf",context )--真の点数
@@ -46,7 +46,11 @@ function Precache( context )
 	PrecacheResource( "model", "models/thd2/yuyuko_fan.vmdl", context )--幽幽子W
 
 	PrecacheResource( "particle_folder", "particles/units/heroes/hero_phoenix", context )--妹红R	
+	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts", context )--妹红R
 	PrecacheResource( "model", "models/thd2/firewing.vmdl", context )--妹红W	
+
+	PrecacheResource( "particle", "particles/thd2/heroes/flandre/ability_flandre_04_buff.vpcf", context )--芙兰朵露	
+	PrecacheResource( "particle", "particles/thd2/heroes/flandre/ability_flandre_04_effect.vpcf", context )--芙兰朵露	
 
 end
 

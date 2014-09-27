@@ -120,6 +120,7 @@ function AbilityMarisa:OnMarisa01Move(keys)
 	caster:SetOrigin(vec)
 	local marisa01dis = caster:GetContext("ability_marisa01_Dis")
 	if(marisa01dis<0)then
+		SetTargetToTraversable(caster)
 		caster:SetContextNum("ability_marisa01_Dis",0,0)
 		caster:RemoveModifierByName("modifier_thdots_marisa01_think_interval")
 	else

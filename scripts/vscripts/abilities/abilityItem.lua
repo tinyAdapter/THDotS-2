@@ -5,10 +5,12 @@ end
 
 function ItemAbility_Camera_OnAttack(keys)
 	local ItemAbility = keys.ability
-	local damage_to_deal =keys.target:GetMaxHealth()*keys.DamageHealthPercent
+	local Caster = keys.caster
+	local Target = keys.target
+	local damage_to_deal =Target:GetMaxHealth()*keys.DamageHealthPercent
 	local damage_table = {
-		victim = keys.target,
-		attacker = keys.caster,
+		victim = Target,
+		attacker = Caster,
 		damage = damage_to_deal,
 		damage_type = DAMAGE_TYPE_MAGICAL,
 		damage_flags = 1
@@ -18,39 +20,19 @@ function ItemAbility_Camera_OnAttack(keys)
 	ApplyDamage(damage_table)
 end
 
-function ItemAbility_Kafziel_OnAttack(keys)
-	local ItemAbility = keys.ability
-	local Caster = keys.caster
-	local Target = keys.target
-	local damage_to_deal = (caster:GetHealth()-target:GetHealth())*keys.HarvestDamageFactor
-	if (damage_to_deal>0)
-		local damage_table = {
-			victim = keys.target,
-			attacker = keys.caster,
-			damage = damage_to_deal,
-			damage_type = DAMAGE_TYPE_MAGICAL,
-			damage_flags = 1
-		}
-		--PrintTable(damage_table)
-		print("ItemAbility_Kafziel_OnAttack| Damage:"..damage_to_deal)
-		ApplyDamage(damage_table)
-	end
-end
-
 function ItemAbility_Verity_OnAttack(keys)
 	local ItemAbility = keys.ability
 	local Caster = keys.caster
 	local Target = keys.target
 	local RemoveMana = Target:GetMaxMana()*keys.PenetrateRemoveManaPercent*0.01
-	if (RemoveMana>Target:GetMana())then
-		RemoveMana=Target:GetMana()
-	end
-	Target:SetMana(Target:GetMana()-RemoveMana)
+	RemoveMana=min(RemoveMana,Target:GetMana())
+	--Target:SetMana(Target:GetMana()-RemoveMana)
+	Target:GiveMana(-1*RemoveMana)
 	local damage_to_deal = RemoveMana*keys.PenetrateDamageFactor
-	if (damage_to_deal>0)
+	if (damage_to_deal>0) then
 		local damage_table = {
-			victim = keys.target,
-			attacker = keys.caster,
+			victim = Target,
+			attacker = Caster,
 			damage = damage_to_deal,
 			damage_type = DAMAGE_TYPE_PHYSICAL,
 			damage_flags = 1
@@ -61,29 +43,141 @@ function ItemAbility_Verity_OnAttack(keys)
 	end
 end
 
+function ItemAbility_Kafziel_OnAttack(keys)
+	local ItemAbility = keys.ability
+	local Caster = keys.caster
+	local Target = keys.target
+	local damage_to_deal = (Caster:GetHealth()-Target:GetHealth())*keys.HarvestDamageFactor
+	if (damage_to_deal>0) then
+		local damage_table = {
+			victim = Target,
+			attacker = Caster,
+			damage = damage_to_deal,
+			damage_type = DAMAGE_TYPE_MAGICAL,
+			damage_flags = 1
+		}
+		--PrintTable(damage_table)
+		print("ItemAbility_Kafziel_OnAttack| Damage:"..damage_to_deal)
+		ApplyDamage(damage_table)
+	end
+end
+
+function ItemAbility_Frock_Poison(keys)
+	local ItemAbility = keys.ability
+	local Caster = keys.caster
+	local Target = keys.attacker
+	local MaxAttribute = max(max(Caster:GetStrength(),Caster:GetAgility()),Caster:GetIntellect())
+	
+	local damage_to_deal = keys.PoisonDamageBase + MaxAttribute*keys.PoisonDamageFactor
+	damage_to_deal = max(damage_to_deal,keys.PoisonMinDamage)
+	if (damage_to_deal>0) then
+		local damage_table = {
+			victim = Target,
+			attacker = Caster,
+			damage = damage_to_deal,
+			damage_type = DAMAGE_TYPE_MAGICAL,
+			damage_flags = 1
+		}
+		--PrintTable(damage_table)
+		print("ItemAbility_Frock_Poison| Damage:"..damage_to_deal)
+		ApplyDamage(damage_table)
+	end
+end
+
+function ItemAbility_DoctorDoll_DeclineHealth(keys)
+	PrintTable(keys)
+	local ItemAbility = keys.ability
+	local Caster = keys.caster
+	local Health = Caster:GetHealth()
+	
+	local damage_to_deal = min(keys.DeclineHealthPerSec,Health-1)
+	if (damage_to_deal>0) then
+		local damage_table = {
+			victim = Caster,
+			attacker = Caster,
+			damage = damage_to_deal,
+			damage_type = DAMAGE_TYPE_PURE,
+			damage_flags = 1
+		}
+		--PrintTable(damage_table)
+		print("ItemAbility_Frock_Poison| Damage:"..damage_to_deal)
+		ApplyDamage(damage_table)
+	end
+end
+
+function ItemAbility_Lunchbox_Charge(keys)
+	PrintTable(keys)
+	local ItemAbility = keys.ability
+	local Caster = keys.caster
+	local Target = keys.Target
+	if (ItemAbility:IsItem()) then
+		local Charge = ItemAbility:GetCurrentCharges()
+		if (Charge<keys.MaxCharges) then
+			ItemAbility:SetCurrentCharges(Charge+1)
+		end
+	end
+end
+
+function ItemAbility_Lunchbox_OnSpellStart(keys)
+	PrintTable(keys)
+	local ItemAbility = keys.ability
+	local Caster = keys.caster
+	if (ItemAbility:IsItem()) then
+		local Charge = ItemAbility:GetCurrentCharges()
+		local HealAmount = Charge*keys.RestorePerCharge
+		if (Charge>0) then
+			Caster:Heal(HealAmount,Caster)
+			Caster:GiveMana(HealAmount)
+			ItemAbility:SetCurrentCharges(0)
+		end
+	end
+end
+
 function ItemAbility_mushroom_kebab_OnSpellStart(keys)
 	local ItemAbility = keys.ability
 	local Caster = keys.caster
 	Caster:SetBaseStrength(Caster:GetBaseStrength() + keys.IncreaseStrength)
+	if (ItemAbility:IsItem()) then
+		Caster:RemoveItem(ItemAbility)
+		--ItemAbility:Kill()
+	end
 end
 
 function ItemAbility_mushroom_pie_OnSpellStart(keys)
 	local ItemAbility = keys.ability
 	local Caster = keys.caster
-	Caster:SetBaseAgility(Caster:GetBaseAgility() + keys.IncreaseAgilit)
+	Caster:SetBaseAgility(Caster:GetBaseAgility() + keys.IncreaseAgility)
+	if (ItemAbility:IsItem()) then
+		Caster:RemoveItem(ItemAbility)
+		--ItemAbility:Kill()
+	end
 end
 
 function ItemAbility_mushroom_soup_OnSpellStart(keys)
 	local ItemAbility = keys.ability
 	local Caster = keys.caster
 	Caster:SetBaseIntellect(Caster:GetBaseIntellect() + keys.IncreaseIntellect)
+	if (ItemAbility:IsItem()) then
+		Caster:RemoveItem(ItemAbility)
+		--ItemAbility:Kill()
+	end
+end
+
+function ItemAbility_AbsorbMana(keys)
+	local ItemAbility = keys.ability
+	local Caster = keys.caster
+	local Target = keys.target
+	local AbsorbMana = min(Target:GetMana(),keys.AbsorbManaAmount)
+	--Target:SetMana(Target:GetMana()-RemoveMana)
+	Target:GiveMana(-1*AbsorbMana)
+	Caster:GiveMana(AbsorbMana)
 end
 
 function ItemAbility_DonationBox_OnSpellStart(keys)
 	local ItemAbility = keys.ability
 	local Caster = keys.caster
 	local Target = keys.target
-	Target:Kill()
+	Target:Kill(ItemAbility,Caster)
 	local CasterPlayerID = Caster:GetPlayerOwnerID()
 	PlayerResource:SetGold(CasterPlayerID,PlayerResource:GetGold(CasterPlayerID) + keys.BonusGold,false)
 end
@@ -105,8 +199,8 @@ function ItemAbility_9ball_OnSpellStart(keys)
 	local Caster = keys.caster
 	local vecCaster = Caster:GetOrigin()
 	local radian = RandomFloat(0,6.28)
-	local range = RandomFloat(BlinkRangeMin,BlinkRangeMax)
-	Caster:SetOrigin(vecCaster.x+math.cos(radian)*range,vecCaster.y+math.sin(radian)*range,vecCaster.z)
+	local range = RandomFloat(keys.BlinkRangeMin,keys.BlinkRangeMax)
+	Caster:SetOrigin(Vector(vecCaster.x+math.cos(radian)*range,vecCaster.y+math.sin(radian)*range,vecCaster.z))
 end
 
 function PrintKeys(keys)

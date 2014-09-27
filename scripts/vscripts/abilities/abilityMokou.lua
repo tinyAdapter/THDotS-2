@@ -41,8 +41,13 @@ function OnMokou01SpellMove(keys)
 		ParticleManager:SetParticleControl(effectIndex, 1, caster:GetOrigin())
 		ParticleManager:SetParticleControl(effectIndex, 3, caster:GetOrigin())
 		ParticleManager:ReleaseParticleIndex(effectIndex)
+		
+		SetTargetToTraversable(caster)
+		vecCaster = caster:GetOrigin()
+
 		caster:RemoveModifierByName("modifier_thdots_Mokou01_think_interval")
 		caster:SetContextNum("ability_Mokou01_Distance",120,0)
+		caster:EmitSound("Hero_Phoenix.SuperNova.Explode") 
 	else
 		local distance = caster:GetContext("ability_Mokou01_Distance")
 		distance = distance - keys.MoveSpeed/50
@@ -52,6 +57,7 @@ function OnMokou01SpellMove(keys)
 	local vec = Vector(vecCaster.x+math.cos(Mokou01rad)*keys.MoveSpeed/50,vecCaster.y+math.sin(Mokou01rad)*keys.MoveSpeed/50,GetGroundPosition(vecCaster, nil).z)
 	caster:SetOrigin(vec)
 end
+
 
 function OnMokou02SpellStartUnit(keys)
 	local caster = EntIndexToHScript(keys.caster_entindex)

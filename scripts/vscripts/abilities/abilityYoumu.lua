@@ -64,8 +64,8 @@ function AbilityYoumu:OnYoumu01Move(keys)
 	local targets = keys.target_entities
 	local count = caster:GetContext("ability_Youmu01_Count")
 	count = count + 0.2
-	if(count == 0.2)then
-	    -- ѭ������Ŀ�굥λ
+	if(count == 0.2 or count == 0.4)then
+	    -- Ñ­»µ¸÷¸öÄ¿±êµ¥Î»
 		for _,v in pairs(targets) do
 				local damage_table = {
 					victim = v,
@@ -76,7 +76,7 @@ function AbilityYoumu:OnYoumu01Move(keys)
 				}
 				UnitDamageTarget(damage_table)
 		end
-		caster:SetContextNum("ability_Youmu01_Count",0,0)
+		caster:SetContextNum("ability_Youmu01_Count",count,0)
 		local effectIndex = ParticleManager:CreateParticle("particles/thd2/heroes/youmu/youmu_01_blink_effect.vpcf", PATTACH_CUSTOMORIGIN, caster)
 		ParticleManager:SetParticleControl(effectIndex, 3, caster:GetOrigin())
 		ParticleManager:ReleaseParticleIndex(effectIndex)
@@ -92,6 +92,9 @@ function AbilityYoumu:OnYoumu01Move(keys)
 		end
 	end
 	caster:SetOrigin(vec)
+	if(count==0.4)then
+		SetTargetToTraversable(caster)
+	end
 end
 
 function AbilityYoumu:OnYoumu02Start(keys)
