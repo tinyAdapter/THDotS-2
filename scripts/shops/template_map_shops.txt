@@ -11,13 +11,14 @@
 		"item"		"item_bird"
 		"item"		"item_glue"
 		"item"		"item_candle"
-		"item"		"item_green_tea"
-		"item"		"item_red_tea"
+		"item"		"item_clarity"
+		"item"		"item_flask"
+		"item"		"item_gem"
 	}
 
 	"attributes"
 	{
-		"item"		"item_ticket"
+		"item"		"item_tpscroll"
 		"item"		"item_cucumber"
 		"item"		"item_mushroom"
 		"item"		"item_ice_block"
@@ -53,7 +54,7 @@
 		"item"		"item_god_hand"
 		"item"		"item_tengu_fan"
 		"item"		"item_gran_grimoire"
-		"item"		"item_hexie"
+		"item"		"item_rapier"
 		"item"		"item_camera"
 		"item"		"item_mushroom_kebab"
 		"item"		"item_mushroom_pie"
@@ -84,12 +85,12 @@
 	"support"
 	{
 
-		"item"		"item_gap"
+		"item"		"item_travel_boots"
 		"item"	    "item_ghost_balloon"
 		"item"		"item_fox_mask"											
-		"item"		"item_marisa_hat"										
-		"item"		"item_hakurei_amulet"						
-		"item"		"item_yukkuri_stick"							
+		"item"		"item_cyclone"										
+		"item"		"item_sphere"						
+		"item"		"item_sheepstick"							
 		"item"		"item_wing"											
 		"item"		"item_frozen_frog"									
 		"item"		"item_guilty_mask"									
